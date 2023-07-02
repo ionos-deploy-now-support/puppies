@@ -1,0 +1,437 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Puppies API",
+    "description": "CSE341 Web Services Project 2, Marc Williamson. A collection of AKC registered Labrador puppies and their litters from JW Farm, Hartselle, AL",
+    "version": "1.0.0"
+  },
+  "host": "puppies-api-ek0y.onrender.com",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/api-docs": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/puppies/": {
+      "get": {
+        "description": "READ all puppies.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "description": "CREATE a new puppy.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "puppyTempName": {
+                  "example": "any"
+                },
+                "puppyDOB": {
+                  "example": "any"
+                },
+                "puppySex": {
+                  "example": "any"
+                },
+                "puppyColor": {
+                  "example": "any"
+                },
+                "puppyCollar": {
+                  "example": "any"
+                },
+                "puppyAKC": {
+                  "example": "any"
+                },
+                "puppyNewName": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/puppies/{id}": {
+      "get": {
+        "description": "READ a specific puppy by id.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "put": {
+        "description": "UPDATE a specific puppy by id.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "puppyTempName": {
+                  "example": "any"
+                },
+                "puppyDOB": {
+                  "example": "any"
+                },
+                "puppySex": {
+                  "example": "any"
+                },
+                "puppyColor": {
+                  "example": "any"
+                },
+                "puppyCollar": {
+                  "example": "any"
+                },
+                "puppyAKC": {
+                  "example": "any"
+                },
+                "puppyNewName": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "delete": {
+        "description": "DELETE a puppy by id.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/litters/": {
+      "get": {
+        "description": "READ all litters.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "description": "CREATE a new litter.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "litterAKC": {
+                  "example": "any"
+                },
+                "sireName": {
+                  "example": "any"
+                },
+                "damName": {
+                  "example": "any"
+                },
+                "litterConceived": {
+                  "example": "any"
+                },
+                "litterDelivered": {
+                  "example": "any"
+                },
+                "femalesBorn": {
+                  "example": "any"
+                },
+                "femalesSurvived": {
+                  "example": "any"
+                },
+                "malesBorn": {
+                  "example": "any"
+                },
+                "malesSurvived": {
+                  "example": "any"
+                },
+                "puppiesYellow": {
+                  "example": "any"
+                },
+                "puppiesChocolate": {
+                  "example": "any"
+                },
+                "puppiesBlack": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/litters/{id}": {
+      "get": {
+        "description": "READ a specific litter by id.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "put": {
+        "description": "UPDATE a specific litter by id.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "litterAKC": {
+                  "example": "any"
+                },
+                "sireName": {
+                  "example": "any"
+                },
+                "damName": {
+                  "example": "any"
+                },
+                "litterConceived": {
+                  "example": "any"
+                },
+                "litterDelivered": {
+                  "example": "any"
+                },
+                "femalesBorn": {
+                  "example": "any"
+                },
+                "femalesSurvived": {
+                  "example": "any"
+                },
+                "malesBorn": {
+                  "example": "any"
+                },
+                "malesSurvived": {
+                  "example": "any"
+                },
+                "puppiesYellow": {
+                  "example": "any"
+                },
+                "puppiesChocolate": {
+                  "example": "any"
+                },
+                "puppiesBlack": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "delete": {
+        "description": "DELETE a specific litter by id.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/users/": {
+      "get": {
+        "description": "READ all users.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/users/signup": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                },
+                "passwordConfirm": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/users/login": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/auth/google": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/auth/google/callback": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/auth/logout": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    }
+  }
+}
