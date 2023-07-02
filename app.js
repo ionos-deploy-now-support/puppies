@@ -1,13 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const helmet = require('helmet');
 const path = require('node:path');
 const mongoose = require('mongoose');
 const mongoSanitize = require('express-mongo-sanitize');
 const morgan = require('morgan');
-const passport = require('passport');
-const session = require('express-session');
+const passport = require('passport'); //OAuth
+const rateLimit = require('express-rate-limit');
+const session = require('express-session'); // OAuth
 const MongoStore = require('connect-mongo')(session);
-const exphbs = require('express-handlebars');
+const exphbs = require('express-handlebars'); //was for OAuth
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const connect = require('./db/connect');
@@ -16,8 +18,13 @@ const globalErrorHandler = require('./controllers/errorController');
 const port = process.env.PORT || 8080;
 const app = express();
 
+//Development logging
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
+
 //Passport config
-require('./config/passport')(passport);
+require('./config/passport')(passport); //used in OAuth
 
 //Safety net
 process.on('uncaughtException', (err) => {
@@ -26,8 +33,24 @@ process.on('uncaughtException', (err) => {
   process.exit(1);
 });
 
-app.enable('trust proxy');
-app.use(bodyParser.json());
+//set certain security HTTP headers
+app.use(helmet());
+
+//limit requests from same ip to help prevent denial of service and brute force attacks
+const limiter = rateLimit({
+  max: 100,
+  windowMs: 60 * 60 * 1000,
+  message: 'Too many requests from this IP, must wait 1 hour to try again.'
+});
+app.use('/', limiter);
+
+app.enable('trust proxy'); //this was for OAuth
+
+// read data from body into req.body and limit body size
+app.use(bodyParser.json({ limit: '10kb' }));
+
+// serve static files
+app.use(express.static(`${__dirname}/public`));
 
 //Data sanitization. Protect against NoSQL query injection
 app.use(mongoSanitize());
@@ -35,12 +58,11 @@ app.use(mongoSanitize());
 app.use(xss());
 //Prevent parameter pollution
 app.use(hpp());
-//Logging
-app.use(morgan('dev'));
-//Handlebars
+
+//Handlebars    was used in OAuth example
 app.engine('.hbs', exphbs.engine({ defaultLayout: 'main', extname: '.hbs' }));
 app.set('view engine', '.hbs');
-//Sessions
+//Sessions      was used in OAuth
 app.use(
   session({
     secret: 'keyboard cat',
@@ -49,12 +71,9 @@ app.use(
     store: new MongoStore({ mongooseConnection: mongoose.connection })
   })
 );
-//Passport middleware
+//Passport middleware  was USED in OAuth
 app.use(passport.initialize());
 app.use(passport.session());
-
-//Static folder
-app.use(express.static(path.join(__dirname, 'public')));
 
 app
   .use((req, res, next) => {
