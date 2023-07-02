@@ -93,7 +93,10 @@ const updateUser = catchAsync(async (req, res, next) => {
 });
 
 const deleteMe = catchAsync(async (req, res, next) => {
-  await JWTUser.findByIdAndUpdate(req.user.id, { active: false });
+  const user = await JWTUser.findByIdAndUpdate(req.user.id, { active: false });
+  if (!user) {
+    return next(new AppError('No user found with that ID', 404));
+  }
   res.status(204).json({
     status: 'success',
     data: null

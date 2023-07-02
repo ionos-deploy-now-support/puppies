@@ -11,11 +11,11 @@ router.get('/:id', protect, restrictTo('admin'), usersController.getUserById);
 
 router.put('/:id', protect, restrictTo('admin'), usersController.updateUser);
 
+router.delete('/deleteMe', protect, usersController.deleteMe);
+
 router.delete('/:id', protect, restrictTo('admin'), usersController.deleteUser);
 
 router.patch('/updateMe', protect, usersController.updateMe);
-
-router.delete('/deleteMe', protect, usersController.deleteMe);
 
 router.post('/signup', authController.signup);
 
