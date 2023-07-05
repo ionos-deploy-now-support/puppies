@@ -1,9 +1,12 @@
-/**** CSE341 Project 2 Puppies API****/
 const express = require('express');
 const router = express.Router();
-
+// puppiesRouter needed for nested routes
+const puppiesRouter = require('../routes/puppies');
 const littersController = require('../controllers/litters');
 const { ensureAuth } = require('../controllers/auth');
+
+//mount router - puppiesRouter for nested route /litters/:litterId/puppies
+router.use('/litterId/puppies', puppiesRouter);
 
 router.get('/', littersController.getAllLitters);
 

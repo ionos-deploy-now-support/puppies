@@ -1,9 +1,8 @@
 const express = require('express');
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
 const puppiesController = require('../controllers/puppies');
 const { protect, restrictTo } = require('../controllers/authController');
-// const { ensureAuth } = require('../controllers/auth');//this one was used with OAuth
 
 router.get('/', puppiesController.getAllPuppies);
 

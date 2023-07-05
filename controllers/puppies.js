@@ -61,6 +61,7 @@ const getPuppyById = catchAsync(async (req, res, next) => {
     res.status(400).json('Use a valid id to find desired puppy.');
   }
   const puppyId = new ObjectId(req.params.id);
+  //added .poplulate to bring in doc for puppyHealthEvents array
   const puppy = await Puppy.findById(puppyId);
   if (!puppy) {
     return next(new AppError('No puppy found with that ID', 404));
@@ -80,13 +81,15 @@ const addPuppy = catchAsync(async (req, res, next) => {
     return;
   }
   const puppy = new Puppy({
+    litterId: req.body.litterId,
     puppyTempName: req.body.puppyTempName,
     puppyDOB: req.body.puppyDOB,
     puppySex: req.body.puppySex,
     puppyColor: req.body.puppyColor,
     puppyCollar: req.body.puppyCollar,
     puppyAKC: req.body.puppyAKC,
-    puppyNewName: req.body.puppyNewName
+    puppyNewName: req.body.puppyNewName,
+    puppyHealthEvents: req.body.puppyHealthEvents
   });
   const newPuppy = await Puppy.create(puppy);
   res.status(201).json({
@@ -104,13 +107,15 @@ const updatePuppy = catchAsync(async (req, res) => {
   }
   const puppyId = new ObjectId(req.params.id);
   const changePuppy = {
+    litterId: req.body.litterId,
     puppyTempName: req.body.puppyTempName,
     puppyDOB: req.body.puppyDOB,
     puppySex: req.body.puppySex,
     puppyColor: req.body.puppyColor,
     puppyCollar: req.body.puppyCollar,
     puppyAKC: req.body.puppyAKC,
-    puppyNewName: req.body.puppyNewName
+    puppyNewName: req.body.puppyNewName,
+    puppyHealthEvents: req.body.puppyHealthEvents
   };
   const puppy = await Puppy.findByIdAndUpdate(puppyId, changePuppy, {
     new: true,

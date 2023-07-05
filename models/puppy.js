@@ -1,9 +1,15 @@
 const mongoose = require('mongoose');
 const slugify = require('slugify');
+const HealthEvent = require('./healthEvent');
 
 mongoose.Schema.Types.String.set('trim', true);
+
 const puppySchema = new mongoose.Schema(
   {
+    litterId: {
+      type: String,
+      maxLength: [26, 'Exceeded max characters of 26 for litterId']
+    },
     puppyTempName: {
       type: String,
       required: [true, 'Poor puppy needs a name'],
@@ -50,7 +56,14 @@ const puppySchema = new mongoose.Schema(
     puppyAvailable: {
       type: Boolean,
       default: true
-    }
+    },
+    //Child reference. will only contain puppyHealth Events id in array. Not whole doc.
+    puppyHealthEvents: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: HealthEvent
+      }
+    ]
   },
   {
     toJSON: { virtuals: true },
@@ -65,6 +78,23 @@ puppySchema.virtual('birthDate').get(function () {
 // Document Middleware runs before .save() and .create
 puppySchema.pre('save', function (next) {
   this.slug = slugify(this.puppyTempName, { lower: true });
+  next();
+});
+// EMBEDS the healthEvents docs into puppy doc on .save  To use this... change back to puppyHealthEvents: Array (Not for updating? so what is the point. Need to add additional healthEvents to the array)
+// puppySchema.pre('save', async function (next) {
+//   const healthEventsPromises = this.puppyHealthEvents.map(
+//     async (id) => await HealthEvent.findById(id)
+//   );
+//   this.puppyHealthEvents = await Promise.all(healthEventsPromises);
+//   next();
+// });
+
+//Populates docs from ObjectId for child referenced relationships
+puppySchema.pre(/^find/, function (next) {
+  this.populate({
+    path: 'puppyHealthEvents',
+    select: '-__v'
+  });
   next();
 });
 

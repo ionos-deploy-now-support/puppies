@@ -33,6 +33,9 @@ process.on('uncaughtException', (err) => {
   process.exit(1);
 });
 
+// serve static files
+app.use(express.static(path.join(__dirname, 'public')));
+
 //set certain security HTTP headers
 app.use(helmet());
 
@@ -48,9 +51,6 @@ app.enable('trust proxy'); //this was for OAuth
 
 // read data from body into req.body and limit body size
 app.use(bodyParser.json({ limit: '10kb' }));
-
-// serve static files
-app.use(express.static(`${__dirname}/public`));
 
 //Data sanitization. Protect against NoSQL query injection
 app.use(mongoSanitize());
