@@ -1,4 +1,5 @@
 const express = require('express');
+//mergeParams for nested routes to get access to add fields in nested route
 const router = express.Router({ mergeParams: true });
 
 const puppiesController = require('../controllers/puppies');

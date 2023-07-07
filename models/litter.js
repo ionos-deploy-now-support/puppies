@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 mongoose.Schema.Types.String.set('trim', true);
+const Puppy = require('./puppy');
+
 const litterSchema = new mongoose.Schema({
   litterAKC: {
     type: String,
@@ -67,7 +69,24 @@ const litterSchema = new mongoose.Schema({
     type: String,
     required: false,
     maxLength: [255, 'Limit comment to 255 characters']
-  }
+  },
+  //Child reference: Litters have puppies. This gives us and id that can be used to populate the other fields. See .populate below.
+  puppies: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Puppy',
+      required: [true, 'Puppy must belong to a litter.']
+    }
+  ]
+});
+
+//Populates docs from ObjectId for child referenced relationships
+litterSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: 'puppies',
+    select: 'puppyTempName puppySex puppyColor puppyCollar'
+  });
+  next();
 });
 
 const Litter = mongoose.model('Litter', litterSchema);

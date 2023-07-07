@@ -11,8 +11,9 @@ const getAllPuppies = catchAsync(async (req, res) => {
   /*
   #swagger.description = 'READ all puppies.'
 */
-
-  const features = new APIFeatures(Puppy.find(), req.query)
+  let filter = {};
+  if (req.params.litterId) filter = { litter: req.params.litterId };
+  const features = new APIFeatures(Puppy.find(filter), req.query)
     .filter()
     .sort()
     .limitFields()
@@ -62,7 +63,7 @@ const getPuppyById = catchAsync(async (req, res, next) => {
   }
   const puppyId = new ObjectId(req.params.id);
   //added .poplulate to bring in doc for puppyHealthEvents array
-  const puppy = await Puppy.findById(puppyId);
+  const puppy = await Puppy.findById(puppyId).populate('puppyHealthEvents');
   if (!puppy) {
     return next(new AppError('No puppy found with that ID', 404));
   }
@@ -80,8 +81,10 @@ const addPuppy = catchAsync(async (req, res, next) => {
     res.status(400).send({ message: 'Content cannot be empty!' });
     return;
   }
+  //For nested routes get litterId from params (url) if not in body
+  if (!req.body.litter) req.body.litter = req.params.litterId;
   const puppy = new Puppy({
-    litterId: req.body.litterId,
+    litter: req.body.litter,
     puppyTempName: req.body.puppyTempName,
     puppyDOB: req.body.puppyDOB,
     puppySex: req.body.puppySex,
@@ -91,6 +94,7 @@ const addPuppy = catchAsync(async (req, res, next) => {
     puppyNewName: req.body.puppyNewName,
     puppyHealthEvents: req.body.puppyHealthEvents
   });
+
   const newPuppy = await Puppy.create(puppy);
   res.status(201).json({
     status: 'success',
@@ -107,7 +111,7 @@ const updatePuppy = catchAsync(async (req, res) => {
   }
   const puppyId = new ObjectId(req.params.id);
   const changePuppy = {
-    litterId: req.body.litterId,
+    litter: req.body.litter,
     puppyTempName: req.body.puppyTempName,
     puppyDOB: req.body.puppyDOB,
     puppySex: req.body.puppySex,

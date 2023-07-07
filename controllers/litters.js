@@ -66,7 +66,8 @@ const addLitter = catchAsync(async (req, res, next) => {
     malesSurvived: req.body.malesSurvived,
     puppiesYellow: req.body.puppiesYellow,
     puppiesChocolate: req.body.puppiesChocolate,
-    puppiesBlack: req.body.puppiesBlack
+    puppiesBlack: req.body.puppiesBlack,
+    puppies: req.body.puppies
   });
   const newLitter = await Litter.create(litter);
   res.status(201).json({
@@ -95,7 +96,8 @@ const updateLitter = catchAsync(async (req, res, next) => {
     malesSurvived: req.body.malesSurvived,
     puppiesYellow: req.body.puppiesYellow,
     puppiesChocolate: req.body.puppiesChocolate,
-    puppiesBlack: req.body.puppiesBlack
+    puppiesBlack: req.body.puppiesBlack,
+    puppies: req.body.puppies
   };
   const litter = await Litter.findByIdAndUpdate(litterId, changeLitter, {
     new: true,

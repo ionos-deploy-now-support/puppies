@@ -1,15 +1,12 @@
 const mongoose = require('mongoose');
 const slugify = require('slugify');
 const HealthEvent = require('./healthEvent');
+const Litter = require('./litter');
 
 mongoose.Schema.Types.String.set('trim', true);
 
 const puppySchema = new mongoose.Schema(
   {
-    litterId: {
-      type: String,
-      maxLength: [26, 'Exceeded max characters of 26 for litterId']
-    },
     puppyTempName: {
       type: String,
       required: [true, 'Poor puppy needs a name'],
@@ -63,7 +60,12 @@ const puppySchema = new mongoose.Schema(
         type: mongoose.Schema.ObjectId,
         ref: HealthEvent
       }
-    ]
+    ],
+    litter: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Litter',
+      required: [true, 'Puppy must belong to a litter']
+    }
   },
   {
     toJSON: { virtuals: true },
@@ -71,10 +73,17 @@ const puppySchema = new mongoose.Schema(
   }
 );
 
-// Virtual properties are not save in database. Derived from another field.
-puppySchema.virtual('birthDate').get(function () {
-  return { $substr: [this.puppyDOB, 0, 9] };
-});
+// Virtual properties are not saved in database. Derived from another field.
+// puppySchema.virtual('birthDate').get(function () {
+//   return { $substr: [this.puppyDOB, 0, 9] };
+// });
+//virtual populate - virtually populate litter in puppy
+// puppySchema.virtual('litter', {
+//   ref: 'Litter',
+//   foreignField: 'litterId',
+//   localField: '_id'
+// });
+
 // Document Middleware runs before .save() and .create
 puppySchema.pre('save', function (next) {
   this.slug = slugify(this.puppyTempName, { lower: true });
