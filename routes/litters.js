@@ -12,9 +12,9 @@ router.get('/', littersController.getAllLitters);
 
 router.get('/litters-stats', littersController.getLittersStats);
 
-router.get('/:id', littersController.getLitterById);
+router.get('/:id', littersController.getLitter);
 
-router.post('/', protect, restrictTo('admin'), littersController.addLitter);
+router.post('/', protect, restrictTo('admin'), littersController.createLitter);
 
 router.put('/:id', protect, restrictTo('admin'), littersController.updateLitter);
 

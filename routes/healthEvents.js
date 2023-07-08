@@ -6,9 +6,9 @@ const { protect, restrictTo } = require('../controllers/authController');
 
 router.get('/', healthEventsController.getAllHealthEvents);
 
-router.get('/:id', healthEventsController.getHealthEventById);
+router.get('/:id', healthEventsController.getHealthEvent);
 
-router.post('/', protect, restrictTo('admin'), healthEventsController.addHealthEvent);
+router.post('/', protect, restrictTo('admin'), healthEventsController.createHealthEvent);
 
 router.put('/:id', protect, restrictTo('admin'), healthEventsController.updateHealthEvent);
 

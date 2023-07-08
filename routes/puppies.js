@@ -9,9 +9,15 @@ router.get('/', puppiesController.getAllPuppies);
 
 router.get('/puppies-stats', puppiesController.getPuppiesStats);
 
-router.get('/:id', puppiesController.getPuppyById);
+router.get('/:id', puppiesController.getPuppy);
 
-router.post('/', protect, restrictTo('admin'), puppiesController.addPuppy);
+router.post(
+  '/',
+  protect,
+  restrictTo('admin'),
+  // puppiesController.setLitterId,
+  puppiesController.createPuppy
+);
 
 router.put('/:id', protect, restrictTo('admin'), puppiesController.updatePuppy);
 

@@ -4,30 +4,10 @@ const mongoose = require('../db/connect');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const ObjectId = require('mongodb').ObjectId;
-const APIFeatures = require('../utils/apiFeatures');
 const Puppy = require('./../models/puppy');
+const factory = require('../controllers/handlerFactory');
 
-const getAllPuppies = catchAsync(async (req, res) => {
-  /*
-  #swagger.description = 'READ all puppies.'
-*/
-  let filter = {};
-  if (req.params.litterId) filter = { litter: req.params.litterId };
-  const features = new APIFeatures(Puppy.find(filter), req.query)
-    .filter()
-    .sort()
-    .limitFields()
-    .paginate();
-  const puppies = await features.query;
-
-  res.status(200).json({
-    status: 'success',
-    results: puppies.length,
-    data: { puppies }
-  });
-});
-
-const getPuppiesStats = catchAsync(async (req, res, next) => {
+exports.getPuppiesStats = catchAsync(async (req, res, next) => {
   /*
   #swagger.description = 'GET stats for puppies.'
 */
@@ -54,109 +34,14 @@ const getPuppiesStats = catchAsync(async (req, res, next) => {
   });
 });
 
-const getPuppyById = catchAsync(async (req, res, next) => {
-  /*
-  #swagger.description = 'READ a specific puppy by id.'
-*/
-  if (!ObjectId.isValid(req.params.id)) {
-    res.status(400).json('Use a valid id to find desired puppy.');
-  }
-  const puppyId = new ObjectId(req.params.id);
-  //added .poplulate to bring in doc for puppyHealthEvents array
-  const puppy = await Puppy.findById(puppyId).populate('puppyHealthEvents');
-  if (!puppy) {
-    return next(new AppError('No puppy found with that ID', 404));
-  }
-  res.status(200).json({
-    status: 'success',
-    data: { puppy }
-  });
-});
+exports.getAllPuppies = factory.getAll(Puppy);
+exports.getPuppy = factory.getOne(Puppy, { path: 'puppyHealthEvents' });
 
-const addPuppy = catchAsync(async (req, res, next) => {
-  /*
-  #swagger.description = 'CREATE a new puppy.'
-*/
-  if (!req.body.puppyTempName) {
-    res.status(400).send({ message: 'Content cannot be empty!' });
-    return;
-  }
-  //For nested routes get litterId from params (url) if not in body
-  if (!req.body.litter) req.body.litter = req.params.litterId;
-  const puppy = new Puppy({
-    litter: req.body.litter,
-    puppyTempName: req.body.puppyTempName,
-    puppyDOB: req.body.puppyDOB,
-    puppySex: req.body.puppySex,
-    puppyColor: req.body.puppyColor,
-    puppyCollar: req.body.puppyCollar,
-    puppyAKC: req.body.puppyAKC,
-    puppyNewName: req.body.puppyNewName,
-    puppyHealthEvents: req.body.puppyHealthEvents
-  });
+// exports.setLitterId = (req, res, next) => {
+//   if (!req.body.litter) req.body.litter = req.params.litterId;
+//   //For nested routes get litterId from params (url) if not in body
+// };
+exports.createPuppy = factory.createOne(Puppy);
 
-  const newPuppy = await Puppy.create(puppy);
-  res.status(201).json({
-    status: 'success',
-    data: { puppy: newPuppy }
-  });
-});
-
-const updatePuppy = catchAsync(async (req, res) => {
-  /*
-  #swagger.description = 'UPDATE a specific puppy by id.'
-*/
-  if (!ObjectId.isValid(req.params.id)) {
-    res.status(400).json('Use a valid id to update desired puppy.');
-  }
-  const puppyId = new ObjectId(req.params.id);
-  const changePuppy = {
-    litter: req.body.litter,
-    puppyTempName: req.body.puppyTempName,
-    puppyDOB: req.body.puppyDOB,
-    puppySex: req.body.puppySex,
-    puppyColor: req.body.puppyColor,
-    puppyCollar: req.body.puppyCollar,
-    puppyAKC: req.body.puppyAKC,
-    puppyNewName: req.body.puppyNewName,
-    puppyHealthEvents: req.body.puppyHealthEvents
-  };
-  const puppy = await Puppy.findByIdAndUpdate(puppyId, changePuppy, {
-    new: true,
-    runValidators: true
-  });
-  if (!puppy) {
-    return next(new AppError('No puppy found with that ID', 404));
-  }
-  res.status(200).json({
-    status: 'success',
-    data: { puppy }
-  });
-});
-
-const deletePuppy = catchAsync(async (req, res, next) => {
-  /*
-  #swagger.description = 'DELETE a puppy by id.'
-*/
-  if (!ObjectId.isValid(req.params.id)) {
-    res.status(400).json('Use a valid id to delete desired puppy.');
-  }
-  const puppyId = new ObjectId(req.params.id);
-  const puppy = await Puppy.findByIdAndDelete(puppyId);
-  if (!puppy) {
-    return next(new AppError('No puppy found with that ID', 404));
-  }
-  res.status(204).json({
-    status: 'success',
-    data: null
-  });
-});
-
-module.exports = {
-  getAllPuppies,
-  getPuppyById,
-  getPuppiesStats,
-  addPuppy,
-  updatePuppy,
-  deletePuppy
-};
+exports.updatePuppy = factory.updateOne(Puppy);
+exports.deletePuppy = factory.deleteOne(Puppy);

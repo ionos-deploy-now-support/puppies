@@ -7,7 +7,9 @@ const { protect, restrictTo } = require('../controllers/authController');
 
 router.get('/', usersController.getAllUsers);
 
-router.get('/:id', protect, restrictTo('admin'), usersController.getUserById);
+router.get('/me', protect, usersController.getMe, usersController.getUser);
+
+router.get('/:id', protect, restrictTo('admin'), usersController.getUser);
 
 router.put('/:id', protect, restrictTo('admin'), usersController.updateUser);
 
