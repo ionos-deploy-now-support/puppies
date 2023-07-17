@@ -77,6 +77,7 @@ const puppySchema = new mongoose.Schema(
   }
 );
 
+// Set up indexes
 puppySchema.index({ puppyAvailable: 1, puppySex: 1, puppyColor: 1 });
 puppySchema.index({ slug: 1 });
 
