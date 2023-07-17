@@ -20,6 +20,10 @@ const puppySchema = new mongoose.Schema(
       min: ['2020-05-05', 'Date must be later than 2020-04-05'],
       max: ['2050-12-31', 'Date must be before 2051-01-01']
     },
+    puppySurvived: {
+      type: Boolean,
+      default: true
+    },
     puppySex: {
       type: String,
       required: [true, 'Puppy must have a gender. M or F'],
@@ -73,6 +77,9 @@ const puppySchema = new mongoose.Schema(
   }
 );
 
+puppySchema.index({ puppyAvailable: 1, puppySex: 1, puppyColor: 1 });
+puppySchema.index({ slug: 1 });
+
 // Virtual properties are not saved in database. Derived from another field.
 // puppySchema.virtual('birthDate').get(function () {
 //   return { $substr: [this.puppyDOB, 0, 9] };
@@ -99,6 +106,7 @@ puppySchema.pre('save', function (next) {
 // });
 
 //Populates docs from ObjectId for child referenced relationships
+// `this` gives access to the query but not the doc.
 puppySchema.pre(/^find/, function (next) {
   this.populate({
     path: 'puppyHealthEvents',
@@ -127,12 +135,12 @@ puppySchema.pre(/^find/, function (next) {
 // });
 
 // Aggregation middleware
-puppySchema.pre('aggregate', function (next) {
-  // add another match to beginning of aggregation pipeline array
-  this.pipeline().unshift({ $match: { puppyAvailable: { $eq: true } } });
-  console.log(this.pipeline());
-  next();
-});
+// puppySchema.pre('aggregate', function (next) {
+//   // add another match to beginning of aggregation pipeline array
+//   this.pipeline().unshift({ $match: { puppyAvailable: { $eq: true } } });
+//   console.log(this.pipeline());
+//   next();
+// });
 
 //custom validators are possible
 //priceDiscount : {
@@ -145,6 +153,118 @@ puppySchema.pre('aggregate', function (next) {
 //   message: 'Discount price ({VALUE}) should be less than regular price'
 // }
 // }
+
+puppySchema.statics.countGender = async function (litterId) {
+  const stats = await this.aggregate([
+    {
+      $match: { litter: litterId }
+    },
+    {
+      $group: {
+        _id: '$puppySex',
+        countGender: {
+          $count: {}
+        }
+      }
+    }
+  ]);
+  console.log(stats);
+  if (stats.length > 0) {
+    await Litter.findByIdAndUpdate(litterId, {
+      femalesBorn: stats[0].countGender,
+      malesBorn: stats[1].countGender
+    });
+  } else {
+    // set back to default value
+    await Litter.findByIdAndUpdate(litterId, {
+      femalesBorn: 0,
+      malesBorn: 0
+    });
+  }
+};
+
+puppySchema.statics.countColor = async function (litterId) {
+  const stats = await this.aggregate([
+    {
+      $match: { litter: litterId }
+    },
+    {
+      $group: {
+        _id: '$puppyColor',
+        countColor: {
+          $count: {}
+        }
+      }
+    }
+  ]);
+  console.log(stats);
+  if (stats.length > 0) {
+    await Litter.findByIdAndUpdate(litterId, {
+      puppiesBlack: stats[1].countColor,
+      puppiesChocolate: stats[0].countColor,
+      puppiesYellow: stats[2].countColor
+    });
+  } else {
+    // set back to default value
+    await Litter.findByIdAndUpdate(litterId, {
+      puppiesBlack: 0,
+      puppiesChocolate: 0,
+      puppiesYellow: 0
+    });
+  }
+};
+
+// Need to figure this out. How to get count of males and females that survived
+puppySchema.statics.countSurvived = async function (litterId) {
+  const stats = await this.aggregate([
+    {
+      $match: {
+        litter: litterId
+      }
+    },
+    {
+      $match: {
+        puppySurvived: true
+      }
+    },
+    {
+      $group: {
+        _id: '$puppySex',
+        countSurvived: {
+          $count: {}
+        }
+      }
+    }
+  ]);
+  console.log(stats);
+  if (stats.length > 0) {
+    // await Litter.findByIdAndUpdate(litterId, {
+    //   femalesSurvived: stats[0].countSurvived,
+    //   malesSurvived: stats[1].countSurvived
+    // });
+  } else {
+    // set back to default value
+    await Litter.findByIdAndUpdate(litterId, {
+      femalesSurvived: femalesBorn,
+      malesSurvived: malesBorn
+    });
+  }
+};
+
+//Litter stats updated on puppy SAVE
+puppySchema.post('save', function () {
+  this.constructor.countGender(this.litter);
+  this.constructor.countColor(this.litter);
+  this.constructor.countSurvived(this.litter);
+});
+
+//Litter stats updated on puppy UPDATE or DELETE
+puppySchema.post(/^findOneAnd/, async function (puppy) {
+  await puppy.constructor.countGender(puppy.litter);
+  await puppy.constructor.countColor(puppy.litter);
+  await puppy.constructor.countSurvived(puppy.litter);
+});
+
 const Puppy = mongoose.model('Puppy', puppySchema);
 
 module.exports = Puppy;
