@@ -7,15 +7,17 @@ const { ensureAuth, ensureGuest } = require('../controllers/auth');
 router.use(bodyParser.json());
 // @desc Login/Landing page
 // @route GET /
-router.get('/', ensureGuest, (req, res) => {
-  res.render('login', {
-    layout: 'login'
-  });
-});
+// router.get('/', ensureGuest, (req, res) => {
+//   res.render('login', {
+//     layout: 'login'
+//   });
+// });
 
 router.get('/api-docs', ensureAuth);
 
 router.use('/', require('./swagger'));
+router.use('/clients', require('./clients'));
+router.use('/payments', require('./payments'));
 router.use('/puppies', require('./puppies'));
 router.use('/healthEvents', require('./healthEvents'));
 router.use('/litters', require('./litters'));
