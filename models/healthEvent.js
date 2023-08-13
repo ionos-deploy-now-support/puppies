@@ -9,9 +9,11 @@ const healthEventsSchema = new mongoose.Schema(
       min: ['2020-05-05', 'Date must be later than 2020-04-05'],
       max: ['2050-12-31', 'Date must be before 2051-01-01']
     },
-    puppyTempName: {
+    puppy: {
       type: String,
-      maxLength: [15, 'Exceeded 15 character puppy temporary name.']
+      maxLength: [30, 'PuppyId should be less than 31 characters'],
+      minLength: [24, 'PuppyId should be more than 23 characters'],
+      lowercase: true
     },
     description: {
       type: String,

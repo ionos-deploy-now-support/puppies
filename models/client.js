@@ -46,15 +46,6 @@ const clientSchema = new mongoose.Schema(
     clientNote: {
       type: String,
       maxLength: [255, 'Client note must not exceed 255 characters']
-    },
-    clientRole: {
-      type: String,
-      maxLength: [15, 'Role must not exceed 15 characters'],
-      default: 'customer'
-    },
-    clientActive: {
-      type: Boolean,
-      default: true
     }
   },
   {

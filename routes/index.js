@@ -17,6 +17,7 @@ router.get('/api-docs', ensureAuth);
 
 router.use('/', require('./swagger'));
 router.use('/clients', require('./clients'));
+router.use('/communications', require('./communications'));
 router.use('/payments', require('./payments'));
 router.use('/puppies', require('./puppies'));
 router.use('/healthEvents', require('./healthEvents'));
