@@ -8,9 +8,10 @@ exports.getAll = (Model) =>
     /*
   #swagger.description = 'READ all documents.'
 */
-    // To allow for nested GET puppies on litter
+    // To allow for nested GETs
     let filter = {};
     if (req.params.litterId) filter = { litter: req.params.litterId };
+    if (req.params.clientId) filter = { client: req.params.clientId };
     const features = new APIFeatures(Model.find(filter), req.query)
       .filter()
       .sort()

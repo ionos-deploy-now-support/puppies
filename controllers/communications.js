@@ -7,6 +7,12 @@ const ObjectId = require('mongodb').ObjectId;
 const Communication = require('./../models/communication');
 const factory = require('../controllers/handlerFactory');
 
+exports.setClientId = (req, res, next) => {
+  if (!req.body.client) req.body.client = req.params.clientId;
+  //For nested routes get clientId from params (url) if not in body
+  next();
+};
+
 exports.getAllCommunications = factory.getAll(Communication);
 exports.getCommunication = factory.getOne(Communication);
 exports.createCommunication = factory.createOne(Communication);

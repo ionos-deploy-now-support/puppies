@@ -16,17 +16,10 @@ const paymentSchema = new mongoose.Schema(
       max: [2000, 'Payment should be less than 2000'],
       min: [0.01, 'Payment should be a positive number']
     },
-    client: {
-      type: String,
-      maxLength: [30, 'ClientId should be less than 31 characters'],
-      minLength: [24, 'ClientId should be more than 23 characters'],
-      lowercase: true
-    },
     contract: {
-      type: String,
-      maxLength: [30, 'ContractId should be less than 31 characters'],
-      minLength: [24, 'ContractId should be more than 23 characters'],
-      lowercase: true
+      type: mongoose.Schema.ObjectId,
+      ref: 'Contract',
+      required: [true, 'Payment must belong to a contract']
     },
     paymentNote: {
       type: String,

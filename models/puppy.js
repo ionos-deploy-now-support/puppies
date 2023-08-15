@@ -60,12 +60,6 @@ const puppySchema = new mongoose.Schema(
       max: [2000, 'Asking price should be 2000 or below'],
       default: 800
     },
-    puppyContractPrice: {
-      type: Number,
-      min: [0, 'Asking price should be a positive number'],
-      max: [2000, 'Asking price should be 2000 or below'],
-      default: 800
-    },
     puppyAvailable: {
       type: Boolean,
       default: true

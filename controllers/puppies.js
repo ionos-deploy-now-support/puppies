@@ -34,12 +34,15 @@ exports.getPuppiesStats = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.setLitterId = (req, res, next) => {
+  if (!req.body.litter) req.body.litter = req.params.litterId;
+  //For nested routes get litterId from params (url) if not in body
+  next();
+};
+
 exports.getAllPuppies = factory.getAll(Puppy);
+//see below - { path: 'puppyHealthEvents' } to pass in populate Options
 exports.getPuppy = factory.getOne(Puppy, { path: 'puppyHealthEvents' });
-// exports.setLitterId = (req, res, next) => {
-//   if (!req.body.litter) req.body.litter = req.params.litterId;
-//   //For nested routes get litterId from params (url) if not in body
-// };
 exports.createPuppy = factory.createOne(Puppy);
 exports.updatePuppy = factory.updateOne(Puppy);
 exports.deletePuppy = factory.deleteOne(Puppy);

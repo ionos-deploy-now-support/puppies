@@ -14,7 +14,7 @@ router.post(
   '/',
   protect,
   restrictTo('admin'),
-  // puppiesController.setLitterId,
+  puppiesController.setLitterId,
   puppiesController.createPuppy
 );
 router.put('/:id', protect, restrictTo('admin'), puppiesController.updatePuppy);

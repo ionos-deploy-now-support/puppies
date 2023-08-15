@@ -52,6 +52,12 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
 
 exports.getAllUsers = factory.getAll(JWTUser);
 exports.getUser = factory.getOne(JWTUser);
+exports.createUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is not defined! Please use /signup instead'
+  });
+};
 
 // Do NOT update passwords with this
 exports.updateUser = factory.updateOne(JWTUser);
