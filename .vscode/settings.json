@@ -1,3 +1,4 @@
 {
-  "cSpell.words": ["venmo"]
+  "cSpell.words": ["venmo"],
+  "emmet.includeLanguages": { "javascript": "javascriptreact" }
 }

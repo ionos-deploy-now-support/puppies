@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
 const path = require('node:path');
 const mongoose = require('mongoose');
@@ -51,6 +52,8 @@ app.enable('trust proxy'); //this was for OAuth
 
 // read data from body into req.body and limit body size
 app.use(bodyParser.json({ limit: '10kb' }));
+//parse data from cookie
+app.use(cookieParser());
 
 //Data sanitization. Protect against NoSQL query injection
 app.use(mongoSanitize());
@@ -78,6 +81,7 @@ app.use(passport.session());
 app
   .use((req, res, next) => {
     req.requestTime = new Date().toISOString();
+    console.log(req.cookies);
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader(
       'Access-Control-Allow-Headers',
