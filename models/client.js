@@ -15,9 +15,9 @@ const clientSchema = new mongoose.Schema(
     },
     clientEmail: {
       type: String,
-      maxLength: [99, 'Email should be less than 100 characters'],
-      unique: true,
-      validate: [isEmail, 'Invalid Email']
+      maxLength: [99, 'Email should be less than 100 characters']
+      // unique: true
+      // validate: [isEmail, 'Invalid Email']
     },
     clientPhone: {
       type: String,
@@ -46,6 +46,10 @@ const clientSchema = new mongoose.Schema(
     clientNote: {
       type: String,
       maxLength: [255, 'Client note must not exceed 255 characters']
+    },
+    createdAt: {
+      type: Date,
+      default: Date().now
     }
   },
   {
@@ -55,7 +59,7 @@ const clientSchema = new mongoose.Schema(
 );
 
 // Set up indexes
-clientSchema.index({ clientEmail: 1 });
+// clientSchema.index({ clientEmail: 1 });
 
 // clientSchema.post(/^find/, function (docs, next) {
 //   console.log(`Query took ${Date.now() - this.start} milliseconds`);
