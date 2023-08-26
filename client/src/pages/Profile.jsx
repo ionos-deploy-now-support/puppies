@@ -37,21 +37,12 @@ const Profile = () => {
         <div className="form-center">
           <FormRow type="text" name="name" defaultValue={name} />
           <FormRow type="email" name="email" defaultValue={email} />
-          <img
-            src={window.location.origin + `/img/users/${photo}`}
-            alt={`photo of ${name}`}
-          />
+          <img src={`/img/users/${photo}`} alt={`photo of ${name}`} width="200" />
           <div className="form-row">
             <label htmlFor="photo" className="form-label">
               Select an image file (max 0.5 MB)
             </label>
-            <input
-              type="file"
-              id="photo"
-              name="photo"
-              className="form-input"
-              accept="image/*"
-            />
+            <input type="file" id="photo" name="photo" className="form-input" accept="image/*" />
           </div>
           <SubmitBtn formBtn btnText="save changes" />
         </div>
