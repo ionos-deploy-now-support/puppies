@@ -9,11 +9,6 @@ export const action =
   // (queryClient) =>
   async ({ request }) => {
     const formData = await request.formData();
-    // const file = formData.get('photo');
-    // if (file && file.size > 500000) {
-    //   toast.error('Image size too large');
-    //   return null;
-    // }
     try {
       await customFetch.patch('/users/updateMe', formData);
       // queryClient.invalidateQueries(['user']);
@@ -37,7 +32,12 @@ const Profile = () => {
         <div className="form-center">
           <FormRow type="text" name="name" defaultValue={name} />
           <FormRow type="email" name="email" defaultValue={email} />
-          <img src={`/img/users/${photo}`} alt={`photo of ${name}`} width="200" />
+          <img
+            src={`/img/users/${photo}`}
+            alt={`photo of ${name}`}
+            width="200"
+            className="img-round"
+          />
           <div className="form-row">
             <label htmlFor="photo" className="form-label">
               Select an image file (max 0.5 MB)

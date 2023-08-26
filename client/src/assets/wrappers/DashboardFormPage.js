@@ -29,6 +29,9 @@ const Wrapper = styled.section`
     display: grid;
     place-items: center;
   }
+  .img-round {
+    border-radius: 50%;
+  }
   @media (min-width: 992px) {
     .form-center {
       grid-template-columns: 1fr 1fr;
