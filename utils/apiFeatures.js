@@ -2,21 +2,60 @@ class APIFeatures {
   constructor(query, queryStr) {
     this.query = query;
     this.queryStr = queryStr;
+    console.log(`features queryStr ${queryStr}`);
+    console.log(`features queryStr stringified ${JSON.stringify(queryStr)}`);
   }
   filter() {
     const queryObj = { ...this.queryStr };
     const excludedFields = ['page', 'sort', 'limit', 'fields'];
     excludedFields.forEach((el) => delete queryObj[el]);
+    const { search } = queryObj;
+    let queryFilterObj = {};
 
-    let queryStr = JSON.stringify(queryObj);
+    console.log(`search ${search}`);
+    if (search) {
+      queryFilterObj.$or = [
+        { clientFirstName: { $regex: search, $options: 'i' } },
+        { clientLastName: { $regex: search, $options: 'i' } }
+      ];
+      // queryFilterObj.$or = [
+      //   { puppyTempName: { $regex: search, $options: 'i' } },
+      //   { puppyColor: { $regex: search, $options: 'i' } }
+      // ];
+    }
+    console.log(`filter queryFilterObj ${queryFilterObj}`);
+    console.log(
+      `filter queryFilterObj stringified is now queryStr ${JSON.stringify(queryFilterObj)}`
+    );
+
+    let queryStr = JSON.stringify(queryFilterObj);
     queryStr = queryStr.replace(/\b(gte|gt|lte\lt)\b/g, (match) => `$${match}`);
-    this.query = this.query.find(JSON.parse(queryStr));
+    console.log(`filter queryStr ${queryStr}`);
+    queryFilterObj = JSON.parse(queryStr);
+    // this.query = this.query.find(JSON.parse(queryStr)); //back to queryFilterObj
+    console.log(`filter queryFilterObj ${queryFilterObj}`);
+    this.query = this.query.find(queryFilterObj);
+
     return this;
   }
+
   sort() {
+    const sortOptions = {
+      newest: '-createdAt',
+      oldest: 'createdAt',
+      'a-z': 'clientFirstName',
+      'z-a': '-clientFirstName'
+      // 'a-z': 'puppyTempName',
+      // 'z-a': '-puppyTempName'
+    };
+
     if (this.queryStr.sort) {
       const sortBy = this.queryStr.sort.split(',').join(' ');
-      this.query = this.query.sort(sortBy);
+      const sortKey = sortOptions[sortBy] || sortOptions.newest;
+      console.log(`apiFeatures sort sortKey ${sortKey}`);
+      // this.query = this.query.sort(sortBy);
+      this.query = this.query.sort(sortKey);
+      console.log(`apiFeatures sortBy ${sortBy}`);
     }
     return this;
   }

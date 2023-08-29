@@ -11,6 +11,7 @@ const FormRow = ({ type, name, labelText, defaultValue, required }) => {
           name={name}
           className="form-input"
           defaultValue={defaultValue || ''}
+          required
         />
       </div>
     );

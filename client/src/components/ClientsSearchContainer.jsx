@@ -5,9 +5,8 @@ import { Form, useSubmit, Link } from 'react-router-dom';
 import { useClientsContext } from '../pages/Clients';
 
 const ClientsSearchContainer = () => {
-  // const { searchValues } = useClientsContext();
-  // const { search, jobStatus, jobType, sort } = searchValues;
-  // const { search, sort } = searchValues;
+  const { searchValues } = useClientsContext();
+  const { search, sort } = searchValues;
   const submit = useSubmit();
 
   const debounce = (onChange) => {
@@ -28,30 +27,13 @@ const ClientsSearchContainer = () => {
           <FormRow
             type="search"
             name="search"
+            labelText="search by client first name"
             defaultValue={search}
             onChange={debounce((form) => {
               submit(form);
             })}
           />
 
-          <FormRowSelect
-            labelText="job status"
-            name="jobStatus"
-            list={['all', ...Object.values(JOB_STATUS)]}
-            defaultValue={jobStatus}
-            onChange={(e) => {
-              submit(e.currentTarget.form);
-            }}
-          />
-          <FormRowSelect
-            labelText="job type"
-            name="jobType"
-            list={['all', ...Object.values(JOB_TYPE)]}
-            defaultValue={jobType}
-            onChange={(e) => {
-              submit(e.currentTarget.form);
-            }}
-          />
           <FormRowSelect
             name="sort"
             defaultValue={sort}
@@ -60,7 +42,7 @@ const ClientsSearchContainer = () => {
               submit(e.currentTarget.form);
             }}
           />
-          <Link to="/dashboard/all-jobs" className="btn form-btn delete-btn">
+          <Link to="/dashboard/clients" className="btn form-btn delete-btn">
             Reset Search Values
           </Link>
         </div>

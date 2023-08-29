@@ -27,31 +27,17 @@ const ClientAdd = () => {
       <Form method="post" className="form">
         <h4 className="form-title">add client</h4>
         <div className="form-center">
-          <FormRow
-            type="text"
-            name="clientFirstName"
-            labelText="first name"
-            required="required"
-          />
+          <FormRow type="text" name="clientFirstName" labelText="first name" required />
           <FormRow type="text" name="clientLastName" labelText="last name" />
           <FormRow type="email" name="clientEmail" labelText="email" />
           <FormRow type="text" name="clientPhone" labelText="phone" />
           <FormRow type="text" name="clientAddress1" labelText="address" />
-          <FormRow
-            type="text"
-            name="clientAddress2"
-            labelText="additional address"
-          />
+          <FormRow type="text" name="clientAddress2" labelText="additional address" />
           <FormRow type="text" name="clientCity" labelText="city" />
           <FormRow type="text" name="clientState" labelText="state" />
           <FormRow type="text" name="clientZip" labelText="zip code" />
           <FormRow type="text" name="clientNote" labelText="special note" />
-          <FormRow
-            type="text"
-            name="clientRole"
-            labelText="client role"
-            defaultValue="customer"
-          />
+          <FormRow type="text" name="clientRole" labelText="client role" defaultValue="customer" />
           <SubmitBtn formBtn btnText="add new client" />
         </div>
       </Form>

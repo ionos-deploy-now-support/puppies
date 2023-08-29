@@ -53,13 +53,16 @@ const clientSchema = new mongoose.Schema(
     }
   },
   {
+    collation: { locale: 'en' }
+  },
+  {
     toJSON: { virtuals: true },
     toObject: { virtuals: true }
   }
 );
 
 // Set up indexes
-// clientSchema.index({ clientEmail: 1 });
+// clientSchema.index({ collation: { locale: 'en' } });
 
 // clientSchema.post(/^find/, function (docs, next) {
 //   console.log(`Query took ${Date.now() - this.start} milliseconds`);

@@ -84,7 +84,10 @@ const puppySchema = new mongoose.Schema(
 );
 
 // Set up indexes
-puppySchema.index({ puppyAvailable: 1, puppySex: 1, puppyColor: 1 });
+puppySchema.index(
+  { puppyAvailable: 1, puppySex: 1, puppyColor: 1 },
+  { collation: { locale: 'en' } }
+);
 puppySchema.index({ slug: 1 });
 
 // Virtual properties are not saved in database. Derived from another field.

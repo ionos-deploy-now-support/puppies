@@ -1,6 +1,7 @@
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const APIFeatures = require('../utils/apiFeatures');
+const { query } = require('express');
 const ObjectId = require('mongodb').ObjectId;
 
 exports.getAll = (Model) =>
@@ -12,11 +13,29 @@ exports.getAll = (Model) =>
     let filter = {};
     if (req.params.litterId) filter = { litter: req.params.litterId };
     if (req.params.clientId) filter = { client: req.params.clientId };
-    const features = new APIFeatures(Model.find(filter), req.query)
+
+    // const { search, sort } = req.query;
+    // const queryObject = {};
+
+    // if (search) {
+    //   queryObject.$or = [
+    //     { clientFirstName: { $regex: search, $options: 'i' } },
+    //     { clientLastName: { $regex: search, $options: 'i' } }
+    //   ];
+    //   // queryObject.$or = [
+    //   //   { puppyTempName: { $regex: search, $options: 'i' } },
+    //   //   { puppyColor: { $regex: search, $options: 'i' } }
+    //   // ];
+    // }
+    // console.log(`stringified queryObject ${JSON.stringify(queryObject)}`);
+
+    const features = new APIFeatures(Model.find(filter), req.query) //search fails here
+      // const features = new APIFeatures(Model.find(filter), queryObject) // sort ignored here
       .filter()
       .sort()
       .limitFields()
       .paginate();
+
     const docs = await features.query;
 
     res.status(200).json({
