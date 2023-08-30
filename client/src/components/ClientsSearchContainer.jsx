@@ -1,7 +1,7 @@
 import { FormRow, FormRowSelect, SubmitBtn } from '../components';
 import Wrapper from '../assets/wrappers/DashboardFormPage';
 import { Form, useSubmit, Link } from 'react-router-dom';
-// import { JOB_TYPE, JOB_STATUS, JOB_SORT_BY } from '../../../utils/constants';
+import { SORT_BY } from '../../../utils/constants';
 import { useClientsContext } from '../pages/Clients';
 
 const ClientsSearchContainer = () => {
@@ -36,15 +36,16 @@ const ClientsSearchContainer = () => {
 
           <FormRowSelect
             name="sort"
-            defaultValue={sort}
-            list={[...Object.values(JOB_SORT_BY)]}
-            onChange={(e) => {
-              submit(e.currentTarget.form);
-            }}
+            defaultValue="newest"
+            list={[...Object.values(SORT_BY)]}
+            // onChange={(e) => {
+            //   submit(e.currentTarget.form);
+            // }}
           />
           <Link to="/dashboard/clients" className="btn form-btn delete-btn">
             Reset Search Values
           </Link>
+          <SubmitBtn formBtn btnText="search now" />
         </div>
       </Form>
     </Wrapper>

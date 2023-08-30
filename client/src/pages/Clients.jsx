@@ -56,7 +56,7 @@ const Clients = () => {
   return (
     // <ClientsContext.Provider value={{ data, searchValues }}>
     <ClientsContext.Provider value={{ data }}>
-      {/* <ClientsSearchContainer /> */}
+      <ClientsSearchContainer />
       <ClientsContainer />
     </ClientsContext.Provider>
   );

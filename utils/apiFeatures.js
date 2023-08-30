@@ -12,7 +12,6 @@ class APIFeatures {
     const { search } = queryObj;
     let queryFilterObj = {};
 
-    console.log(`search ${search}`);
     if (search) {
       queryFilterObj.$or = [
         { clientFirstName: { $regex: search, $options: 'i' } },
@@ -23,19 +22,12 @@ class APIFeatures {
       //   { puppyColor: { $regex: search, $options: 'i' } }
       // ];
     }
-    console.log(`filter queryFilterObj ${queryFilterObj}`);
-    console.log(
-      `filter queryFilterObj stringified is now queryStr ${JSON.stringify(queryFilterObj)}`
-    );
 
     let queryStr = JSON.stringify(queryFilterObj);
     queryStr = queryStr.replace(/\b(gte|gt|lte\lt)\b/g, (match) => `$${match}`);
     console.log(`filter queryStr ${queryStr}`);
     queryFilterObj = JSON.parse(queryStr);
-    // this.query = this.query.find(JSON.parse(queryStr)); //back to queryFilterObj
-    console.log(`filter queryFilterObj ${queryFilterObj}`);
     this.query = this.query.find(queryFilterObj);
-
     return this;
   }
 
@@ -70,7 +62,7 @@ class APIFeatures {
   }
   paginate() {
     const page = this.queryStr.page * 1 || 1;
-    const limit = this.queryStr.limit * 1 || 100;
+    const limit = this.queryStr.limit * 1 || 20;
     const skip = (page - 1) * limit;
     this.query = this.query.skip(skip).limit(limit);
     return this;
