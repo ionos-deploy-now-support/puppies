@@ -3,41 +3,40 @@ import { ClientsContainer, ClientsSearchContainer } from '../components';
 import customFetch from '../utils/customFetch';
 import { useLoaderData } from 'react-router-dom';
 import { useContext, createContext } from 'react';
-
 // import { useQuery } from '@tanstack/react-query';
 
 // const allClientsQuery = (params) => {
-//   const { search, clientStatus, clientType, sort, page } = params;
+//   const { search, sort, page } = params;
 //   return {
 //     queryKey: [
-//       'clients',
+//       'docs',
 //       search ?? '',
-//       clientStatus ?? 'all',
-//       clientType ?? 'all',
+//       // clientStatus ?? 'all',
+//       // clientType ?? 'all',
 //       sort ?? 'newest',
-//       page ?? 1,
+//       page ?? 1
 //     ],
 //     queryFn: async () => {
 //       const { data } = await customFetch.get('/clients', {
-//         params,
+//         params
 //       });
 //       return data;
-//     },
+//     }
 //   };
 // };
 
 // export const loader =
 //   (queryClient) =>
 //   async ({ request }) => {
-//     const params = Object.fromEntries([
-//       ...new URL(request.url).searchParams.entries(),
-//     ]);
+//     const params = Object.fromEntries([...new URL(request.url).searchParams.entries()]);
 
 //     await queryClient.ensureQueryData(allClientsQuery(params));
 //     return { searchValues: { ...params } };
 //   };
 
-export const loader = async () => {
+export const loader = async ({ request }) => {
+  const params = Object.fromEntries([...new URL(request.url).searchParams.entries()]);
+  console.log(params);
   try {
     const { data } = await customFetch.get('/clients');
     console.log({ data });

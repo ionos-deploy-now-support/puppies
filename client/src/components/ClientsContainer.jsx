@@ -1,15 +1,14 @@
 import Client from './Client';
 import Wrapper from '../assets/wrappers/ClientsContainer';
 import { useClientsContext } from '../pages/Clients';
-// import PageBtnContainer from './PageBtnContainer';
+import PageBtnContainer from './PageBtnContainer';
 const ClientsContainer = () => {
   const { data } = useClientsContext();
   console.log({ data });
   const clients = data.data.docs;
-  console.log(clients);
 
   // const { clients, totalClients, numOfPages } = data;
-
+  console.log({ clients });
   if (clients.length === 0) {
     return (
       <Wrapper>
@@ -27,7 +26,7 @@ const ClientsContainer = () => {
           return <Client key={client._id} {...client} />;
         })}
       </div>
-      {/* {numOfPages > 1 && <PageBtnContainer />} */}
+      {/* {numPages > 1 && <PageBtnContainer />} */}
     </Wrapper>
   );
 };
