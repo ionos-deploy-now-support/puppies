@@ -17,7 +17,7 @@ const ClientsSearchContainer = () => {
       clearTimeout(timeout);
       timeout = setTimeout(() => {
         onChange(form);
-      }, 2000);
+      }, 1500);
     };
   };
 
@@ -27,19 +27,14 @@ const ClientsSearchContainer = () => {
         <h5 className="form-title">search form</h5>
         <div className="form-center">
           <FormRow
-            // type="search"
+            type="search"
             name="search"
             labelText="search by first or last name"
             defaultValue={search}
-            onChange={(e) => {
-              console.log(`e.currentTarget.form: ${e.currentTarget.form}`);
-              submit(e.currentTarget.form);
-            }}
-            // onChange={debounce((form) => {
-            //   submit(form);
-            // })}
+            onChange={debounce((form) => {
+              submit(form);
+            })}
           />
-
           <FormRowSelect
             name="sort"
             defaultValue={sort}
@@ -48,7 +43,10 @@ const ClientsSearchContainer = () => {
               submit(e.currentTarget.form);
             }}
           />
-          <Link to="/dashboard/clients" className="btn form-btn delete-btn">
+          <Link
+            to="/dashboard/clients"
+            className="btn form-btn delete-btn"
+            onClick={(e) => e.currentTarget.form.reset()}>
             Reset Search Values
           </Link>
         </div>

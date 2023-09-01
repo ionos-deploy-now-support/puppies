@@ -6,9 +6,9 @@ const ClientsContainer = () => {
   const { data } = useClientsContext();
   console.log({ data });
   const clients = data.data.docs;
+  const { results } = data;
+  console.log(clients, results);
 
-  // const { clients, totalClients, numOfPages } = data;
-  console.log({ clients });
   if (clients.length === 0) {
     return (
       <Wrapper>
@@ -18,9 +18,9 @@ const ClientsContainer = () => {
   }
   return (
     <Wrapper>
-      {/* <h5>
-        {totalClients} client{clients.length > 1 && 's'} found
-      </h5> */}
+      <h5>
+        {results} client{clients.length > 1 && 's'} found
+      </h5>
       <div className="clients">
         {clients.map((client) => {
           return <Client key={client._id} {...client} />;
