@@ -11,8 +11,8 @@ const FormRow = ({ type, name, labelText, defaultValue, required, onChange }) =>
           name={name}
           className="form-input"
           defaultValue={defaultValue || ''}
-          required
           onChange={onChange}
+          required
         />
       </div>
     );
@@ -28,6 +28,7 @@ const FormRow = ({ type, name, labelText, defaultValue, required, onChange }) =>
           name={name}
           className="form-input"
           defaultValue={defaultValue || ''}
+          onChange={onChange}
         />
       </div>
     );

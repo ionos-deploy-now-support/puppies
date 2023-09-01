@@ -35,12 +35,14 @@ import { useContext, createContext } from 'react';
 //   };
 
 export const loader = async ({ request }) => {
+  // create new URL object - turn query params into an object
+  console.log(`request.url: ${request.url}`);
   const params = Object.fromEntries([...new URL(request.url).searchParams.entries()]);
-  console.log(params);
+  console.log({ params });
   try {
-    const { data } = await customFetch.get('/clients');
+    const { data } = await customFetch.get('/clients', { params });
     console.log({ data });
-    return { data };
+    return { data, searchValues: { ...params } };
   } catch (error) {
     toast.error(error?.response?.data?.message);
     return error;
@@ -48,20 +50,18 @@ export const loader = async ({ request }) => {
 };
 const ClientsContext = createContext();
 const Clients = () => {
-  // const { searchValues } = useLoaderData();
-  const { data } = useLoaderData();
+  const { data, searchValues } = useLoaderData();
 
   // const { data } = useQuery(allClientsQuery(searchValues));
   return (
-    // <ClientsContext.Provider value={{ data, searchValues }}>
-    <ClientsContext.Provider value={{ data }}>
+    <ClientsContext.Provider value={{ data, searchValues }}>
       <ClientsSearchContainer />
       <ClientsContainer />
     </ClientsContext.Provider>
   );
 };
 
-//custom hook
+//custom context hook
 export const useClientsContext = () => useContext(ClientsContext);
 
 export default Clients;

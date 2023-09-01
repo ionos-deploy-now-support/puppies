@@ -1,9 +1,4 @@
-import {
-  FaLocationArrow,
-  FaCalendarAlt,
-  FaPhone,
-  FaStickyNote,
-} from 'react-icons/fa';
+import { FaLocationArrow, FaCalendarAlt, FaPhone, FaStickyNote } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 import { Link, Form } from 'react-router-dom';
 import { SubmitBtn } from '../components';
@@ -25,7 +20,7 @@ const Client = ({
   clientState,
   clientZip,
   clientNote,
-  createdAt,
+  createdAt
 }) => {
   const date = day(createdAt).format('MMM Do, YYYY');
   return (
