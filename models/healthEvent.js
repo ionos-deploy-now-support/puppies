@@ -22,6 +22,10 @@ const healthEventsSchema = new mongoose.Schema(
     grams: {
       type: Number,
       max: [13600, 'Puppy grams should not exceed 13600']
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now()
     }
   },
   {

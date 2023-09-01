@@ -1,4 +1,4 @@
-import { FormRow, FormRowSelect, SubmitBtn } from '../components';
+import { FormRow, FormRowSelect } from '../components';
 import Wrapper from '../assets/wrappers/DashboardFormPage';
 import { Form, useSubmit, Link } from 'react-router-dom';
 import { SORT_BY } from '../../../utils/constants';
@@ -17,7 +17,7 @@ const ClientsSearchContainer = () => {
       clearTimeout(timeout);
       timeout = setTimeout(() => {
         onChange(form);
-      }, 1500);
+      }, 1000);
     };
   };
 

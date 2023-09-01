@@ -75,6 +75,10 @@ const puppySchema = new mongoose.Schema(
       type: mongoose.Schema.ObjectId,
       ref: 'Litter',
       required: [true, 'Puppy must belong to a litter']
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now()
     }
   },
   {

@@ -33,6 +33,10 @@ const paymentSchema = new mongoose.Schema(
         values: ['cash', 'check', 'venmo', 'paypal', 'zelle'],
         message: '{VALUE} is not supported. Enter cash, check, venmo, paypal, or zelle'
       }
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now()
     }
   },
   {

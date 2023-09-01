@@ -64,6 +64,10 @@ const contractSchema = new mongoose.Schema(
       type: mongoose.Schema.ObjectId,
       ref: 'Client',
       required: [true, 'Contract must have a client']
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now()
     }
   },
   {

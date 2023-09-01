@@ -10,6 +10,7 @@ class APIFeatures {
     const excludedFields = ['page', 'sort', 'limit', 'fields'];
     excludedFields.forEach((el) => delete queryObj[el]);
     const { search } = queryObj;
+
     let queryFilterObj = {};
 
     if (search) {
@@ -45,9 +46,11 @@ class APIFeatures {
       const sortBy = this.queryStr.sort.split(',').join(' ');
       const sortKey = sortOptions[sortBy] || sortOptions.newest;
       console.log(`apiFeatures sort sortKey ${sortKey}`);
-      // this.query = this.query.sort(sortBy);
       this.query = this.query.sort(sortKey);
       console.log(`apiFeatures sortBy ${sortBy}`);
+    } else {
+      // sort by newest entry by default if no sort params
+      this.query = this.query.sort('-createdAt');
     }
     return this;
   }
@@ -62,8 +65,11 @@ class APIFeatures {
   }
   paginate() {
     const page = this.queryStr.page * 1 || 1;
-    const limit = this.queryStr.limit * 1 || 20;
+    // const limit = this.queryStr.limit * 1 || 20;
+    const limit = this.queryStr.limit * 1 || 4;
     const skip = (page - 1) * limit;
+    console.log(`API features currentPage is ${page}`);
+
     this.query = this.query.skip(skip).limit(limit);
     return this;
   }

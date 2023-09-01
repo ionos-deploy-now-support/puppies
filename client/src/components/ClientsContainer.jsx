@@ -26,7 +26,8 @@ const ClientsContainer = () => {
           return <Client key={client._id} {...client} />;
         })}
       </div>
-      {/* {numPages > 1 && <PageBtnContainer />} */}
+      <PageBtnContainer />
+      {/* {results > 1 && <PageBtnContainer />} */}
     </Wrapper>
   );
 };

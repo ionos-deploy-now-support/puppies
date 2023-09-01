@@ -9,11 +9,12 @@ exports.getAll = (Model) =>
     /*
   #swagger.description = 'READ all documents.'
 */
-
     // To allow for nested GETs. THis is a work around. see video162 q&a for possible alternative
     let filter = {};
     if (req.params.litterId) filter = { litter: req.params.litterId };
     if (req.params.clientId) filter = { client: req.params.clientId };
+
+    const totalDocs = await Model.countDocuments(filter);
 
     const features = new APIFeatures(Model.find(filter), req.query)
       .filter()
@@ -22,13 +23,16 @@ exports.getAll = (Model) =>
       .paginate();
 
     const docs = await features.query;
-    const totalDocs = docs.length;
-    // const numPages = Math.ceil(totalDocs / limit);
-    // console.log(numPages);
+    const limit = docs.length;
+    const numPages = Math.ceil(totalDocs / limit);
+    // const currentPage = getCurrentPage();
 
     res.status(200).json({
       status: 'success',
       results: totalDocs,
+      numPages: numPages,
+      // currentPage: page,
+      perPage: limit,
       data: { docs }
     });
   });

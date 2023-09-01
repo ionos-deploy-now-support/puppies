@@ -30,6 +30,10 @@ const communicationSchema = new mongoose.Schema(
     communicationNote: {
       type: String,
       maxLength: [255, 'Communication note must not exceed 255 characters']
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now()
     }
   },
   {

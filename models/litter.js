@@ -77,7 +77,11 @@ const litterSchema = new mongoose.Schema({
       ref: 'Puppy',
       required: [true, 'Puppy must belong to a litter.']
     }
-  ]
+  ],
+  createdAt: {
+    type: Date,
+    default: Date.now()
+  }
 });
 
 //Populates docs from ObjectId for child referenced relationships
