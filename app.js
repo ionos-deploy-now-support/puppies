@@ -92,6 +92,10 @@ app
   })
   .use('', require('./routes'));
 
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, './client/public', 'index.html'));
+});
+
 //Error handling to catch unhandled routes
 app.all('*', (req, res, next) => {
   next(new AppError(`Cannot find ${req.originalUrl} on this server.`, 404));
