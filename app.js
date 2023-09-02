@@ -6,11 +6,11 @@ const path = require('node:path');
 const mongoose = require('mongoose');
 const mongoSanitize = require('express-mongo-sanitize');
 const morgan = require('morgan');
-const passport = require('passport'); //OAuth
+// const passport = require('passport'); //OAuth
 const rateLimit = require('express-rate-limit');
-const session = require('express-session'); // OAuth
-const MongoStore = require('connect-mongo')(session); // OAuth
-const exphbs = require('express-handlebars'); //was for OAuth
+// const session = require('express-session'); // OAuth
+// const MongoStore = require('connect-mongo')(session); // OAuth
+// const exphbs = require('express-handlebars'); //was for OAuth
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const connect = require('./db/connect');
@@ -25,7 +25,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 //Passport config
-require('./config/passport')(passport); //used in OAuth
+// require('./config/passport')(passport); //used in OAuth
 
 //Safety net
 process.on('uncaughtException', (err) => {
@@ -48,7 +48,7 @@ const limiter = rateLimit({
 });
 app.use('/', limiter);
 
-app.enable('trust proxy'); //this was for OAuth
+// app.enable('trust proxy'); //this was for OAuth
 
 // read data from body into req.body and limit body size
 app.use(bodyParser.json({ limit: '10kb' }));
@@ -63,20 +63,20 @@ app.use(xss());
 app.use(hpp());
 
 //Handlebars    was used in OAuth example
-app.engine('.hbs', exphbs.engine({ defaultLayout: 'main', extname: '.hbs' }));
-app.set('view engine', '.hbs');
+// app.engine('.hbs', exphbs.engine({ defaultLayout: 'main', extname: '.hbs' }));
+// app.set('view engine', '.hbs');
 //Sessions      was used in OAuth
-app.use(
-  session({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: false,
-    store: new MongoStore({ mongooseConnection: mongoose.connection })
-  })
-);
+// app.use(
+//   session({
+//     secret: 'keyboard cat',
+//     resave: false,
+//     saveUninitialized: false,
+//     store: new MongoStore({ mongooseConnection: mongoose.connection })
+//   })
+// );
 //Passport middleware  was USED in OAuth
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 app
   .use((req, res, next) => {
