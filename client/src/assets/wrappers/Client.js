@@ -68,7 +68,7 @@ const Wrapper = styled.article`
   }
   .edit-btn,
   .delete-btn {
-    height: 30px;
+    height: 34px;
     font-size: 0.85rem;
     display: flex;
     align-items: center;

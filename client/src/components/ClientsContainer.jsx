@@ -6,7 +6,7 @@ const ClientsContainer = () => {
   const { data } = useClientsContext();
   console.log({ data });
   const clients = data.data.docs;
-  const { results } = data;
+  const { results, filteredResults } = data;
   console.log(clients, results);
 
   if (clients.length === 0) {
@@ -19,7 +19,8 @@ const ClientsContainer = () => {
   return (
     <Wrapper>
       <h5>
-        {results} client{clients.length > 1 && 's'} found
+        {results} client{results > 1 && 's '}{' '}
+        {filteredResults !== results && `and found ${filteredResults} matching search`}
       </h5>
       <div className="clients">
         {clients.map((client) => {

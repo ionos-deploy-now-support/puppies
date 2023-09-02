@@ -2,7 +2,6 @@ class APIFeatures {
   constructor(query, queryStr) {
     this.query = query;
     this.queryStr = queryStr;
-    console.log(`features queryStr ${queryStr}`);
     console.log(`features queryStr stringified ${JSON.stringify(queryStr)}`);
   }
   filter() {
@@ -69,7 +68,6 @@ class APIFeatures {
     const limit = this.queryStr.limit * 1 || 4;
     const skip = (page - 1) * limit;
     console.log(`API features currentPage is ${page}`);
-
     this.query = this.query.skip(skip).limit(limit);
     return this;
   }

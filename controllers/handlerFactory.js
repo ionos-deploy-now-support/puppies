@@ -15,7 +15,10 @@ exports.getAll = (Model) =>
     if (req.params.clientId) filter = { client: req.params.clientId };
 
     const totalDocs = await Model.countDocuments(filter);
+    const filtered = new APIFeatures(Model.find(filter), req.query).filter();
+    const filteredDocs = await filtered.query;
 
+    console.log(`factory filteredDocs: ${filteredDocs}`);
     const features = new APIFeatures(Model.find(filter), req.query)
       .filter()
       .sort()
@@ -23,16 +26,22 @@ exports.getAll = (Model) =>
       .paginate();
 
     const docs = await features.query;
-    const limit = docs.length;
-    const numPages = Math.ceil(totalDocs / limit);
+    let currentPage,
+      limit = '';
+    req.query.page ? (currentPage = req.query.page * 1) : (currentPage = 1 * 1);
+    req.query.limit ? (limit = req.query.page * 1) : (limit = 4 * 1); //hard code for now
+    const displaying = docs.length; //appears to be docs displayed up to limit
+    const numPages = Math.ceil(filteredDocs.length / displaying);
     // const currentPage = getCurrentPage();
 
     res.status(200).json({
       status: 'success',
       results: totalDocs,
+      filteredResults: filteredDocs.length,
+      displaying: displaying,
       numPages: numPages,
+      currentPage: currentPage,
       // currentPage: page,
-      perPage: limit,
       data: { docs }
     });
   });
