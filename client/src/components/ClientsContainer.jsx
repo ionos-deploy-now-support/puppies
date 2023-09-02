@@ -6,7 +6,7 @@ const ClientsContainer = () => {
   const { data } = useClientsContext();
   console.log({ data });
   const clients = data.data.docs;
-  const { results, filteredResults } = data;
+  const { results, filteredResults, numPages } = data;
   console.log(clients, results);
 
   if (clients.length === 0) {
@@ -27,8 +27,7 @@ const ClientsContainer = () => {
           return <Client key={client._id} {...client} />;
         })}
       </div>
-      <PageBtnContainer />
-      {/* {results > 1 && <PageBtnContainer />} */}
+      {numPages > 1 && <PageBtnContainer />}
     </Wrapper>
   );
 };
