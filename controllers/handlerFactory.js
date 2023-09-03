@@ -31,7 +31,7 @@ exports.getAll = (Model) =>
     req.query.page ? (currentPage = req.query.page * 1) : (currentPage = 1 * 1);
     req.query.limit ? (limit = req.query.page * 1) : (limit = 4 * 1); //hard code for now
     const displaying = docs.length; //appears to be docs displayed up to limit
-    const numPages = Math.ceil(filteredDocs.length / displaying);
+    const numPages = Math.ceil(filteredDocs.length / limit);
     // const currentPage = getCurrentPage();
 
     res.status(200).json({
