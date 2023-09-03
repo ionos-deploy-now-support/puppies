@@ -1,12 +1,9 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { Suspense, useEffect, useState } from 'react';
-// import SpinnerFullPage from './components/SpinnerFullPage';
-
-// import LittersList from './components/LittersList';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import {
   AboutUs,
-  Admin,
   Clients,
   ClientAdd,
   ClientEdit,
@@ -16,13 +13,12 @@ import {
   HomeLayout,
   Landing,
   Litters,
-  LitterDetails,
   Login,
   Profile,
   Puppies,
   Register,
   Reserve,
-  Stats,
+  Stats
 } from './pages';
 
 import { action as registerAction } from './pages/Register';
@@ -34,9 +30,9 @@ import { loader as editClientLoader } from './pages/ClientEdit';
 import { action as editClientAction } from './pages/ClientEdit';
 import { action as deleteClientAction } from './pages/ClientDelete';
 import { action as profileAction } from './pages/Profile';
-// import { loader as adminLoader } from './pages/Admin';
+import ErrorElement from './components/ErrorElement';
+
 // import { loader as statsLoader } from './pages/Stats';
-// import ErrorElement from './components/ErrorElement';
 
 export const checkDefaultTheme = () => {
   const isDarkTheme = localStorage.getItem('darkTheme') === 'true';
@@ -46,13 +42,13 @@ export const checkDefaultTheme = () => {
 
 checkDefaultTheme();
 
-// const queryClient = new QueryClient({
-//   defaultOptions: {
-//     queries: {
-//       staleTime: 1000 * 60 * 5,
-//     },
-//   },
-// });
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5
+    }
+  }
+});
 
 const router = createBrowserRouter([
   {
@@ -62,25 +58,25 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Landing />,
+        element: <Landing />
       },
       {
         path: 'about-us',
-        element: <AboutUs />,
+        element: <AboutUs />
       },
       {
         path: 'login',
         element: <Login />,
-        action: loginAction,
+        action: loginAction
       },
       {
         path: 'register',
         element: <Register />,
-        action: registerAction,
+        action: registerAction
       },
       {
         path: 'reserve',
-        element: <Reserve />,
+        element: <Reserve />
       },
       {
         path: 'dashboard',
@@ -89,51 +85,55 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <Puppies />,
+            element: <Puppies />
           },
           {
             path: 'stats',
-            element: <Stats />,
+            element: <Stats />
           },
           {
             path: 'litters',
-            element: <Litters />,
+            element: <Litters />
           },
           {
             path: 'clients',
             element: <Clients />,
             loader: allClientsLoader,
+            errorElement: <ErrorElement />
           },
           {
             path: 'client-add',
             element: <ClientAdd />,
-            action: addClientAction,
+            action: addClientAction
           },
           {
             path: 'client-edit/:id',
             element: <ClientEdit />,
             loader: editClientLoader,
-            action: editClientAction,
+            action: editClientAction
           },
           {
             path: 'client-delete/:id',
-            action: deleteClientAction,
+            action: deleteClientAction
           },
           {
             path: 'profile',
             element: <Profile />,
-            action: profileAction,
-          },
-        ],
-      },
-    ],
-  },
+            action: profileAction
+          }
+        ]
+      }
+    ]
+  }
 ]);
 
-const API_URL = 'https://puppies-api-ek0y.onrender.com';
-
-function App() {
-  return <RouterProvider router={router} />;
-}
+const App = () => {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
+  );
+};
 
 export default App;

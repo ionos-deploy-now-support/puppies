@@ -3,7 +3,7 @@ import { ClientsContainer, ClientsSearchContainer } from '../components';
 import customFetch from '../utils/customFetch';
 import { useLoaderData } from 'react-router-dom';
 import { useContext, createContext } from 'react';
-// import { useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
 // const allClientsQuery = (params) => {
 //   const { search, sort, page } = params;
@@ -39,14 +39,9 @@ export const loader = async ({ request }) => {
   console.log(`request.url: ${request.url}`);
   const params = Object.fromEntries([...new URL(request.url).searchParams.entries()]);
   console.log({ params });
-  try {
-    const { data } = await customFetch.get('/clients', { params });
-    console.log({ data });
-    return { data, searchValues: { ...params } };
-  } catch (error) {
-    toast.error(error?.response?.data?.message);
-    return error;
-  }
+  const { data } = await customFetch.get('/clients', { params });
+  console.log({ data });
+  return { data, searchValues: { ...params } };
 };
 const ClientsContext = createContext();
 const Clients = () => {
