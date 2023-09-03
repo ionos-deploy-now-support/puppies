@@ -35,7 +35,7 @@ process.on('uncaughtException', (err) => {
 });
 
 // serve static files
-app.use(express.static(path.join(__dirname, './client/public')));
+app.use(express.static(path.join(__dirname, './client/dist')));
 
 //set certain security HTTP headers
 app.use(helmet());
@@ -93,7 +93,7 @@ app
   .use('', require('./routes'));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, './client/public', 'index.html'));
+  res.sendFile(path.resolve(__dirname, './client/dist', 'index.html'));
 });
 
 //Error handling to catch unhandled routes
