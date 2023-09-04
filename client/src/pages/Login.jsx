@@ -1,17 +1,17 @@
-import { Form, redirect, Link, useNavigate } from 'react-router-dom';
+import { Form, redirect, Link } from 'react-router-dom';
 import { FormRow, Logo, SubmitBtn } from '../components';
 import Wrapper from '../assets/wrappers/LoginAndSignUpPage';
 import customFetch from '../utils/customFetch';
 import { toast } from 'react-toastify';
 
 export const action =
-  // (queryClient) =>
+  (queryClient) =>
   async ({ request }) => {
     const formData = await request.formData();
     const data = Object.fromEntries(formData);
     try {
       await customFetch.post('/users/login', data);
-      // queryClient.invalidateQueries();
+      queryClient.invalidateQueries(); // w/o options all queries invalidated
       toast.success('Login successful');
       return redirect('/dashboard');
     } catch (error) {
@@ -21,8 +21,6 @@ export const action =
   };
 
 function Login() {
-  const navigation = useNavigate();
-  const isSubmitting = navigation.state === 'submitting';
   return (
     <Wrapper>
       <Form method="post" className="form" action="">
@@ -30,9 +28,7 @@ function Login() {
         <h4>Login</h4>
         <FormRow type="email" name="email" />
         <FormRow type="password" name="password" />
-        <button type="submit" className="btn btn-block" disabled={isSubmitting}>
-          {isSubmitting ? 'submitting...' : 'submit'}
-        </button>
+        <SubmitBtn formBtn btnText="login" />
         <p>
           New?
           <Link to="/register" className="member-btn">

@@ -6,13 +6,13 @@ import { toast } from 'react-toastify';
 import customFetch from '../utils/customFetch';
 
 export const action =
-  // (queryClient) =>
+  (queryClient) =>
   async ({ request }) => {
     const formData = await request.formData();
     const data = Object.fromEntries(formData);
     try {
       await customFetch.post('/clients', data);
-      // queryClient.invalidateQueries(['jobs']);
+      queryClient.invalidateQueries(['clients']);
       toast.success('Client added successfully ');
       return redirect('/dashboard');
     } catch (error) {

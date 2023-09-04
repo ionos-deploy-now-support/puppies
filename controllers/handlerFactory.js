@@ -3,6 +3,7 @@ const AppError = require('../utils/appError');
 const APIFeatures = require('../utils/apiFeatures');
 const { query } = require('express');
 const ObjectId = require('mongodb').ObjectId;
+const PAGINATION_LIMIT = require('../utils/constants2');
 
 exports.getAll = (Model) =>
   catchAsync(async (req, res, next) => {
@@ -29,10 +30,9 @@ exports.getAll = (Model) =>
     let currentPage,
       limit = '';
     req.query.page ? (currentPage = req.query.page * 1) : (currentPage = 1 * 1);
-    req.query.limit ? (limit = req.query.page * 1) : (limit = 4 * 1); //hard code for now
-    const displaying = docs.length; //appears to be docs displayed up to limit
+    req.query.limit ? (limit = req.query.page * 1) : (limit = PAGINATION_LIMIT);
+    const displaying = docs.length;
     const numPages = Math.ceil(filteredDocs.length / limit);
-    // const currentPage = getCurrentPage();
 
     res.status(200).json({
       status: 'success',
@@ -41,7 +41,6 @@ exports.getAll = (Model) =>
       displaying: displaying,
       numPages: numPages,
       currentPage: currentPage,
-      // currentPage: page,
       data: { docs }
     });
   });

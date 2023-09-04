@@ -6,11 +6,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const mongoSanitize = require('express-mongo-sanitize');
 const morgan = require('morgan');
-// const passport = require('passport'); //OAuth
 const rateLimit = require('express-rate-limit');
-// const session = require('express-session'); // OAuth
-// const MongoStore = require('connect-mongo')(session); // OAuth
-// const exphbs = require('express-handlebars'); //was for OAuth
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const connect = require('./db/connect');
@@ -24,9 +20,6 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
-//Passport config
-// require('./config/passport')(passport); //used in OAuth
-
 //Safety net
 process.on('uncaughtException', (err) => {
   console.log('UNCAUGHT EXCEPTION! Shutting down...');
@@ -39,7 +32,6 @@ app.use(express.static(path.join(__dirname, './client/dist')));
 
 //set certain security HTTP headers
 app.use(helmet());
-
 //limit requests from same ip to help prevent denial of service and brute force attacks
 const limiter = rateLimit({
   max: 100,
@@ -47,36 +39,16 @@ const limiter = rateLimit({
   message: 'Too many requests from this IP, must wait 1 hour to try again.'
 });
 app.use('/', limiter);
-
-// app.enable('trust proxy'); //this was for OAuth
-
 // read data from body into req.body and limit body size
 app.use(bodyParser.json({ limit: '10kb' }));
 //parse data from cookie
 app.use(cookieParser());
-
 //Data sanitization. Protect against NoSQL query injection
 app.use(mongoSanitize());
 //Data sanitization. Protect against XSS
 app.use(xss());
 //Prevent parameter pollution
 app.use(hpp());
-
-//Handlebars    was used in OAuth example
-// app.engine('.hbs', exphbs.engine({ defaultLayout: 'main', extname: '.hbs' }));
-// app.set('view engine', '.hbs');
-//Sessions      was used in OAuth
-// app.use(
-//   session({
-//     secret: 'keyboard cat',
-//     resave: false,
-//     saveUninitialized: false,
-//     store: new MongoStore({ mongooseConnection: mongoose.connection })
-//   })
-// );
-//Passport middleware  was USED in OAuth
-// app.use(passport.initialize());
-// app.use(passport.session());
 
 app
   .use((req, res, next) => {

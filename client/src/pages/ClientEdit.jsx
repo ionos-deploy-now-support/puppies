@@ -4,24 +4,37 @@ import Wrapper from '../assets/wrappers/DashboardFormPage';
 import { Form, redirect, useLoaderData } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import customFetch from '../utils/customFetch';
+import { useQuery } from '@tanstack/react-query';
 
-export const loader = async ({ params }) => {
-  try {
-    const { data } = await customFetch.get(`/clients/${params.id}`);
-    return data;
-  } catch (error) {
-    toast.error(error?.response?.data?.message);
-    return redirect('/dashboard/clients');
-  }
+const singleClientQuery = (id) => {
+  return {
+    queryKey: ['client', id],
+    queryFn: async () => {
+      const { data } = await customFetch.get(`/clients/${id}`);
+      return data;
+    }
+  };
 };
+
+export const loader =
+  (queryClient) =>
+  async ({ params }) => {
+    try {
+      await queryClient.ensureQueryData(singleClientQuery(params.id));
+      return params.id;
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+      return redirect('/dashboard/clients');
+    }
+  };
 export const action =
-  // (queryClient) =>
+  (queryClient) =>
   async ({ request, params }) => {
     const formData = await request.formData();
     const data = Object.fromEntries(formData);
     try {
       await customFetch.put(`/clients/${params.id}`, data);
-      // queryClient.invalidateQueries(['jobs']);
+      queryClient.invalidateQueries(['clients']);
 
       toast.success('Client edited successfully');
       return redirect('/dashboard/clients');
@@ -32,8 +45,11 @@ export const action =
   };
 
 const ClientEdit = () => {
-  const { data } = useLoaderData();
-  const client = data.data;
+  const id = useLoaderData();
+  // const client = data.data;
+  const {
+    data: { client }
+  } = useQuery(singleClientQuery(id));
 
   return (
     <Wrapper>

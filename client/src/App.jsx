@@ -67,7 +67,7 @@ const router = createBrowserRouter([
       {
         path: 'login',
         element: <Login />,
-        action: loginAction
+        action: loginAction(queryClient)
       },
       {
         path: 'register',
@@ -80,8 +80,8 @@ const router = createBrowserRouter([
       },
       {
         path: 'dashboard',
-        element: <DashboardLayout />,
-        loader: dashboardLoader,
+        element: <DashboardLayout queryClient={queryClient} />,
+        loader: dashboardLoader(queryClient),
         children: [
           {
             index: true,
@@ -98,28 +98,28 @@ const router = createBrowserRouter([
           {
             path: 'clients',
             element: <Clients />,
-            loader: allClientsLoader,
+            loader: allClientsLoader(queryClient),
             errorElement: <ErrorElement />
           },
           {
             path: 'client-add',
             element: <ClientAdd />,
-            action: addClientAction
+            action: addClientAction(queryClient)
           },
           {
             path: 'client-edit/:id',
             element: <ClientEdit />,
-            loader: editClientLoader,
-            action: editClientAction
+            loader: editClientLoader(queryClient),
+            action: editClientAction(queryClient)
           },
           {
             path: 'client-delete/:id',
-            action: deleteClientAction
+            action: deleteClientAction(queryClient)
           },
           {
             path: 'profile',
             element: <Profile />,
-            action: profileAction
+            action: profileAction(queryClient)
           }
         ]
       }
