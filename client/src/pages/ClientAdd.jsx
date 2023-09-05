@@ -14,7 +14,7 @@ export const action =
       await customFetch.post('/clients', data);
       queryClient.invalidateQueries(['clients']);
       toast.success('Client added successfully ');
-      return redirect('/dashboard');
+      return redirect('/dashboard/clients');
     } catch (error) {
       toast.error(error?.response?.data?.message);
       return error;

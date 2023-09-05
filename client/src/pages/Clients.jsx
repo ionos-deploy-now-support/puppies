@@ -9,7 +9,7 @@ const allClientsQuery = (params) => {
   const { search, sort, page } = params;
   return {
     queryKey: [
-      'docs',
+      'clients',
       search ?? '',
       // clientStatus ?? 'all',
       // clientType ?? 'all',

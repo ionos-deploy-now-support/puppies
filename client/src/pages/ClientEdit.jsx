@@ -1,6 +1,5 @@
 import { FormRow, SubmitBtn } from '../components';
 import Wrapper from '../assets/wrappers/DashboardFormPage';
-// import { JOB_STATUS, JOB_TYPE } from '../../../utils/constants';
 import { Form, redirect, useLoaderData } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import customFetch from '../utils/customFetch';
@@ -35,7 +34,6 @@ export const action =
     try {
       await customFetch.put(`/clients/${params.id}`, data);
       queryClient.invalidateQueries(['clients']);
-
       toast.success('Client edited successfully');
       return redirect('/dashboard/clients');
     } catch (error) {
@@ -45,12 +43,11 @@ export const action =
   };
 
 const ClientEdit = () => {
+  //grab client id from loader
   const id = useLoaderData();
-  // const client = data.data;
-  const {
-    data: { client }
-  } = useQuery(singleClientQuery(id));
-
+  console.log(`user id is ${id}`);
+  // having to drill deep into object to get to data wanted
+  const client = useQuery(singleClientQuery(id)).data.data.data;
   return (
     <Wrapper>
       <Form method="post" className="form">

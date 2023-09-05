@@ -7,7 +7,7 @@ export const action =
   async ({ params }) => {
     try {
       await customFetch.delete(`/clients/${params.id}`);
-      queryClient.invalidateQueries(['jobs']);
+      queryClient.invalidateQueries(['clients']);
 
       toast.success('Client deleted successfully');
     } catch (error) {
