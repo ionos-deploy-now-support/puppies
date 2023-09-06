@@ -1,6 +1,4 @@
 import { Link } from 'react-router-dom';
-
-import LittersList from '../components/LittersList';
 import PageNav from '../components/PageNav';
 import Wrapper from '../assets/wrappers/LandingPage';
 

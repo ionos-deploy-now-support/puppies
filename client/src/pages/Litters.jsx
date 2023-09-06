@@ -1,5 +1,3 @@
-import LittersList from '../components/LittersList';
-import PageNav from '../components/PageNav';
 import { useEffect, useState } from 'react';
 const BASE_URL = 'https://puppies-api-ek0y.onrender.com';
 function Litters() {
@@ -24,7 +22,6 @@ function Litters() {
   return (
     <main>
       <p>This is the Litters page</p>
-      <LittersList litters={litters} isLoading={isLoading} />
     </main>
   );
 }
