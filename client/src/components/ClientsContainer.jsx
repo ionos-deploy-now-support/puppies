@@ -4,7 +4,6 @@ import { useClientsContext } from '../pages/Clients';
 import PageBtnContainer from './PageBtnContainer';
 const ClientsContainer = () => {
   const { data } = useClientsContext();
-  console.log({ data });
   const clients = data.data.docs;
   const { results, filteredResults, numPages } = data;
   console.log(clients, results);

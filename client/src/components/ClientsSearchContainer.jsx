@@ -6,7 +6,6 @@ import { useClientsContext } from '../pages/Clients';
 
 const ClientsSearchContainer = () => {
   const { searchValues } = useClientsContext();
-  console.log(searchValues);
   const { search, sort } = searchValues;
   const submit = useSubmit(); //invokes the useSubmit hook
 
@@ -24,7 +23,7 @@ const ClientsSearchContainer = () => {
   return (
     <Wrapper>
       <Form className="form">
-        <h5 className="form-title">search form</h5>
+        <h5 className="form-title">search clients</h5>
         <div className="form-center">
           <FormRow
             type="search"

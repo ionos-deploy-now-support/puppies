@@ -1,31 +1,22 @@
 import { NavLink } from 'react-router-dom';
 import Logo from './Logo';
-import styles from './PageNav.module.css';
+import Wrapper from '../assets/wrappers/PageNav';
+import ThemeToggle from './ThemeToggle';
+import PageNavListItem from './PageNavListItem';
 
 function PageNav() {
   return (
-    <nav className={styles.nav}>
+    <Wrapper>
       <Logo />
       <ul>
+        <PageNavListItem linkText="Gallery" linkTo="/gallery" />
+        <PageNavListItem linkText="About Us" linkTo="/about-us" />
         <li>
-          <NavLink to="/gallery">Gallery</NavLink>
+          <ThemeToggle />
         </li>
-        <li>
-          <NavLink to="/litters">Litters</NavLink>
-        </li>
-        <li>
-          <NavLink to="/puppies">Available Puppies</NavLink>
-        </li>
-        <li>
-          <NavLink to="/about-us">About Us</NavLink>
-        </li>
-        <li>
-          <NavLink to="/login" className={styles.ctaLink}>
-            Login
-          </NavLink>
-        </li>
+        <PageNavListItem linkText="Login" linkTo="/login" />
       </ul>
-    </nav>
+    </Wrapper>
   );
 }
 

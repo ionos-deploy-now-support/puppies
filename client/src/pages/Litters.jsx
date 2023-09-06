@@ -23,7 +23,6 @@ function Litters() {
   }, []);
   return (
     <main>
-      <PageNav />
       <p>This is the Litters page</p>
       <LittersList litters={litters} isLoading={isLoading} />
     </main>

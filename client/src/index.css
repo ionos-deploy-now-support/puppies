@@ -136,28 +136,6 @@ h5 {
   /* Tiny heading */
 }
 
-/* BIGGER FONTS */
-/* h1 {
-  font-size: clamp(3rem, 6vw, 6rem);
-}
-
-h2 {
-  font-size: clamp(2.5rem, 5vw, 5rem);
-}
-
-h3 {
-  font-size: clamp(2rem, 4vw, 4rem);
-}
-
-h4 {
-  font-size: clamp(1.5rem, 3vw, 3rem);
-}
-
-h5 {
-  font-size: clamp(1rem, 2vw, 2rem);
-}
- */
-
 .text {
   margin-bottom: 1.5rem;
   max-width: 40em;
@@ -170,6 +148,10 @@ small,
 
 a {
   text-decoration: none;
+}
+
+a:hover {
+  box-shadow: var(--shadow-3);
 }
 
 ul {
@@ -222,7 +204,7 @@ button:disabled {
   cursor: wait;
 }
 
-.cta:link,
+/* .cta:link,
 .cta:visited {
   display: inline-block;
   background-color: var(--color-brand--2);
@@ -233,7 +215,7 @@ button:disabled {
   font-weight: 600;
   padding: 1rem 3rem;
   border-radius: 5px;
-}
+} */
 
 .danger-btn {
   color: var(--red-dark);

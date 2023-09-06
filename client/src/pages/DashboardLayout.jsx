@@ -29,10 +29,6 @@ export const loader = (queryClient) => async () => {
 const DashboardContext = createContext();
 
 const DashboardLayout = ({ queryClient }) => {
-  // const { data } = useLoaderData();
-  // const user = data.data;
-
-  // const { user } = useQuery(userQuery).data;
   const { data } = useQuery(userQuery);
   const user = data.data.data;
   const navigate = useNavigate();
