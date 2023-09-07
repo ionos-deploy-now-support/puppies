@@ -4,7 +4,7 @@ const PageNavListItem = ({ linkText, linkTo }) => {
   const { isDarkTheme } = useHomeContext();
   return (
     <li>
-      <NavLink to={linkTo} className={isDarkTheme ? 'dark-nav' : ''}>
+      <NavLink to={linkTo} className={isDarkTheme ? 'dark-nav btn' : 'btn'}>
         {linkText}
       </NavLink>
     </li>

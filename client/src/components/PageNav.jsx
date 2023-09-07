@@ -1,4 +1,3 @@
-import { NavLink } from 'react-router-dom';
 import Logo from './Logo';
 import Wrapper from '../assets/wrappers/PageNav';
 import ThemeToggle from './ThemeToggle';

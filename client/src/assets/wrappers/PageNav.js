@@ -13,7 +13,7 @@ const Wrapper = styled.nav`
   a:link,
   a:visited {
     text-decoration: none;
-    color: var(--grey-600);
+    color: var(#ffffff);
     font-size: 1.2rem;
     font-weight: 600;
   }
@@ -29,23 +29,21 @@ const Wrapper = styled.nav`
     padding: 0.8rem 2rem;
     border-radius: 7px;
   }
-  .dark-nav {
+  /* .dark-nav {
     --text-color: var(--dark-mode-text-color);
     --text-secondary-color: var(--dark-mode-text-secondary-color);
-  }
+  } */
 
-  a:link.dark-nav,
+  /* a:link.dark-nav,
   a:visited.dark-nav {
     text-decoration: none;
     color: var(--dark-mode-text-color);
     --text-secondary-color: var(--dark-mode-text-secondary-color);
     font-size: 1.2rem;
     font-weight: 600;
-  }
-  a:hover.dark-nav {
-    border: 2px solid white;
+  } */
+  /* a:hover.dark-nav {
     border-radius: 5px;
-    padding: 2px;
-  }
+  } */
 `;
 export default Wrapper;

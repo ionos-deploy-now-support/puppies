@@ -32,6 +32,7 @@
   --white: #fff;
   --red-light: #f8d7da;
   --red-dark: #842029;
+  --orange-warn: orange;
   --green-light: #d1e7dd;
   --green-dark: #0f5132;
 
@@ -65,6 +66,16 @@
   --text-color: var(--grey-900);
   --background-secondary-color: var(--white);
   --text-secondary-color: var(--grey-500);
+
+  --toastify-color-progress-dark: var(--primary-900);
+  --toastify-icon-color-info: var(--primary-900);
+  --toastify-color-progress-info: var(--primary-900);
+  --toastify-icon-color-success: var(--primary-900);
+  --toastify-color-progress-success: var(--primary-900);
+  --toastify-color-progress-warning: var(--orange-warn);
+  --toastify-icon-color-warning: var(--orange-warn);
+  --toastify-icon-color-error: var(--red-dark);
+  --toastify-color-progress-error: var(--red-dark);
 }
 
 .dark-theme {
