@@ -53,7 +53,7 @@ const queryClient = new QueryClient({
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <HomeLayout />,
+    element: <HomeLayout queryClient={queryClient} />,
     errorElement: <Error />,
     children: [
       {
