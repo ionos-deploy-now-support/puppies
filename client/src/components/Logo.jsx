@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom';
 import Wrapper from '../assets/wrappers/Logo';
 import { useHomeContext } from '../pages/HomeLayout';
 
-function Logo() {
+const Logo = () => {
   const { isDarkTheme } = useHomeContext();
-  console.log(isDarkTheme);
+
   return (
     <Wrapper>
       {isDarkTheme ? (
@@ -18,6 +18,6 @@ function Logo() {
       )}
     </Wrapper>
   );
-}
+};
 
 export default Logo;
