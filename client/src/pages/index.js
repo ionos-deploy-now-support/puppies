@@ -1,5 +1,4 @@
 export { default as AboutUs } from './AboutUs';
-export { default as Admin } from './Admin';
 export { default as Clients } from './Clients';
 export { default as ClientAdd } from './ClientAdd';
 export { default as ClientEdit } from './ClientEdit';
@@ -9,7 +8,6 @@ export { default as Gallery } from './Gallery';
 export { default as HomeLayout } from './HomeLayout';
 export { default as Landing } from './Landing';
 export { default as Litters } from './Litters';
-export { default as LitterDetails } from './LitterDetails';
 export { default as Login } from './Login';
 export { default as Profile } from './Profile';
 export { default as Puppies } from './Puppies';
