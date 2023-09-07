@@ -49,9 +49,11 @@ const HomeLayout = ({ queryClient }) => {
     logoutUser();
   }, [isAuthError]);
 
+  const user = { name: 'Marc-test' };
   return (
     <HomeContext.Provider
       value={{
+        user,
         isDarkTheme,
         toggleDarkTheme,
         logoutUser

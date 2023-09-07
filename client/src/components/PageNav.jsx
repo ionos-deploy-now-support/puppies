@@ -3,6 +3,7 @@ import Logo from './Logo';
 import Wrapper from '../assets/wrappers/PageNav';
 import ThemeToggle from './ThemeToggle';
 import PageNavListItem from './PageNavListItem';
+import LogoutContainer from './LogoutContainer';
 
 function PageNav() {
   return (
@@ -15,6 +16,7 @@ function PageNav() {
           <ThemeToggle />
         </li>
         <PageNavListItem linkText="Login" linkTo="/login" />
+        <LogoutContainer />
       </ul>
     </Wrapper>
   );
