@@ -3,8 +3,10 @@ import Wrapper from '../assets/wrappers/PageNav';
 import ThemeToggle from './ThemeToggle';
 import PageNavListItem from './PageNavListItem';
 import LogoutContainer from './LogoutContainer';
+import { useHomeContext } from '../pages/HomeLayout';
 
 function PageNav() {
+  const { isLoggedIn } = useHomeContext();
   return (
     <Wrapper>
       <Logo />
@@ -14,8 +16,7 @@ function PageNav() {
         <li>
           <ThemeToggle />
         </li>
-        <PageNavListItem linkText="Login" linkTo="/login" />
-        <LogoutContainer />
+        {!isLoggedIn ? <PageNavListItem linkText="Login" linkTo="/login" /> : <LogoutContainer />}
       </ul>
     </Wrapper>
   );

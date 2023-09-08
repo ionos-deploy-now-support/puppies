@@ -13,6 +13,8 @@ const HomeLayout = ({ queryClient }) => {
   const isPageLoading = navigation.state === 'loading';
   const [isDarkTheme, setIsDarkTheme] = useState(checkDefaultTheme());
   const [isAuthError, setIsAuthError] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState({});
 
   const toggleDarkTheme = () => {
     console.log('toggle dark theme');
@@ -28,6 +30,7 @@ const HomeLayout = ({ queryClient }) => {
     await customFetch.get('/users/logout');
     queryClient.invalidateQueries();
     toast.success('Logging out...');
+    setIsLoggedIn(false);
     console.log('logout user');
   };
 
@@ -49,11 +52,13 @@ const HomeLayout = ({ queryClient }) => {
     logoutUser();
   }, [isAuthError]);
 
-  const user = { name: 'Marc-test' };
   return (
     <HomeContext.Provider
       value={{
-        user,
+        isLoggedIn,
+        setIsLoggedIn,
+        currentUser,
+        setCurrentUser,
         isDarkTheme,
         toggleDarkTheme,
         logoutUser

@@ -4,6 +4,7 @@ import { BigSidebar, Navbar, SmallSidebar, Loading } from '../components';
 import { createContext, useContext, useState } from 'react';
 import customFetch from '../utils/customFetch';
 import { useQuery } from '@tanstack/react-query';
+import { useHomeContext } from './HomeLayout';
 
 const userQuery = {
   queryKey: ['user'], //query key uniquely describes the data being fetched
@@ -27,6 +28,7 @@ export const loader = (queryClient) => async () => {
 const DashboardContext = createContext();
 
 const DashboardLayout = () => {
+  const { setIsLoggedIn, setCurrentUser } = useHomeContext();
   const { data } = useQuery(userQuery);
   const user = data.data.data;
   const navigation = useNavigation();
@@ -36,6 +38,10 @@ const DashboardLayout = () => {
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
   };
+  if (user) {
+    setIsLoggedIn(true);
+    setCurrentUser(user);
+  }
 
   return (
     <DashboardContext.Provider
