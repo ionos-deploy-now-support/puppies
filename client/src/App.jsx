@@ -85,6 +85,11 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
+            element: <Profile />,
+            action: profileAction(queryClient)
+          },
+          {
+            path: 'puppies',
             element: <Puppies />
           },
           {
@@ -115,11 +120,6 @@ const router = createBrowserRouter([
           {
             path: 'client-delete/:id',
             action: deleteClientAction(queryClient)
-          },
-          {
-            path: 'profile',
-            element: <Profile />,
-            action: profileAction(queryClient)
           }
         ]
       }

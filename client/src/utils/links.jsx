@@ -9,15 +9,21 @@ import { BsPeople } from 'react-icons/bs';
 
 const links = [
   {
-    text: 'puppies',
+    text: 'profile',
     path: '.',
-    icon: <FaDog />,
-    adminOnly: true
+    icon: <ImProfile />,
+    adminOnly: false
   },
   {
     text: 'litters',
     path: 'litters',
     icon: <GiDogHouse />,
+    adminOnly: true
+  },
+  {
+    text: 'puppies',
+    path: 'puppies',
+    icon: <FaDog />,
     adminOnly: true
   },
   {
@@ -37,12 +43,6 @@ const links = [
     path: 'stats',
     icon: <IoBarChartSharp />,
     adminOnly: true
-  },
-  {
-    text: 'profile',
-    path: 'profile',
-    icon: <ImProfile />,
-    adminOnly: false
   }
 ];
 
