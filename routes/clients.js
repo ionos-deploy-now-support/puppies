@@ -10,9 +10,9 @@ const { protect, restrictTo } = require('../controllers/authController');
 //mount router - paymentsRouter for nested route /clients/:clientId/payments
 router.use('/:clientId/communications', communicationsRouter);
 router.use('/:clientId/payments', paymentsRouter);
-router.get('/', clientsController.getAllClients);
+router.get('/', protect, restrictTo('admin'), clientsController.getAllClients);
 // router.get('/clients-stats', clientsController.getClientsStats);
-router.get('/:id', clientsController.getClient);
+router.get('/:id', protect, restrictTo('admin'), clientsController.getClient);
 router.post('/', protect, restrictTo('admin'), clientsController.createClient);
 router.put('/:id', protect, restrictTo('admin'), clientsController.updateClient);
 router.delete('/:id', protect, restrictTo('admin'), clientsController.deleteClient);
