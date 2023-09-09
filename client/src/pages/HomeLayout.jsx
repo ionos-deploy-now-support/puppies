@@ -4,6 +4,7 @@ import customFetch from '../utils/customFetch';
 import { toast } from 'react-toastify';
 import { checkDefaultTheme } from '../App';
 import { Loading } from '../components';
+import Wrapper from '../assets/wrappers/Logo';
 
 const HomeContext = createContext();
 
@@ -63,7 +64,9 @@ const HomeLayout = ({ queryClient }) => {
         toggleDarkTheme,
         logoutUser
       }}>
-      <div className="landing-page">{isPageLoading ? <Loading /> : <Outlet />}</div>
+      <Wrapper>
+        <div className="landing-page">{isPageLoading ? <Loading /> : <Outlet />}</div>
+      </Wrapper>
     </HomeContext.Provider>
   );
 };

@@ -12,32 +12,38 @@ const links = [
     text: 'puppies',
     path: '.',
     icon: <FaDog />,
+    adminOnly: true
   },
   {
     text: 'litters',
     path: 'litters',
     icon: <GiDogHouse />,
+    adminOnly: true
   },
   {
     text: 'clients',
     path: 'clients',
     icon: <BsPeople />,
+    adminOnly: true
   },
   {
     text: 'add client',
     path: 'client-add',
     icon: <BsPeople />,
+    adminOnly: true
   },
   {
     text: 'stats',
     path: 'stats',
     icon: <IoBarChartSharp />,
+    adminOnly: true
   },
   {
     text: 'profile',
     path: 'profile',
     icon: <ImProfile />,
-  },
+    adminOnly: false
+  }
 ];
 
 export default links;
