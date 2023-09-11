@@ -11,6 +11,9 @@ const LogoutContainer = () => {
   const navToDashboard = () => {
     navigate('/dashboard');
   };
+  const navToHome = () => {
+    navigate('/');
+  };
 
   return (
     <Wrapper>
@@ -28,9 +31,16 @@ const LogoutContainer = () => {
         <FaCaretDown />
       </button>
       <div className={showLogout ? 'dropdown show-dropdown' : 'dropdown'}>
-        <button type="button" className="dropdown-btn" onClick={navToDashboard}>
-          dashboard
-        </button>
+        {window.location.pathname !== '/dashboard' && (
+          <button type="button" className="dropdown-btn" onClick={navToDashboard}>
+            dashboard
+          </button>
+        )}
+        {window.location.pathname !== '/' && (
+          <button type="button" className="dropdown-btn" onClick={navToHome}>
+            home
+          </button>
+        )}
         <button type="button" className="dropdown-btn" onClick={logoutUser}>
           logout
         </button>
