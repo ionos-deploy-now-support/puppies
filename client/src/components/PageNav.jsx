@@ -1,23 +1,19 @@
 import Logo from './Logo';
 import Wrapper from '../assets/wrappers/PageNav';
 import ThemeToggle from './ThemeToggle';
-import PageNavListItem from './PageNavListItem';
 import LogoutContainer from './LogoutContainer';
 import { useHomeContext } from '../pages/HomeLayout';
+import PageNavDropDown from './PageNavDropDown';
+import LoginBtn from './LoginBtn';
 
 function PageNav() {
   const { isLoggedIn } = useHomeContext();
   return (
-    <Wrapper>
+    <Wrapper className="nav-center">
       <Logo />
-      <ul>
-        <PageNavListItem linkText="Gallery" linkTo="/gallery" />
-        <PageNavListItem linkText="About Us" linkTo="/about-us" />
-        <li>
-          <ThemeToggle />
-        </li>
-        {!isLoggedIn ? <PageNavListItem linkText="Login" linkTo="/login" /> : <LogoutContainer />}
-      </ul>
+      <PageNavDropDown />
+      <ThemeToggle />
+      {!isLoggedIn ? <LoginBtn /> : <LogoutContainer />}
     </Wrapper>
   );
 }

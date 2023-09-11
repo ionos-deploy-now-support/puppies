@@ -16,6 +16,7 @@ const HomeLayout = ({ queryClient }) => {
   const [isAuthError, setIsAuthError] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
+  const [showMenuDropDown, setShowMenuDropDown] = useState(false);
 
   const toggleDarkTheme = () => {
     console.log('toggle dark theme');
@@ -62,7 +63,9 @@ const HomeLayout = ({ queryClient }) => {
         setCurrentUser,
         isDarkTheme,
         toggleDarkTheme,
-        logoutUser
+        logoutUser,
+        setShowMenuDropDown,
+        showMenuDropDown
       }}>
       <Wrapper>
         <div className="landing-page">{isPageLoading ? <Loading /> : <Outlet />}</div>

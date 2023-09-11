@@ -3,7 +3,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import {
-  AboutUs,
+  About,
   Clients,
   ClientAdd,
   ClientEdit,
@@ -32,8 +32,6 @@ import { action as deleteClientAction } from './pages/ClientDelete';
 import { action as profileAction } from './pages/Profile';
 import ErrorElement from './components/ErrorElement';
 
-// import { loader as statsLoader } from './pages/Stats';
-
 export const checkDefaultTheme = () => {
   const isDarkTheme = localStorage.getItem('darkTheme') === 'true';
   document.body.classList.toggle('dark-theme', isDarkTheme);
@@ -61,8 +59,8 @@ const router = createBrowserRouter([
         element: <Landing />
       },
       {
-        path: 'about-us',
-        element: <AboutUs />
+        path: 'about',
+        element: <About />
       },
       {
         path: 'login',

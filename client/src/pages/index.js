@@ -1,4 +1,4 @@
-export { default as AboutUs } from './AboutUs';
+export { default as About } from './About';
 export { default as Clients } from './Clients';
 export { default as ClientAdd } from './ClientAdd';
 export { default as ClientEdit } from './ClientEdit';

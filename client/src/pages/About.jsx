@@ -1,12 +1,12 @@
 import PageNav from '../components/PageNav';
 
-function AboutUs() {
+function About() {
   return (
     <main>
       <PageNav />
-      <p>About Us Page</p>
+      <p>About Page</p>
     </main>
   );
 }
 
-export default AboutUs;
+export default About;

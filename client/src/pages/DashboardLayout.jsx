@@ -38,6 +38,7 @@ const DashboardLayout = () => {
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
   };
+
   if (user) {
     setIsLoggedIn(true);
     setCurrentUser(user);

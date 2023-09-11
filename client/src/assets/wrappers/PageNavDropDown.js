@@ -2,7 +2,12 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
   position: relative;
-  .logout-btn {
+  .menu-btn {
+    background: transparent;
+    border-color: transparent;
+    font-size: 1.75rem;
+    color: var(--primary-500);
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
