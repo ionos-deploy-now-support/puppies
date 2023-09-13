@@ -9,7 +9,7 @@ import LoginBtn from './LoginBtn';
 function PageNav() {
   const { isLoggedIn } = useHomeContext();
   return (
-    <Wrapper className="nav-center">
+    <Wrapper>
       <Logo />
       <PageNavDropDown />
       <ThemeToggle />

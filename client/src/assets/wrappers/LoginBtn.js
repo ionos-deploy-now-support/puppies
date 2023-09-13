@@ -2,16 +2,17 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
   position: relative;
+  font-size: 1rem;
   .login-btn {
-    background: transparent;
+    background: var(--primary-500);
     border-color: transparent;
-    font-size: 1.75rem;
-    color: var(--primary-500);
+    color: var(--white);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0 0.5rem;
+    padding: 0.4rem;
   }
 `;
 

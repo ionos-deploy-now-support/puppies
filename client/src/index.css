@@ -62,7 +62,7 @@
   --dark-mode-bg-secondary-color: #3f3f3f;
   --dark-mode-text-secondary-color: var(--grey-300);
 
-  --background-color: var(--grey-50);
+  --background-color: var(--grey-100);
   --text-color: var(--grey-900);
   --background-secondary-color: var(--white);
   --text-secondary-color: var(--grey-500);
@@ -76,6 +76,8 @@
   --toastify-icon-color-warning: var(--orange-warn);
   --toastify-icon-color-error: var(--red-dark);
   --toastify-color-progress-error: var(--red-dark);
+
+
 }
 
 .dark-theme {
@@ -104,6 +106,7 @@ body {
     Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 400;
   line-height: 1;
+
 }
 
 p {

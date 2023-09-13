@@ -3,7 +3,7 @@ import Wrapper from '../assets/wrappers/LoginBtn';
 const LoginBtn = () => {
   return (
     <Wrapper>
-      <Link to="/login" className="btn">
+      <Link to="/login" className="btn login-btn">
         Login
       </Link>
     </Wrapper>

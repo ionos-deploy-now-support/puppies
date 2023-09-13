@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.section`
+  overflow-y: hidden;
   nav {
     width: var(--fluid-width);
     max-width: var(--max-width);
