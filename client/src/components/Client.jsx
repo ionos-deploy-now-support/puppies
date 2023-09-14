@@ -50,7 +50,7 @@ const Client = ({
             Edit
           </Link>
           <Form method="post" action={`../client-delete/${_id}`}>
-            <SubmitBtn formBtn btnText="delete client" />
+            <SubmitBtn formBtn btnText="delete" />
           </Form>
         </footer>
       </div>

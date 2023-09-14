@@ -3,6 +3,7 @@ import Wrapper from '../assets/wrappers/DashboardFormPage';
 import { Form, useSubmit, Link } from 'react-router-dom';
 import { SORT_BY } from '../../../utils/constants';
 import { useClientsContext } from '../pages/Clients';
+import { BsPlusCircle } from 'react-icons/bs';
 
 const ClientsSearchContainer = () => {
   const { searchValues } = useClientsContext();
@@ -23,7 +24,16 @@ const ClientsSearchContainer = () => {
   return (
     <Wrapper>
       <Form className="form">
-        <h5 className="form-title">search clients</h5>
+        <Link
+          to="/dashboard/client-add"
+          className="btn form-btn"
+          style={{ marginTop: '-2rem', marginBottom: '2rem' }}>
+          <span>
+            <BsPlusCircle className="icon" />
+            new client
+          </span>
+        </Link>
+        <hr style={{ marginTop: '-.4rem', marginBottom: '.8rem' }} />
         <div className="form-center">
           <FormRow
             type="search"
@@ -36,6 +46,7 @@ const ClientsSearchContainer = () => {
           />
           <FormRowSelect
             name="sort"
+            labelText="sort by"
             defaultValue={sort}
             list={[...Object.values(SORT_BY)]}
             onChange={(e) => {

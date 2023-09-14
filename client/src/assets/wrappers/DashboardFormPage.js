@@ -32,6 +32,15 @@ const Wrapper = styled.section`
   .img-round {
     border-radius: 50%;
   }
+  .icon {
+    font-size: 1rem;
+    margin-right: 1rem;
+    place-items: center;
+  }
+  span {
+    display: inline-block;
+    text-align: center;
+  }
   @media (min-width: 992px) {
     .form-center {
       grid-template-columns: 1fr 1fr;

@@ -32,12 +32,12 @@ const links = [
     icon: <BsPeople />,
     adminOnly: true
   },
-  {
-    text: 'add client',
-    path: 'client-add',
-    icon: <BsPeople />,
-    adminOnly: true
-  },
+  // {
+  //   text: 'add client',
+  //   path: 'client-add',
+  //   icon: <BsPeople />,
+  //   adminOnly: true
+  // },
   {
     text: 'stats',
     path: 'stats',
