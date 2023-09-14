@@ -16,6 +16,8 @@ import {
   Login,
   Profile,
   Puppies,
+  PuppyAdd,
+  PuppyEdit,
   Register,
   Reserve,
   Stats
@@ -30,6 +32,10 @@ import { loader as editClientLoader } from './pages/ClientEdit';
 import { action as editClientAction } from './pages/ClientEdit';
 import { action as deleteClientAction } from './pages/ClientDelete';
 import { loader as allPuppiesLoader } from './pages/Puppies';
+import { action as addPuppyAction } from './pages/PuppyAdd';
+import { loader as editPuppyLoader } from './pages/PuppyEdit';
+import { action as editPuppyAction } from './pages/PuppyEdit';
+import { action as deletePuppyAction } from './pages/PuppyDelete';
 import { action as profileAction } from './pages/Profile';
 import ErrorElement from './components/ErrorElement';
 
@@ -91,6 +97,21 @@ const router = createBrowserRouter([
             path: 'puppies',
             loader: allPuppiesLoader(queryClient),
             element: <Puppies />
+          },
+          {
+            path: 'puppy-add',
+            element: <PuppyAdd />,
+            action: addPuppyAction(queryClient)
+          },
+          {
+            path: 'puppy-edit/:id',
+            element: <PuppyEdit />,
+            loader: editPuppyLoader(queryClient),
+            action: editPuppyAction(queryClient)
+          },
+          {
+            path: 'puppy-delete/:id',
+            action: deletePuppyAction(queryClient)
           },
           {
             path: 'stats',

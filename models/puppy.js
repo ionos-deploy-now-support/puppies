@@ -45,7 +45,6 @@ const puppySchema = new mongoose.Schema(
     },
     puppyAKC: {
       type: String,
-      required: [true, 'Puppy must have AKC registration number.'],
       maxLength: [10, 'AKC registration must be less than 11 characters']
     },
     puppyNewName: {
@@ -172,6 +171,7 @@ puppySchema.pre(/^find/, function (next) {
 // }
 // }
 
+/************************************* CAUSING ERROR IN CLIENT EDIT ************ 
 puppySchema.statics.countGender = async function (litterId) {
   const stats = await this.aggregate([
     {
@@ -282,6 +282,7 @@ puppySchema.post(/^findOneAnd/, async function (puppy) {
   await puppy.constructor.countColor(puppy.litter);
   await puppy.constructor.countSurvived(puppy.litter);
 });
+*****************************************************/
 
 const Puppy = mongoose.model('Puppy', puppySchema);
 

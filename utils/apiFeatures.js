@@ -3,7 +3,6 @@ class APIFeatures {
   constructor(query, queryStr) {
     this.query = query;
     this.queryStr = queryStr;
-    console.log(this.query.model);
   }
   filter() {
     const queryObj = { ...this.queryStr };
