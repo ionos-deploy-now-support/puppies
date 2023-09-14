@@ -3,6 +3,7 @@ class APIFeatures {
   constructor(query, queryStr) {
     this.query = query;
     this.queryStr = queryStr;
+    console.log(this.query.model);
   }
   filter() {
     const queryObj = { ...this.queryStr };
@@ -13,13 +14,11 @@ class APIFeatures {
     let queryFilterObj = {};
 
     if (search) {
-      // queryFilterObj.$or = [
-      //   { clientFirstName: { $regex: search, $options: 'i' } },
-      //   { clientLastName: { $regex: search, $options: 'i' } }
-      // ];
       queryFilterObj.$or = [
         { puppyTempName: { $regex: search, $options: 'i' } },
-        { puppyColor: { $regex: search, $options: 'i' } }
+        { puppyColor: { $regex: search, $options: 'i' } },
+        { clientFirstName: { $regex: search, $options: 'i' } },
+        { clientLastName: { $regex: search, $options: 'i' } }
       ];
     }
 
@@ -31,12 +30,11 @@ class APIFeatures {
   }
 
   sort() {
-    console.log(this.queryStr);
     const sortOptions = {
       newest: '-createdAt',
       oldest: 'createdAt',
-      // 'a-z': 'clientFirstName',
-      // 'z-a': '-clientFirstName'
+      'a-z': 'clientFirstName',
+      'z-a': '-clientFirstName',
       'a-z': 'puppyTempName',
       'z-a': '-puppyTempName'
     };
