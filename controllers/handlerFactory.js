@@ -19,7 +19,6 @@ exports.getAll = (Model) =>
     const filtered = new APIFeatures(Model.find(filter), req.query).filter();
     const filteredDocs = await filtered.query;
 
-    console.log(`factory filteredDocs: ${filteredDocs}`);
     const features = new APIFeatures(Model.find(filter), req.query)
       .filter()
       .sort()

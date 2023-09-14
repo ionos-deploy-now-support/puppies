@@ -64,6 +64,10 @@ const puppySchema = new mongoose.Schema(
       type: Boolean,
       default: true
     },
+    puppyNote: {
+      type: String,
+      maxLength: [255, 'Puppy note must not exceed 255 characters']
+    },
     //Child reference. will only contain puppyHealth Events id in array. Not whole doc.
     puppyHealthEvents: [
       {

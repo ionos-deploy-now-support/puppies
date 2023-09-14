@@ -29,6 +29,7 @@ import { action as addClientAction } from './pages/ClientAdd';
 import { loader as editClientLoader } from './pages/ClientEdit';
 import { action as editClientAction } from './pages/ClientEdit';
 import { action as deleteClientAction } from './pages/ClientDelete';
+import { loader as allPuppiesLoader } from './pages/Puppies';
 import { action as profileAction } from './pages/Profile';
 import ErrorElement from './components/ErrorElement';
 
@@ -88,6 +89,7 @@ const router = createBrowserRouter([
           },
           {
             path: 'puppies',
+            loader: allPuppiesLoader(queryClient),
             element: <Puppies />
           },
           {

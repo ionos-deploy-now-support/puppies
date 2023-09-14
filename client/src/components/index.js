@@ -8,5 +8,7 @@ export { default as Loading } from './Loading';
 export { default as Logo } from './Logo';
 export { default as Navbar } from './Navbar';
 export { default as PageNav } from './PageNav';
+export { default as PuppiesContainer } from './PuppiesContainer';
+export { default as PuppiesSearchContainer } from './PuppiesSearchContainer';
 export { default as SmallSidebar } from './SmallSidebar';
 export { default as SubmitBtn } from './SubmitBtn';

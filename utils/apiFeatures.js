@@ -3,7 +3,6 @@ class APIFeatures {
   constructor(query, queryStr) {
     this.query = query;
     this.queryStr = queryStr;
-    console.log(`features queryStr stringified ${JSON.stringify(queryStr)}`);
   }
   filter() {
     const queryObj = { ...this.queryStr };
@@ -14,40 +13,38 @@ class APIFeatures {
     let queryFilterObj = {};
 
     if (search) {
-      queryFilterObj.$or = [
-        { clientFirstName: { $regex: search, $options: 'i' } },
-        { clientLastName: { $regex: search, $options: 'i' } }
-      ];
       // queryFilterObj.$or = [
-      //   { puppyTempName: { $regex: search, $options: 'i' } },
-      //   { puppyColor: { $regex: search, $options: 'i' } }
+      //   { clientFirstName: { $regex: search, $options: 'i' } },
+      //   { clientLastName: { $regex: search, $options: 'i' } }
       // ];
+      queryFilterObj.$or = [
+        { puppyTempName: { $regex: search, $options: 'i' } },
+        { puppyColor: { $regex: search, $options: 'i' } }
+      ];
     }
 
     let queryStr = JSON.stringify(queryFilterObj);
     queryStr = queryStr.replace(/\b(gte|gt|lte\lt)\b/g, (match) => `$${match}`);
-    console.log(`filter queryStr ${queryStr}`);
     queryFilterObj = JSON.parse(queryStr);
     this.query = this.query.find(queryFilterObj);
     return this;
   }
 
   sort() {
+    console.log(this.queryStr);
     const sortOptions = {
       newest: '-createdAt',
       oldest: 'createdAt',
-      'a-z': 'clientFirstName',
-      'z-a': '-clientFirstName'
-      // 'a-z': 'puppyTempName',
-      // 'z-a': '-puppyTempName'
+      // 'a-z': 'clientFirstName',
+      // 'z-a': '-clientFirstName'
+      'a-z': 'puppyTempName',
+      'z-a': '-puppyTempName'
     };
 
     if (this.queryStr.sort) {
       const sortBy = this.queryStr.sort.split(',').join(' ');
       const sortKey = sortOptions[sortBy] || sortOptions.newest;
-      console.log(`apiFeatures sort sortKey ${sortKey}`);
       this.query = this.query.sort(sortKey);
-      console.log(`apiFeatures sortBy ${sortBy}`);
     } else {
       // sort by newest entry by default if no sort params
       this.query = this.query.sort('-createdAt');
@@ -65,10 +62,8 @@ class APIFeatures {
   }
   paginate() {
     const page = this.queryStr.page * 1 || 1;
-    // const limit = this.queryStr.limit * 1 || 20;
     const limit = this.queryStr.limit * 1 || PAGINATION_LIMIT;
     const skip = (page - 1) * limit;
-    console.log(`API features currentPage is ${page}`);
     this.query = this.query.skip(skip).limit(limit);
     return this;
   }
