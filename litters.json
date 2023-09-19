@@ -1,5 +1,6 @@
 [
   {
+    "litterName": "Piper's First",
     "litterAKC": "SS184059",
     "sireName": "Jacob",
     "damName": "Piper",
@@ -12,9 +13,23 @@
     "puppiesYellow": 7,
     "puppiesChocolate": 3,
     "puppiesBlack": 1,
-    "litterNote": "A healthy litter. No issues."
+    "litterNote": "A healthy litter. No issues.",
+    "puppies": [
+      "646503dd6d2238deabe1bbfa",
+      "646503dd6d2238deabe1bbf7",
+      "646503dd6d2238deabe1bbf8",
+      "646503dd6d2238deabe1bbf9",
+      "646503dd6d2238deabe1bbf3",
+      "646503dd6d2238deabe1bbf2",
+      "646503dd6d2238deabe1bbf6",
+      "646503dd6d2238deabe1bbf1",
+      "646503dd6d2238deabe1bbf4",
+      "646503dd6d2238deabe1bbf0",
+      "646503dd6d2238deabe1bbf5"
+    ]
   },
   {
+    "litterName": "Piper's Second",
     "litterAKC": "SS282101",
     "sireName": "Jacob",
     "damName": "Piper",
@@ -27,14 +42,27 @@
     "puppiesYellow": 3,
     "puppiesChocolate": 2,
     "puppiesBlack": 2,
-    "litterNote": "Sadly we had 2 still-born chocolate males."
+    "litterNote": "Sadly we had 2 still-born chocolate males.",
+    "puppies": [
+      "646503dd6d2238deabe1bbff",
+      "646503dd6d2238deabe1bbfd",
+      "646503dd6d2238deabe1bc00",
+      "646503dd6d2238deabe1bc01",
+      "646503dd6d2238deabe1bbfe",
+      "646503dd6d2238deabe1bbfb",
+      "646503dd6d2238deabe1bbfc",
+      "646503dd6d2238deabe1bbf7",
+      "64ac74c930eca87d1ebc0683",
+      "64ac7c6526028d82a396ce70"
+    ]
   },
   {
+    "litterName": "Oakley's False1",
     "litterAKC": "Pending",
     "sireName": "Jacob",
     "damName": "Oakley",
     "litterConceived": "2023-05-14",
-    "litterDelivered": "expecting 2023-07-10",
+    "litterDelivered": "2023-07-14",
     "femalesBorn": 0,
     "femalesSurvived": 0,
     "malesBorn": 0,
@@ -42,6 +70,6 @@
     "puppiesYellow": 0,
     "puppiesChocolate": 0,
     "puppiesBlack": 0,
-    "litterNote": ""
+    "litterNote": "Ended up being a false pregnancy"
   }
 ]

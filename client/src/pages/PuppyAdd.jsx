@@ -1,8 +1,11 @@
-import { FormRow, SubmitBtn } from '../components';
+import { FormRow, FormRowSelect, SubmitBtn } from '../components';
 import Wrapper from '../assets/wrappers/DashboardFormPage';
 import { Form, redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import customFetch from '../utils/customFetch';
+import day from 'dayjs';
+import advancedFormat from 'dayjs/plugin/advancedFormat';
+day.extend(advancedFormat);
 
 export const action =
   (queryClient) =>
@@ -21,6 +24,9 @@ export const action =
   };
 
 const PuppyAdd = () => {
+  let today = Date();
+  today = day(today).format('MMM Do, YYYY');
+  const littersArray = [];
   return (
     <Wrapper>
       <Form method="post" className="form">
@@ -29,8 +35,9 @@ const PuppyAdd = () => {
           <FormRow type="text" name="puppyTempName" labelText="name" />
           <FormRow type="text" name="puppyColor" labelText="color" />
           <FormRow type="text" name="puppySex" labelText="sex" />
-          <FormRow type="text" name="puppyDOB" labelText="born" defaultValue={Date.now()} />
+          <FormRow type="text" name="puppyDOB" labelText="born" defaultValue={today} />
           <FormRow type="text" name="puppyLitter" labelText="litter" />
+          {/* <FormRowSelect labelText="litter" name="Litter" defaultValue={''} list={''} /> */}
           <FormRow type="text" name="puppySurvived" labelText="survived" defaultValue="true" />
           <FormRow type="text" name="puppyCollar" labelText="collar" />
           <FormRow type="text" name="puppyAKC" labelText="AKC" />

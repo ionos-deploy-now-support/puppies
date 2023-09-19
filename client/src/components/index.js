@@ -4,6 +4,8 @@ export { default as ClientsSearchContainer } from './ClientsSearchContainer';
 export { default as FormRow } from './FormRow';
 export { default as FormRowRadio } from './FormRowRadio';
 export { default as FormRowSelect } from './FormRowSelect';
+export { default as LittersContainer } from './LittersContainer';
+export { default as LittersSearchContainer } from './LittersSearchContainer';
 export { default as Loading } from './Loading';
 export { default as Logo } from './Logo';
 export { default as Navbar } from './Navbar';

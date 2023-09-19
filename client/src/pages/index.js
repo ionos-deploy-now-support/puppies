@@ -8,6 +8,8 @@ export { default as Gallery } from './Gallery';
 export { default as HomeLayout } from './HomeLayout';
 export { default as Landing } from './Landing';
 export { default as Litters } from './Litters';
+export { default as LitterAdd } from './LitterAdd';
+export { default as LitterEdit } from './LitterEdit';
 export { default as Login } from './Login';
 export { default as Profile } from './Profile';
 export { default as Puppies } from './Puppies';

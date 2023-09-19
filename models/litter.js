@@ -3,11 +3,16 @@ mongoose.Schema.Types.String.set('trim', true);
 const Puppy = require('./puppy');
 
 const litterSchema = new mongoose.Schema({
+  litterName: {
+    type: String,
+    required: [true, 'Each litter has a name.'],
+    maxLength: [25, 'Litter name must be less than 26 characters']
+  },
   litterAKC: {
     type: String,
     required: [true, 'All litters have an AKC #'],
     unique: true,
-    maxLength: [10, 'AKC registration must be less than 11 characters']
+    maxLength: [20, 'AKC registration must be less than 21 characters']
   },
   sireName: {
     type: String,
@@ -17,7 +22,6 @@ const litterSchema = new mongoose.Schema({
   damName: {
     type: String,
     required: [true, 'Each litter has a mother.'],
-
     maxLength: [15, "Dam's name must be less than 16 characters"]
   },
   litterConceived: {

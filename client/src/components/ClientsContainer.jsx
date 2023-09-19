@@ -1,7 +1,7 @@
 import Client from './Client';
 import Wrapper from '../assets/wrappers/ClientsContainer';
 import { useClientsContext } from '../pages/Clients';
-import PageBtnContainer from './PageBtnContainer';
+import ClientsPageBtnContainer from './ClientsPageBtnContainer';
 const ClientsContainer = () => {
   const { data } = useClientsContext();
   const clients = data.data.docs;
@@ -26,7 +26,7 @@ const ClientsContainer = () => {
           return <Client key={client._id} {...client} />;
         })}
       </div>
-      {numPages > 1 && <PageBtnContainer />}
+      {numPages > 1 && <ClientsPageBtnContainer />}
     </Wrapper>
   );
 };

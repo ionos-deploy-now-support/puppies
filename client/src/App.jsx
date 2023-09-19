@@ -13,6 +13,8 @@ import {
   HomeLayout,
   Landing,
   Litters,
+  LitterAdd,
+  LitterEdit,
   Login,
   Profile,
   Puppies,
@@ -31,6 +33,11 @@ import { action as addClientAction } from './pages/ClientAdd';
 import { loader as editClientLoader } from './pages/ClientEdit';
 import { action as editClientAction } from './pages/ClientEdit';
 import { action as deleteClientAction } from './pages/ClientDelete';
+import { loader as allLittersLoader } from './pages/Litters';
+import { action as addLitterAction } from './pages/LitterAdd';
+import { loader as editLitterLoader } from './pages/LitterEdit';
+import { action as editLitterAction } from './pages/LitterEdit';
+import { action as deleteLitterAction } from './pages/LitterDelete';
 import { loader as allPuppiesLoader } from './pages/Puppies';
 import { action as addPuppyAction } from './pages/PuppyAdd';
 import { loader as editPuppyLoader } from './pages/PuppyEdit';
@@ -119,7 +126,23 @@ const router = createBrowserRouter([
           },
           {
             path: 'litters',
+            loader: allLittersLoader(queryClient),
             element: <Litters />
+          },
+          {
+            path: 'litter-add',
+            element: <LitterAdd />,
+            action: addLitterAction(queryClient)
+          },
+          {
+            path: 'litter-edit/:id',
+            element: <LitterEdit />,
+            loader: editLitterLoader(queryClient),
+            action: editLitterAction(queryClient)
+          },
+          {
+            path: 'litter-delete/:id',
+            action: deleteLitterAction(queryClient)
           },
           {
             path: 'clients',
