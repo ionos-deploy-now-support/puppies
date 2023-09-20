@@ -42,8 +42,8 @@ const Litter = ({
       </header>
       <div className="content">
         <div className="content-center">
-          <LitterInfo text={`Conceived On: ${dateConceived}`} />
-          <LitterInfo text={`Delivered On: ${dateDelivered}`} />
+          <LitterInfo text={`Conceived: ${dateConceived}`} />
+          <LitterInfo text={`Delivered: ${dateDelivered}`} />
           <LitterInfo text={`# Females: ${femalesBorn}`} />
           <LitterInfo text={`Survived: ${femalesSurvived}`} />
           <LitterInfo text={`# Males: ${malesBorn}`} />
@@ -54,6 +54,9 @@ const Litter = ({
           <LitterInfo icon={<FaStickyNote />} text={litterNote} />
         </div>
         <footer className="actions">
+          <Link to={`../litter-edit/${_id}`} className="btn edit-btn">
+            Edit
+          </Link>
           <Link to={`../litter-edit/${_id}`} className="btn edit-btn">
             Edit
           </Link>

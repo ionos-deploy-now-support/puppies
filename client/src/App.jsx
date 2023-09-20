@@ -19,6 +19,7 @@ import {
   Profile,
   Puppies,
   PuppyAdd,
+  PuppyAddToLitter,
   PuppyEdit,
   Register,
   Reserve,
@@ -40,6 +41,7 @@ import { action as editLitterAction } from './pages/LitterEdit';
 import { action as deleteLitterAction } from './pages/LitterDelete';
 import { loader as allPuppiesLoader } from './pages/Puppies';
 import { action as addPuppyAction } from './pages/PuppyAdd';
+import { action as addPuppyToLitterAction } from './pages/PuppyAddToLitter';
 import { loader as editPuppyLoader } from './pages/PuppyEdit';
 import { action as editPuppyAction } from './pages/PuppyEdit';
 import { action as deletePuppyAction } from './pages/PuppyDelete';
@@ -128,6 +130,11 @@ const router = createBrowserRouter([
             path: 'litters',
             loader: allLittersLoader(queryClient),
             element: <Litters />
+          },
+          {
+            path: 'litter/:id/puppy-add',
+            element: <PuppyAddToLitter />,
+            action: addPuppyToLitterAction(queryClient)
           },
           {
             path: 'litter-add',

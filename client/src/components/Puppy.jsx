@@ -20,9 +20,7 @@ const Puppy = ({
   puppyNewName,
   puppyAskingPrice,
   puppyAvailable,
-  puppyNote,
-  litter,
-  createdAt
+  puppyNote
 }) => {
   const date = day(puppyDOB).format('MMM Do, YYYY');
   return (
@@ -41,12 +39,11 @@ const Puppy = ({
       <div className="content">
         <div className="content-center">
           <PuppyInfo text={`Born: ${date}`} />
-          <PuppyInfo text={`Litter: ${litter}`} />
           <PuppyInfo text={`Survived?: ${puppySurvived}`} />
           <PuppyInfo text={`Collar: ${puppyCollar}`} />
-          <PuppyInfo text={`AKC: ${puppyAKC}`} />
+          <PuppyInfo text={`AKC #: ${puppyAKC}`} />
           <PuppyInfo text={`New Name: ${puppyNewName}`} />
-          <PuppyInfo text={`Asking Price: ${puppyAskingPrice}`} />
+          <PuppyInfo text={`Asking Price: $${puppyAskingPrice}`} />
           <PuppyInfo text={`Available?: ${puppyAvailable}`} />
           <PuppyInfo icon={<FaStickyNote />} text={puppyNote} />
         </div>

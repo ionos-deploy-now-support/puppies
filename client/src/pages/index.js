@@ -14,6 +14,7 @@ export { default as Login } from './Login';
 export { default as Profile } from './Profile';
 export { default as Puppies } from './Puppies';
 export { default as PuppyAdd } from './PuppyAdd';
+export { default as PuppyAddToLitter } from './PuppyAddToLitter';
 export { default as PuppyEdit } from './PuppyEdit';
 export { default as Register } from './Register';
 export { default as Reserve } from './Reserve';

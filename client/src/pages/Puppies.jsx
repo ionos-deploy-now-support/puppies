@@ -5,9 +5,16 @@ import { useContext, createContext } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 const allPuppiesQuery = (params) => {
-  const { search, sort, page } = params;
+  const { search, puppySex, puppyColor, sort, page } = params;
   return {
-    queryKey: ['puppies', search ?? '', sort ?? 'newest', page ?? 1],
+    queryKey: [
+      'puppies',
+      search ?? '',
+      puppySex ?? 'Both',
+      puppyColor ?? 'All',
+      sort ?? 'newest',
+      page ?? 1
+    ],
     queryFn: async () => {
       const { data } = await customFetch.get('/puppies', {
         params

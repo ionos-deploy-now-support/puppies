@@ -1,15 +1,15 @@
 import { FormRow, FormRowSelect } from '../components';
 import Wrapper from '../assets/wrappers/DashboardFormPage';
 import { Form, useSubmit, Link } from 'react-router-dom';
-import { SORT_BY } from '../../../utils/constants';
+import { PUPPY_SEX, PUPPY_COLOR, SORT_BY } from '../../../utils/constants';
 import { usePuppiesContext } from '../pages/Puppies';
 import { BsPlusCircle } from 'react-icons/bs';
 
 const PuppiesSearchContainer = () => {
   const { searchValues } = usePuppiesContext();
-  const { search, sort } = searchValues;
+  const { search, puppySex, puppyColor, sort } = searchValues;
   const submit = useSubmit(); //invokes the useSubmit hook
-
+  // debounce feature controls how often form is submitted during key input
   const debounce = (onChange) => {
     let timeout;
     return (e) => {
@@ -38,11 +38,29 @@ const PuppiesSearchContainer = () => {
           <FormRow
             type="search"
             name="search"
-            labelText="search by puppy name or color"
+            labelText="search by puppy name"
             defaultValue={search}
             onChange={debounce((form) => {
               submit(form);
             })}
+          />
+          <FormRowSelect
+            name="puppySex"
+            labelText="sex"
+            list={['Both', ...Object.values(PUPPY_SEX)]}
+            defaultValue={puppySex}
+            onChange={(e) => {
+              submit(e.currentTarget.form);
+            }}
+          />
+          <FormRowSelect
+            name="puppyColor"
+            labelText="color"
+            list={['All', ...Object.values(PUPPY_COLOR)]}
+            defaultValue={puppyColor}
+            onChange={(e) => {
+              submit(e.currentTarget.form);
+            }}
           />
           <FormRowSelect
             name="sort"

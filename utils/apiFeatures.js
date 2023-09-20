@@ -8,17 +8,23 @@ class APIFeatures {
     const queryObj = { ...this.queryStr };
     const excludedFields = ['page', 'sort', 'limit', 'fields'];
     excludedFields.forEach((el) => delete queryObj[el]);
-    const { search } = queryObj;
+    const { search, puppySex, puppyColor } = queryObj;
 
     let queryFilterObj = {};
 
     if (search) {
       queryFilterObj.$or = [
         { puppyTempName: { $regex: search, $options: 'i' } },
-        { puppyColor: { $regex: search, $options: 'i' } },
         { clientFirstName: { $regex: search, $options: 'i' } },
-        { clientLastName: { $regex: search, $options: 'i' } }
+        { clientLastName: { $regex: search, $options: 'i' } },
+        { litterName: { $regex: search, $options: 'i' } }
       ];
+    }
+    if (puppySex && puppySex !== 'Both') {
+      queryFilterObj.puppySex = puppySex;
+    }
+    if (puppyColor && puppyColor !== 'All') {
+      queryFilterObj.puppyColor = puppyColor;
     }
 
     let queryStr = JSON.stringify(queryFilterObj);
@@ -35,7 +41,9 @@ class APIFeatures {
       'a-z': 'clientFirstName',
       'z-a': '-clientFirstName',
       'a-z': 'puppyTempName',
-      'z-a': '-puppyTempName'
+      'z-a': '-puppyTempName',
+      'a-z': 'litterName',
+      'z-a': '-litterName'
     };
 
     if (this.queryStr.sort) {
