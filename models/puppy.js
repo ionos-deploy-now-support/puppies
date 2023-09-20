@@ -11,7 +11,7 @@ const puppySchema = new mongoose.Schema(
       type: String,
       required: [true, 'Poor puppy needs a name'],
       unique: true,
-      maxLength: [15, 'Name should be less than 16 characters']
+      maxLength: [25, 'Name should be less than 26 characters']
     },
     slug: String,
     puppyDOB: {
@@ -50,7 +50,7 @@ const puppySchema = new mongoose.Schema(
     puppyNewName: {
       type: String,
       required: false,
-      maxLength: [15, 'Puppy new name must be less than 16 characters'],
+      maxLength: [25, 'Puppy new name must be less than 26 characters'],
       default: 'TBD by Owner'
     },
     puppyAskingPrice: {

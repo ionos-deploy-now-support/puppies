@@ -9,6 +9,11 @@ export const PUPPY_COLOR = {
   YELLOW: 'yellow'
 };
 
+export const TRUE_FALSE = {
+  TRUE: 'true',
+  FALSE: 'false'
+};
+
 export const SORT_BY = {
   NEWEST_FIRST: 'newest',
   OLDEST_FIRST: 'oldest',
