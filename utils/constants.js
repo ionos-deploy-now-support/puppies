@@ -20,3 +20,5 @@ export const SORT_BY = {
   ASCENDING: 'a-z',
   DESCENDING: 'z-a'
 };
+
+// export const PAGINATION_LIMIT = 10; //see constants2.js

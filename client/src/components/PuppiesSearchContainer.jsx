@@ -8,6 +8,11 @@ import { BsPlusCircle } from 'react-icons/bs';
 
 const PuppiesSearchContainer = () => {
   const { litters } = useLittersContext();
+  const litterNames = litters.map((litter) => ({ key: litter._id, value: litter.litterName }));
+  const litterNamesObj = litterNames.reduce(
+    (obj, item) => ({ ...obj, [item.key]: item.value }),
+    {}
+  );
   const { searchValues } = usePuppiesContext();
   const { search, puppySex, puppyColor, litterName, sort } = searchValues;
   const submit = useSubmit(); //invokes the useSubmit hook
@@ -65,15 +70,15 @@ const PuppiesSearchContainer = () => {
               submit(e.currentTarget.form);
             }}
           />
-          {/* <FormRowSelect
+          <FormRowSelect
             name="litterName"
-            labelText="litter name"
-            list={['All', ...Object.values(litters)]}
+            labelText="litter"
+            list={['All', ...Object.values(litterNamesObj)]}
             defaultValue={litterName}
             onChange={(e) => {
               submit(e.currentTarget.form);
             }}
-          /> */}
+          />
           <FormRowSelect
             name="sort"
             labelText="sort by"

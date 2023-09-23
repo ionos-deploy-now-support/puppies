@@ -32,7 +32,7 @@ const LittersContext = createContext();
 const LittersLayout = () => {
   const { searchValues } = useLoaderData();
   const { data } = useQuery(allLittersQuery(searchValues));
-  const litters = data.data.docs; //nicely formed litters object
+  const litters = data.data.docs; //nicely formed array of objects for litters
   const navigation = useNavigation();
   const isPageLoading = navigation.state === 'loading';
 
