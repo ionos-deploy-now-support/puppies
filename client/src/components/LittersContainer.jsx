@@ -1,6 +1,6 @@
 import Litter from './Litter';
 import Wrapper from '../assets/wrappers/LittersContainer';
-import { useLittersContext } from '../pages/Litters';
+import { useLittersContext } from '../pages/LittersLayout';
 import LittersPageBtnContainer from './LittersPageBtnContainer';
 const LittersContainer = () => {
   const { data } = useLittersContext();

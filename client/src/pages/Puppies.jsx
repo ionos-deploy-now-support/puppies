@@ -3,6 +3,7 @@ import customFetch from '../utils/customFetch';
 import { useLoaderData } from 'react-router-dom';
 import { useContext, createContext } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { all } from 'axios';
 
 const allPuppiesQuery = (params) => {
   const { search, puppySex, puppyColor, sort, page } = params;
@@ -36,6 +37,7 @@ const PuppiesContext = createContext();
 const Puppies = () => {
   const { searchValues } = useLoaderData();
   const { data } = useQuery(allPuppiesQuery(searchValues));
+
   return (
     <PuppiesContext.Provider value={{ data, searchValues }}>
       <PuppiesSearchContainer />

@@ -6,6 +6,7 @@ const PuppiesContainer = () => {
   const { data } = usePuppiesContext();
   const puppies = data.data.docs;
   const { results, filteredResults, numPages } = data;
+  console.log(puppies, results);
 
   if (puppies.length === 0) {
     return (

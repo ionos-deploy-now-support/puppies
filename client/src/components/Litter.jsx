@@ -57,9 +57,6 @@ const Litter = ({
           <Link to={`../litter-edit/${_id}`} className="btn edit-btn">
             Edit
           </Link>
-          <Link to={`../litter-edit/${_id}`} className="btn edit-btn">
-            Edit
-          </Link>
           <Form method="post" action={`../litter-delete/${_id}`}>
             <SubmitBtn formBtn btnText="delete" />
           </Form>

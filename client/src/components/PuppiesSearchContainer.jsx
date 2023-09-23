@@ -3,12 +3,15 @@ import Wrapper from '../assets/wrappers/DashboardFormPage';
 import { Form, useSubmit, Link } from 'react-router-dom';
 import { PUPPY_SEX, PUPPY_COLOR, SORT_BY } from '../../../utils/constants';
 import { usePuppiesContext } from '../pages/Puppies';
+import { useLittersContext } from '../pages/LittersLayout';
 import { BsPlusCircle } from 'react-icons/bs';
 
 const PuppiesSearchContainer = () => {
+  const { litters } = useLittersContext();
   const { searchValues } = usePuppiesContext();
-  const { search, puppySex, puppyColor, sort } = searchValues;
+  const { search, puppySex, puppyColor, litterName, sort } = searchValues;
   const submit = useSubmit(); //invokes the useSubmit hook
+
   // debounce feature controls how often form is submitted during key input
   const debounce = (onChange) => {
     let timeout;
@@ -62,6 +65,15 @@ const PuppiesSearchContainer = () => {
               submit(e.currentTarget.form);
             }}
           />
+          {/* <FormRowSelect
+            name="litterName"
+            labelText="litter name"
+            list={['All', ...Object.values(litters)]}
+            defaultValue={litterName}
+            onChange={(e) => {
+              submit(e.currentTarget.form);
+            }}
+          /> */}
           <FormRowSelect
             name="sort"
             labelText="sort by"

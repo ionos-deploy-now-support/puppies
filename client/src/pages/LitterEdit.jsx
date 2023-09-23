@@ -89,7 +89,7 @@ const LitterEdit = () => {
           <FormRow
             type="text"
             name="femalesSurvived"
-            labelText="# females"
+            labelText="# females survived"
             defaultValue={litter.femalesSurvived || '0'}
           />
           <FormRow
@@ -101,7 +101,7 @@ const LitterEdit = () => {
           <FormRow
             type="text"
             name="malesSurvived"
-            labelText="# females"
+            labelText="# males survived"
             defaultValue={litter.malesSurvived || '0'}
           />
           <FormRow

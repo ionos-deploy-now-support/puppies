@@ -2,7 +2,7 @@ import { FormRow, FormRowSelect } from '../components';
 import Wrapper from '../assets/wrappers/DashboardFormPage';
 import { Form, useSubmit, Link } from 'react-router-dom';
 import { SORT_BY } from '../../../utils/constants';
-import { useLittersContext } from '../pages/Litters';
+import { useLittersContext } from '../pages/LittersLayout';
 import { BsPlusCircle } from 'react-icons/bs';
 
 const LittersSearchContainer = () => {

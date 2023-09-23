@@ -28,13 +28,13 @@ export const loader = (queryClient) => async () => {
 const DashboardContext = createContext();
 
 const DashboardLayout = () => {
+  const [allLitters, setAllLitters] = useState('test');
+  const [showSidebar, setShowSidebar] = useState(false);
   const { setIsLoggedIn, setCurrentUser } = useHomeContext();
+  const navigation = useNavigation();
   const { data } = useQuery(userQuery);
   const user = data.data.data;
-  const navigation = useNavigation();
   const isPageLoading = navigation.state === 'loading';
-  const [showSidebar, setShowSidebar] = useState(false);
-
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
   };
@@ -43,13 +43,15 @@ const DashboardLayout = () => {
     setIsLoggedIn(true);
     setCurrentUser(user);
   }
-
+  console.clear();
   return (
     <DashboardContext.Provider
       value={{
         user,
         showSidebar,
-        toggleSidebar
+        toggleSidebar,
+        allLitters,
+        setAllLitters
       }}>
       <Wrapper>
         <main className="dashboard">

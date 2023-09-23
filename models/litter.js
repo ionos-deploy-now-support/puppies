@@ -74,6 +74,10 @@ const litterSchema = new mongoose.Schema({
     required: false,
     maxLength: [255, 'Limit comment to 255 characters']
   },
+  createdAt: {
+    type: Date,
+    default: Date.now()
+  },
   //Child reference: Litters have puppies. This gives us and id that can be used to populate the other fields. See .populate below.
   puppies: [
     {
@@ -81,11 +85,7 @@ const litterSchema = new mongoose.Schema({
       ref: 'Puppy',
       required: [true, 'Puppy must belong to a litter.']
     }
-  ],
-  createdAt: {
-    type: Date,
-    default: Date.now()
-  }
+  ]
 });
 
 //Populates docs from ObjectId for child referenced relationships

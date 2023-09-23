@@ -22,7 +22,7 @@ const links = [
   },
   {
     text: 'puppies',
-    path: 'puppies',
+    path: 'litters/puppies',
     icon: <FaDog />,
     adminOnly: true
   },
