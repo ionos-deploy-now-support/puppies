@@ -8,7 +8,7 @@ class APIFeatures {
     const queryObj = { ...this.queryStr };
     const excludedFields = ['page', 'sort', 'limit', 'fields'];
     excludedFields.forEach((el) => delete queryObj[el]);
-    const { search, puppySex, puppyColor } = queryObj;
+    const { search, puppySex, puppyColor, litter } = queryObj;
 
     let queryFilterObj = {};
 
@@ -17,7 +17,8 @@ class APIFeatures {
         { puppyTempName: { $regex: search, $options: 'i' } },
         { clientFirstName: { $regex: search, $options: 'i' } },
         { clientLastName: { $regex: search, $options: 'i' } },
-        { litterName: { $regex: search, $options: 'i' } }
+        { litterName: { $regex: search, $options: 'i' } },
+        { litter: { $regex: search, $options: 'i' } }
       ];
     }
     if (puppySex && puppySex !== 'Both') {
@@ -25,6 +26,9 @@ class APIFeatures {
     }
     if (puppyColor && puppyColor !== 'All') {
       queryFilterObj.puppyColor = puppyColor;
+    }
+    if (litter && litter !== 'All') {
+      queryFilterObj.litter = litter;
     }
 
     let queryStr = JSON.stringify(queryFilterObj);

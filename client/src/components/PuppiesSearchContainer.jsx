@@ -9,12 +9,13 @@ import { BsPlusCircle } from 'react-icons/bs';
 const PuppiesSearchContainer = () => {
   const { litters } = useLittersContext();
   const litterNames = litters.map((litter) => ({ key: litter._id, value: litter.litterName }));
-  const litterNamesObj = litterNames.reduce(
-    (obj, item) => ({ ...obj, [item.key]: item.value }),
-    {}
-  );
+  //can convert array of objects into object
+  // const litterNamesObj = litterNames.reduce(
+  //   (obj, item) => ({ ...obj, [item.key]: item.value }),
+  //   {}
+  // );
   const { searchValues } = usePuppiesContext();
-  const { search, puppySex, puppyColor, litterName, sort } = searchValues;
+  const { search, puppySex, puppyColor, litter, sort } = searchValues;
   const submit = useSubmit(); //invokes the useSubmit hook
 
   // debounce feature controls how often form is submitted during key input
@@ -70,15 +71,28 @@ const PuppiesSearchContainer = () => {
               submit(e.currentTarget.form);
             }}
           />
-          <FormRowSelect
-            name="litterName"
-            labelText="litter"
-            list={['All', ...Object.values(litterNamesObj)]}
-            defaultValue={litterName}
-            onChange={(e) => {
-              submit(e.currentTarget.form);
-            }}
-          />
+          <div className="form-row">
+            <label htmlFor="litter" className="form-label">
+              litter
+            </label>
+            <select
+              name="litter"
+              id="litter"
+              className="form-select"
+              defaultValue={litter}
+              onChange={(e) => {
+                submit(e.currentTarget.form);
+              }}>
+              <option>All</option>
+              {litterNames.map((item) => {
+                return (
+                  <option key={item.key} value={item.key}>
+                    {item.value}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
           <FormRowSelect
             name="sort"
             labelText="sort by"
@@ -89,7 +103,7 @@ const PuppiesSearchContainer = () => {
             }}
           />
           <Link
-            to="/dashboard/puppies"
+            to="/dashboard/litters/puppies"
             className="btn form-btn delete-btn"
             onClick={(e) => e.currentTarget.form.reset()}>
             Reset Search Values

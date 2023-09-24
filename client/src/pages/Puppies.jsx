@@ -6,13 +6,14 @@ import { useQuery } from '@tanstack/react-query';
 import { all } from 'axios';
 
 const allPuppiesQuery = (params) => {
-  const { search, puppySex, puppyColor, sort, page } = params;
+  const { search, puppySex, puppyColor, litter, sort, page } = params;
   return {
     queryKey: [
       'puppies',
       search ?? '',
       puppySex ?? 'Both',
       puppyColor ?? 'All',
+      litter ?? 'All',
       sort ?? 'newest',
       page ?? 1
     ],
