@@ -1,8 +1,9 @@
 import { FormRow, FormRowSelect, SubmitBtn } from '../components';
 import Wrapper from '../assets/wrappers/DashboardFormPage';
-import { Form, redirect } from 'react-router-dom';
+import { Form, redirect, useSubmit } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import customFetch from '../utils/customFetch';
+import { useLittersContext } from '../pages/LittersLayout';
 import { PUPPY_SEX, PUPPY_COLOR, TRUE_FALSE } from '../../../utils/constants';
 
 export const action =
@@ -14,7 +15,7 @@ export const action =
       await customFetch.post('/puppies', data);
       queryClient.invalidateQueries(['puppies']);
       toast.success('Puppy added successfully ');
-      return redirect('/dashboard/puppies');
+      return redirect('/dashboard/litters/puppies');
     } catch (error) {
       toast.error(error?.response?.data?.message);
       return error;
@@ -22,9 +23,11 @@ export const action =
   };
 
 const PuppyAdd = () => {
+  const { litters } = useLittersContext();
+  const litterNames = litters.map((litter) => ({ key: litter._id, value: litter.litterName }));
   let today = Date();
+  const submit = useSubmit();
 
-  const littersArray = [];
   return (
     <Wrapper>
       <Form method="post" className="form">
@@ -44,8 +47,27 @@ const PuppyAdd = () => {
             list={Object.values(PUPPY_COLOR)}
           />
           <FormRow type="text" name="puppyDOB" labelText="born" defaultValue={today} />
-          <FormRow type="text" name="litter" />
-          {/* <FormRowSelect labelText="litter" name="Litter" defaultValue={''} list={''} /> */}
+          <div className="form-row">
+            <label htmlFor="litter" className="form-label">
+              litter
+            </label>
+            <select
+              name="litter"
+              id="litter"
+              className="form-select"
+              defaultValue={litters[0]}
+              onChange={(e) => {
+                submit(e.currentTarget.form);
+              }}>
+              {litterNames.map((item) => {
+                return (
+                  <option key={item.key} value={item.key}>
+                    {item.value}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
           <FormRowSelect
             labelText="survived"
             name="puppySurvived"

@@ -34,7 +34,7 @@ const PuppiesSearchContainer = () => {
     <Wrapper>
       <Form className="form">
         <Link
-          to="/dashboard/puppy-add"
+          to="/dashboard/litters/puppy-add"
           className="btn form-btn"
           style={{ marginTop: '-2rem', marginBottom: '2rem' }}>
           <span>
