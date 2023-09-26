@@ -18,10 +18,11 @@ import {
   LitterEdit,
   Login,
   Profile,
+  PuppiesLayout,
   Puppies,
   PuppyAdd,
-  PuppyAddToLitter,
   PuppyEdit,
+  PuppyHealthEvents,
   Register,
   Reserve,
   Stats,
@@ -41,7 +42,7 @@ import { action as addLitterAction } from './pages/LitterAdd';
 import { loader as editLitterLoader } from './pages/LitterEdit';
 import { action as editLitterAction } from './pages/LitterEdit';
 import { action as deleteLitterAction } from './pages/LitterDelete';
-import { loader as allPuppiesLoader } from './pages/Puppies';
+import { loader as allPuppiesLoader } from './pages/PuppiesLayout';
 import { action as addPuppyAction } from './pages/PuppyAdd';
 import { action as addPuppyToLitterAction } from './pages/PuppyAddToLitter';
 import { loader as editPuppyLoader } from './pages/PuppyEdit';
@@ -119,11 +120,6 @@ const router = createBrowserRouter([
                 element: <Litters />
               },
               {
-                path: 'litter/:id/puppy-add',
-                element: <PuppyAddToLitter />,
-                action: addPuppyToLitterAction(queryClient)
-              },
-              {
                 path: 'litter-add',
                 element: <LitterAdd />,
                 action: addLitterAction(queryClient)
@@ -141,26 +137,36 @@ const router = createBrowserRouter([
               {
                 path: 'puppies',
                 loader: allPuppiesLoader(queryClient),
-                element: <Puppies />
-              },
-              {
-                path: 'puppy-add',
-                element: <PuppyAdd />,
-                action: addPuppyAction(queryClient)
-              },
-              {
-                path: 'puppy-edit/:id',
-                element: <PuppyEdit />,
-                loader: editPuppyLoader(queryClient),
-                action: editPuppyAction(queryClient)
-              },
-              {
-                path: 'puppy-delete/:id',
-                action: deletePuppyAction(queryClient)
-              },
-              {
-                path: 'test',
-                element: <Test />
+                element: <PuppiesLayout />,
+                children: [
+                  {
+                    index: true,
+                    element: <Puppies />
+                  },
+                  {
+                    path: 'puppy-add',
+                    element: <PuppyAdd />,
+                    action: addPuppyAction(queryClient)
+                  },
+                  {
+                    path: 'puppy-edit/:id',
+                    element: <PuppyEdit />,
+                    loader: editPuppyLoader(queryClient),
+                    action: editPuppyAction(queryClient)
+                  },
+                  {
+                    path: 'puppy-delete/:id',
+                    action: deletePuppyAction(queryClient)
+                  },
+                  {
+                    path: 'test',
+                    element: <Test />
+                  },
+                  {
+                    path: 'puppy-health-events',
+                    element: <PuppyHealthEvents />
+                  }
+                ]
               }
             ]
           },

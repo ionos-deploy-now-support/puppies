@@ -2,7 +2,7 @@ import { FormRow, FormRowSelect } from '../components';
 import Wrapper from '../assets/wrappers/DashboardFormPage';
 import { Form, useSubmit, Link } from 'react-router-dom';
 import { PUPPY_SEX, PUPPY_COLOR, SORT_BY } from '../../../utils/constants';
-import { usePuppiesContext } from '../pages/Puppies';
+import { usePuppiesContext } from '../pages/PuppiesLayout';
 import { useLittersContext } from '../pages/LittersLayout';
 import { BsPlusCircle } from 'react-icons/bs';
 

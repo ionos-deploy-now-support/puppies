@@ -1,4 +1,3 @@
-import { BsAsterisk } from 'react-icons/bs';
 import { FaStickyNote } from 'react-icons/fa';
 import { Link, Form } from 'react-router-dom';
 import { SubmitBtn } from '../components';

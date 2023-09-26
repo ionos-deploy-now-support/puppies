@@ -1,7 +1,7 @@
 import { HiChevronDoubleLeft, HiChevronDoubleRight } from 'react-icons/hi';
 import Wrapper from '../assets/wrappers/PageBtnContainer';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { usePuppiesContext } from '../pages/Puppies';
+import { usePuppiesContext } from '../pages/PuppiesLayout';
 
 const PuppiesPageBtnContainer = () => {
   const {

@@ -1,6 +1,6 @@
 import Puppy from './Puppy';
 import Wrapper from '../assets/wrappers/PuppiesContainer';
-import { usePuppiesContext } from '../pages/Puppies';
+import { usePuppiesContext } from '../pages/PuppiesLayout';
 import PuppiesPageBtnContainer from './PuppiesPageBtnContainer';
 const PuppiesContainer = () => {
   const { data } = usePuppiesContext();
