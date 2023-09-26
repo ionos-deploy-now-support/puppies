@@ -1,9 +1,10 @@
 import { FormRow, SubmitBtn } from '../components';
 import Wrapper from '../assets/wrappers/DashboardFormPage';
-import { Form, redirect, useLoaderData } from 'react-router-dom';
+import { Form, redirect, useLoaderData, useSubmit } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import customFetch from '../utils/customFetch';
 import { useQuery } from '@tanstack/react-query';
+import { useLittersContext } from '../pages/LittersLayout';
 
 const singlePuppyQuery = (id) => {
   return {
@@ -23,7 +24,7 @@ export const loader =
       return params.id;
     } catch (error) {
       toast.error(error?.response?.data?.message);
-      return redirect('/dashboard/puppies');
+      return redirect('/dashboard/litters/puppies');
     }
   };
 export const action =
@@ -35,7 +36,7 @@ export const action =
       await customFetch.put(`/puppies/${params.id}`, data);
       queryClient.invalidateQueries(['puppies']);
       toast.success('Puppy edited successfully');
-      return redirect('/dashboard/puppies');
+      return redirect('/dashboard/litters/puppies');
     } catch (error) {
       toast.error(error?.response?.data?.message);
       return error;
@@ -48,6 +49,9 @@ const PuppyEdit = () => {
   console.log(`From PuppyEdit puppy id is ${id}`);
   // having to drill deep into object to get to data wanted
   const puppy = useQuery(singlePuppyQuery(id)).data.data.data;
+  const { litters } = useLittersContext();
+  const litterNames = litters.map((litter) => ({ key: litter._id, value: litter.litterName }));
+  const submit = useSubmit();
   return (
     <Wrapper>
       <Form method="post" className="form">
@@ -67,7 +71,27 @@ const PuppyEdit = () => {
           />
           <FormRow type="text" name="puppySex" labelText="sex" defaultValue={puppy.puppySex} />
           <FormRow type="text" name="puppyDOB" labelText="born" defaultValue={puppy.puppyDOB} />
-          <FormRow type="text" name="litter" labelText="litter" defaultValue={puppy.litter} />
+          <div className="form-row">
+            <label htmlFor="litter" className="form-label">
+              litter
+            </label>
+            <select
+              name="litter"
+              id="litter"
+              className="form-select"
+              defaultValue={puppy.litter}
+              onChange={(e) => {
+                submit(e.currentTarget.form);
+              }}>
+              {litterNames.map((item) => {
+                return (
+                  <option key={item.key} value={item.key}>
+                    {item.value}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
           <FormRow
             type="text"
             name="puppySurvived"
@@ -92,7 +116,7 @@ const PuppyEdit = () => {
             type="text"
             name="puppyAsking"
             labelText="Asking Price"
-            defaultValue={puppy.puppyAsking}
+            defaultValue={puppy.puppyAskingPrice}
           />
           <FormRow
             type="text"

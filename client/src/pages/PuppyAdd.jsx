@@ -33,23 +33,23 @@ const PuppyAdd = () => {
       <Form method="post" className="form">
         <h4 className="form-title">add puppy</h4>
         <div className="form-center">
-          <FormRow type="text" name="puppyTempName" labelText="name" />
+          <FormRow type="text" name="puppyTempName" labelText="name *" />
           <FormRowSelect
-            labelText="sex"
+            labelText="sex *"
             name="puppySex"
             defaultValue="F"
             list={Object.values(PUPPY_SEX)}
           />
           <FormRowSelect
-            labelText="color"
+            labelText="color *"
             name="puppyColor"
             defaultValue="black"
             list={Object.values(PUPPY_COLOR)}
           />
-          <FormRow type="text" name="puppyDOB" labelText="born" defaultValue={today} />
+          <FormRow type="text" name="puppyDOB" labelText="born *" defaultValue={today} />
           <div className="form-row">
             <label htmlFor="litter" className="form-label">
-              litter
+              litter *
             </label>
             <select
               name="litter"
@@ -74,7 +74,7 @@ const PuppyAdd = () => {
             defaultValue="true"
             list={Object.values(TRUE_FALSE)}
           />
-          <FormRow type="text" name="puppyCollar" labelText="collar" />
+          <FormRow type="text" name="puppyCollar" labelText="color of collar *" />
           <FormRow type="text" name="puppyAKC" labelText="AKC" />
           <FormRow
             type="text"
@@ -82,7 +82,7 @@ const PuppyAdd = () => {
             labelText="New Name"
             defaultValue="TBD by new owner"
           />
-          <FormRow type="text" name="puppyAsking" labelText="Asking Price" defaultValue="800" />
+          <FormRow type="text" name="puppyAsking" labelText="Asking Price $" defaultValue="800" />
           <FormRowSelect
             labelText="available"
             name="puppyAvailable"
@@ -91,6 +91,7 @@ const PuppyAdd = () => {
           />
           <FormRow type="text" name="puppyNote" labelText="note" />
           <SubmitBtn formBtn btnText="add new puppy" />
+          <p>* Required</p>
         </div>
       </Form>
     </Wrapper>
