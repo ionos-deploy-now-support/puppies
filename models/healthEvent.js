@@ -10,10 +10,8 @@ const healthEventsSchema = new mongoose.Schema(
       max: ['2050-12-31', 'Date must be before 2051-01-01']
     },
     puppy: {
-      type: String,
-      maxLength: [30, 'PuppyId should be less than 31 characters'],
-      minLength: [24, 'PuppyId should be more than 23 characters'],
-      lowercase: true
+      type: mongoose.Schema.ObjectId,
+      ref: 'Puppy'
     },
     description: {
       type: String,

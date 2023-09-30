@@ -50,6 +50,9 @@ const Puppy = ({
           <Link to={`../puppy-edit/${_id}`} className="btn edit-btn">
             Edit
           </Link>
+          <Link to={`../puppies/${_id}/puppy-health-events`} className="btn edit-btn">
+            health record
+          </Link>
           <Form method="post" action={`../puppy-delete/${_id}`}>
             <SubmitBtn formBtn btnText="delete" />
           </Form>

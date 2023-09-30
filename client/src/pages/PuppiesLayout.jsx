@@ -20,6 +20,7 @@ const allPuppiesQuery = (params) => {
       const { data } = await customFetch.get('/puppies', {
         params
       });
+      console.log(data);
       return data;
     }
   };
