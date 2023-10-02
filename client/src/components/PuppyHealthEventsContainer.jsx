@@ -1,11 +1,11 @@
 import PuppyHealthEvent from './PuppyHealthEvent';
 import Wrapper from '../assets/wrappers/PuppyHealthEventsContainer';
-import { usePuppiesContext } from '../pages/PuppiesLayout';
-import { usePuppyHealthEventsContext } from '../pages/PuppyHealthEvents';
+import { usePuppyHealthEventsContext } from '../pages/PuppyHealthEventsLayout';
 import PuppyHealthEventsPageBtnContainer from './PuppyHealthEventsPageBtnContainer';
 
 const PuppyHealthEventsContainer = () => {
-  const { data } = usePuppyHealthEventsContext();
+  const { data } = usePuppyHealthEventsContext(); //UNDEFINED?????
+  console.log(`Data object passed in usePuppyHealthEventsContext ${JSON.stringify(data)}`);
   const puppyHealthEvents = data.puppyHealthEvents;
   const { results, filteredResults, numPages, puppyTempName } = data;
   console.log(puppyHealthEvents);
@@ -13,7 +13,7 @@ const PuppyHealthEventsContainer = () => {
   if (puppyHealthEvents.length === 0) {
     return (
       <Wrapper>
-        <p>No health events entered yet for {puppyTempName}</p>
+        <h5>No health events entered yet for {puppyTempName}</h5>
       </Wrapper>
     );
   }

@@ -22,7 +22,9 @@ import {
   Puppies,
   PuppyAdd,
   PuppyEdit,
+  PuppyHealthEventsLayout,
   PuppyHealthEvents,
+  PuppyHealthEventEdit,
   Register,
   Reserve,
   Stats,
@@ -37,7 +39,9 @@ import { action as addClientAction } from './pages/ClientAdd';
 import { loader as editClientLoader } from './pages/ClientEdit';
 import { action as editClientAction } from './pages/ClientEdit';
 import { action as deleteClientAction } from './pages/ClientDelete';
-import { loader as singlePuppyHealthEventsLoader } from './pages/PuppyHealthEvents';
+import { loader as singlePuppyHealthEventsLoader } from './pages/PuppyHealthEventsLayout';
+import { loader as editPuppyHealthEventLoader } from './pages/PuppyHealthEventEdit';
+import { action as editPuppyHealthEventAction } from './pages/PuppyHealthEventEdit';
 import { loader as allLittersLoader } from './pages/LittersLayout';
 import { action as addLitterAction } from './pages/LitterAdd';
 import { loader as editLitterLoader } from './pages/LitterEdit';
@@ -115,7 +119,7 @@ const router = createBrowserRouter([
           {
             path: 'litters',
             loader: allLittersLoader(queryClient),
-            element: <LittersLayout />,
+            element: <LittersLayout queryClient={queryClient} />,
             children: [
               {
                 index: true,
@@ -164,15 +168,27 @@ const router = createBrowserRouter([
                     path: 'test',
                     element: <Test />
                   },
-                  {
-                    path: 'puppy-health-events',
-                    element: <PuppyHealthEvents />
-                    // loader: allPuppyHealthEventsLoader(queryClient)
-                  },
+                  // {
+                  //   path: 'puppy-health-events',
+                  //   element: <PuppyHealthEvents />
+                  //   // loader: allPuppyHealthEventsLoader(queryClient)
+                  // },
                   {
                     path: ':id/puppy-health-events',
-                    element: <PuppyHealthEvents />,
-                    loader: singlePuppyHealthEventsLoader(queryClient)
+                    element: <PuppyHealthEventsLayout queryClient={queryClient} />,
+                    loader: singlePuppyHealthEventsLoader(queryClient),
+                    children: [
+                      {
+                        index: true,
+                        element: <PuppyHealthEvents />
+                      },
+                      {
+                        path: ':id/puppy-health-event-edit/:id',
+                        element: <PuppyHealthEventEdit />,
+                        // loader: editPuppyHealthEventLoader(queryClient),
+                        action: editPuppyHealthEventAction(queryClient)
+                      }
+                    ]
                   }
                 ]
               }

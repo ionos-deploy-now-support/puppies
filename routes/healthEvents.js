@@ -4,9 +4,9 @@ const router = express.Router();
 const healthEventsController = require('../controllers/healthEventsController');
 const { protect, restrictTo } = require('../controllers/authController');
 
-router.get('/', healthEventsController.getAllHealthEvents);
+router.get('/', protect, restrictTo('admin'), healthEventsController.getAllHealthEvents);
 
-router.get('/:id', healthEventsController.getHealthEvent);
+router.get('/:id', protect, restrictTo('admin'), healthEventsController.getHealthEvent);
 
 router.post('/', protect, restrictTo('admin'), healthEventsController.createHealthEvent);
 
