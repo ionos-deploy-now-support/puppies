@@ -40,7 +40,7 @@ import { loader as editClientLoader } from './pages/ClientEdit';
 import { action as editClientAction } from './pages/ClientEdit';
 import { action as deleteClientAction } from './pages/ClientDelete';
 import { loader as singlePuppyHealthEventsLoader } from './pages/PuppyHealthEventsLayout';
-import { loader as editPuppyHealthEventLoader } from './pages/PuppyHealthEventEdit';
+// import { loader as editPuppyHealthEventLoader } from './pages/PuppyHealthEventEdit';
 import { action as editPuppyHealthEventAction } from './pages/PuppyHealthEventEdit';
 import { loader as allLittersLoader } from './pages/LittersLayout';
 import { action as addLitterAction } from './pages/LitterAdd';
@@ -183,7 +183,7 @@ const router = createBrowserRouter([
                         element: <PuppyHealthEvents />
                       },
                       {
-                        path: ':id/puppy-health-event-edit/:id',
+                        path: 'puppy-health-event-edit/:id',
                         element: <PuppyHealthEventEdit />,
                         // loader: editPuppyHealthEventLoader(queryClient),
                         action: editPuppyHealthEventAction(queryClient)

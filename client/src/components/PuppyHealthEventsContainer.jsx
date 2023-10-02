@@ -4,7 +4,7 @@ import { usePuppyHealthEventsContext } from '../pages/PuppyHealthEventsLayout';
 import PuppyHealthEventsPageBtnContainer from './PuppyHealthEventsPageBtnContainer';
 
 const PuppyHealthEventsContainer = () => {
-  const { data } = usePuppyHealthEventsContext(); //UNDEFINED?????
+  const { data } = usePuppyHealthEventsContext();
   console.log(`Data object passed in usePuppyHealthEventsContext ${JSON.stringify(data)}`);
   const puppyHealthEvents = data.puppyHealthEvents;
   const { results, filteredResults, numPages, puppyTempName } = data;
