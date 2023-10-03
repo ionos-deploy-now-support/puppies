@@ -183,7 +183,7 @@ const router = createBrowserRouter([
                         element: <PuppyHealthEvents />
                       },
                       {
-                        path: 'puppy-health-event-edit/:id',
+                        path: 'puppy-health-event-edit/:eventId',
                         element: <PuppyHealthEventEdit />,
                         // loader: editPuppyHealthEventLoader(queryClient),
                         action: editPuppyHealthEventAction(queryClient)

@@ -4,10 +4,10 @@ import { usePuppyHealthEventsContext } from '../pages/PuppyHealthEventsLayout';
 import PuppyHealthEventsPageBtnContainer from './PuppyHealthEventsPageBtnContainer';
 
 const PuppyHealthEventsContainer = () => {
-  const { data } = usePuppyHealthEventsContext();
-  console.log(`Data object passed in usePuppyHealthEventsContext ${JSON.stringify(data)}`);
-  const puppyHealthEvents = data.puppyHealthEvents;
-  const { results, filteredResults, numPages, puppyTempName } = data;
+  const { puppyObj } = usePuppyHealthEventsContext();
+  console.log(`Data object passed in usePuppyHealthEventsContext ${JSON.stringify(puppyObj)}`);
+  const puppyHealthEvents = puppyObj.puppyHealthEvents;
+  const { results, filteredResults, numPages, puppyTempName } = puppyObj;
   console.log(puppyHealthEvents);
 
   if (puppyHealthEvents.length === 0) {

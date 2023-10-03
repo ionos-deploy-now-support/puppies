@@ -32,10 +32,11 @@ const PuppyHealthEventsLayout = () => {
   const puppyId = useLoaderData();
   console.log(`From PuppyHealthEventsLayout puppy id is ${puppyId}`);
   const { data } = useQuery(singlePuppyHealthEventsQuery(puppyId)).data.data; //provides a well-formed puppy object that also has associated healthEvents array
+  const puppyObj = data;
   const navigation = useNavigation();
   const isPageLoading = navigation.state === 'loading';
   return (
-    <PuppyHealthEventsContext.Provider value={{ data }}>
+    <PuppyHealthEventsContext.Provider value={{ puppyObj }}>
       <div className="landing-page">{isPageLoading ? <Loading /> : <Outlet />}</div>
     </PuppyHealthEventsContext.Provider>
   );

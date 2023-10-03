@@ -1,6 +1,6 @@
 import { FormRow, SubmitBtn } from '../components';
 import Wrapper from '../assets/wrappers/DashboardFormPage';
-import { Form, redirect, useLoaderData, useSubmit } from 'react-router-dom';
+import { Form, redirect, useLoaderData, useSubmit, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import customFetch from '../utils/customFetch';
 import { useQuery } from '@tanstack/react-query';
@@ -19,16 +19,13 @@ const singlePuppyHealthEventQuery = (id) => {
 export const loader =
   (queryClient) =>
   async ({ params }) => {
-    // async ({ request }) => {
-    //   console.log(request.url);
-    //   const params = Object.fromEntries([...new URL(request.url).searchParams.entries()]);
     try {
-      await queryClient.ensureQueryData(singlePuppyHealthEventQuery(params.id));
-      console.log(`From PuppyHealthEventEdit Loader healthEvent- id: ${params.id}`);
-      return params.id;
+      await queryClient.ensureQueryData(singlePuppyHealthEventQuery(params.eventId));
+      console.log(`From PuppyHealthEventEdit Loader healthEvent- id: ${params.eventId}`);
+      return params.eventId;
     } catch (error) {
       toast.error(error?.response?.data?.message);
-      return redirect(`/dashboard/litters/puppies`);
+      return redirect(`/dashboard/litters/puppies/${params.id}/puppy-health-events`);
     }
   };
 
@@ -49,35 +46,47 @@ export const action =
   };
 
 const PuppyHealthEventEdit = () => {
-  const { data } = usePuppyHealthEventsContext(); //brings in puppy object
-  const { puppyTempName } = data; //pull out puppy id and name
-
-  //grab healthEvent id from loader. Loader gets it from params
-  const id = useLoaderData(); //need healthEvent id -it was pulling puppyId here - now undefined
-  console.log(id);
-  // const eventId = '64a2ef384f03fbc207c1d80d';
-
-  // const healthEvent = useQuery(singlePuppyHealthEventQuery(puppyId, eventId)).data.data.data;
-  // console.log(healthEvent);
-
+  const { puppyObj } = usePuppyHealthEventsContext(); //brings in puppy object
+  const { puppyTempName } = puppyObj;
+  const params = useParams();
+  const eventId = params.eventId;
+  const puppyId = params.id;
+  // const { data } = useQuery(singlePuppyHealthEventQuery(eventId));
+  const { data } = useQuery(singlePuppyHealthEventQuery(eventId), {
+    onSuccess: (data) => {
+      return data;
+    }
+  });
+  const getEvent = () => {
+    if (data) {
+      const healthEvent = data.data.data;
+      return healthEvent;
+    }
+  };
+  const healthEvent = getEvent();
   return (
     <Wrapper>
       <Form method="post" className="form">
         <h4 className="form-title">edit health record for {puppyTempName}</h4>
         <div className="form-center">
-          <FormRow type="text" name="eventDate" labelText="date" defaultValue="{}" />
+          <FormRow
+            type="text"
+            name="eventDate"
+            labelText="date"
+            defaultValue={healthEvent && healthEvent.eventDate}
+          />
 
           <FormRow
             type="text"
             name="description"
             labelText="description"
-            defaultValue="{healthEvent.description}"
+            defaultValue={healthEvent && healthEvent.description}
           />
           <FormRow
             type="text"
             name="grams"
             labelText="weight in grams"
-            defaultValue="{healthEvent.grams}"
+            defaultValue={healthEvent && healthEvent.grams}
           />
           <SubmitBtn formBtn btnText="save changes" />
         </div>
