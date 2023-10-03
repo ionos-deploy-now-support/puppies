@@ -30,7 +30,6 @@ export const loader =
 const PuppyHealthEventsContext = createContext();
 const PuppyHealthEventsLayout = () => {
   const puppyId = useLoaderData();
-  console.log(`From PuppyHealthEventsLayout puppy id is ${puppyId}`);
   const { data } = useQuery(singlePuppyHealthEventsQuery(puppyId)).data.data; //provides a well-formed puppy object that also has associated healthEvents array
   const puppyObj = data;
   const navigation = useNavigation();

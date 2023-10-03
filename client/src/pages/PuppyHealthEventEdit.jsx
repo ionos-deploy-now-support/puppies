@@ -35,10 +35,10 @@ export const action =
     const formData = await request.formData();
     const data = Object.fromEntries(formData);
     try {
-      await customFetch.put(`/healthEvents/${params.id}`, data);
+      await customFetch.put(`/healthEvents/${params.eventId}`, data);
       queryClient.invalidateQueries(['puppy']);
       toast.success('Health event edited successfully');
-      return redirect(`/dashboard/litters/puppies`);
+      return redirect(`/dashboard/litters/puppies/${params.id}/puppy-health-events`);
     } catch (error) {
       toast.error(error?.response?.data?.message);
       return error;
