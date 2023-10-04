@@ -6,8 +6,10 @@ import { Loading } from '../components';
 import { toast } from 'react-toastify';
 
 const singlePuppyHealthEventsQuery = (id) => {
+  // const { sort } = params;
   return {
     queryKey: ['puppy', id],
+    // queryKey: ['puppy', id, sort ?? 'newest'],
     queryFn: async () => {
       const { data } = await customFetch.get(`/puppies/${id}`);
       return data;

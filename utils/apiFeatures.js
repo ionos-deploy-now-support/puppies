@@ -47,7 +47,9 @@ class APIFeatures {
       'a-z': 'puppyTempName',
       'z-a': '-puppyTempName',
       'a-z': 'litterName',
-      'z-a': '-litterName'
+      'z-a': '-litterName',
+      'a-z': 'description',
+      'z-a': '-description'
     };
 
     if (this.queryStr.sort) {

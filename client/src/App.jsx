@@ -27,8 +27,7 @@ import {
   PuppyHealthEventEdit,
   Register,
   Reserve,
-  Stats,
-  Test
+  Stats
 } from './pages';
 
 import { action as registerAction } from './pages/Register';
@@ -165,15 +164,6 @@ const router = createBrowserRouter([
                     action: deletePuppyAction(queryClient)
                   },
                   {
-                    path: 'test',
-                    element: <Test />
-                  },
-                  // {
-                  //   path: 'puppy-health-events',
-                  //   element: <PuppyHealthEvents />
-                  //   // loader: allPuppyHealthEventsLoader(queryClient)
-                  // },
-                  {
                     path: ':id/puppy-health-events',
                     element: <PuppyHealthEventsLayout queryClient={queryClient} />,
                     loader: singlePuppyHealthEventsLoader(queryClient),
@@ -185,7 +175,6 @@ const router = createBrowserRouter([
                       {
                         path: 'puppy-health-event-edit/:eventId',
                         element: <PuppyHealthEventEdit />,
-                        // loader: editPuppyHealthEventLoader(queryClient),
                         action: editPuppyHealthEventAction(queryClient)
                       }
                     ]

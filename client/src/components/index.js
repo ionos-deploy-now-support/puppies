@@ -13,6 +13,6 @@ export { default as PageNav } from './PageNav';
 export { default as PuppiesContainer } from './PuppiesContainer';
 export { default as PuppiesSearchContainer } from './PuppiesSearchContainer';
 export { default as PuppyHealthEventsContainer } from './PuppyHealthEventsContainer';
-export { default as PuppyHealthEventsSearchContainer } from './PuppyHealthEventsSearchContainer';
+export { default as PuppyHealthEventsAddSortContainer } from './PuppyHealthEventsAddSortContainer';
 export { default as SmallSidebar } from './SmallSidebar';
 export { default as SubmitBtn } from './SubmitBtn';

@@ -16,19 +16,6 @@ const singlePuppyHealthEventQuery = (id) => {
   };
 };
 
-export const loader =
-  (queryClient) =>
-  async ({ params }) => {
-    try {
-      await queryClient.ensureQueryData(singlePuppyHealthEventQuery(params.eventId));
-      console.log(`From PuppyHealthEventEdit Loader healthEvent- id: ${params.eventId}`);
-      return params.eventId;
-    } catch (error) {
-      toast.error(error?.response?.data?.message);
-      return redirect(`/dashboard/litters/puppies/${params.id}/puppy-health-events`);
-    }
-  };
-
 export const action =
   (queryClient) =>
   async ({ request, params }) => {
@@ -50,8 +37,6 @@ const PuppyHealthEventEdit = () => {
   const { puppyTempName } = puppyObj;
   const params = useParams();
   const eventId = params.eventId;
-  const puppyId = params.id;
-  // const { data } = useQuery(singlePuppyHealthEventQuery(eventId));
   const { data } = useQuery(singlePuppyHealthEventQuery(eventId), {
     onSuccess: (data) => {
       return data;

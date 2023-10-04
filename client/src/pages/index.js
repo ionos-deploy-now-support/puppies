@@ -24,4 +24,3 @@ export { default as PuppyHealthEventEdit } from './PuppyHealthEventEdit';
 export { default as Register } from './Register';
 export { default as Reserve } from './Reserve';
 export { default as Stats } from './Stats';
-export { default as Test } from './Test';
