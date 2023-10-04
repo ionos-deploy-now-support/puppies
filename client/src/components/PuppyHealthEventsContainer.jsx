@@ -1,13 +1,12 @@
 import PuppyHealthEvent from './PuppyHealthEvent';
 import Wrapper from '../assets/wrappers/PuppyHealthEventsContainer';
 import { usePuppyHealthEventsContext } from '../pages/PuppyHealthEventsLayout';
-import PuppyHealthEventsPageBtnContainer from './PuppyHealthEventsPageBtnContainer';
 
 const PuppyHealthEventsContainer = () => {
   const { puppyObj } = usePuppyHealthEventsContext();
   console.log(`Data object passed in usePuppyHealthEventsContext ${JSON.stringify(puppyObj)}`);
   const puppyHealthEvents = puppyObj.puppyHealthEvents;
-  const { results, filteredResults, numPages, puppyTempName } = puppyObj;
+  const { puppyTempName } = puppyObj;
   console.log(puppyHealthEvents);
 
   if (puppyHealthEvents.length === 0) {
@@ -23,7 +22,6 @@ const PuppyHealthEventsContainer = () => {
         {puppyHealthEvents.length}{' '}
         {puppyHealthEvents.length > 1 ? 'health records' : 'health record'}
         {` for ${puppyTempName}`}
-        {filteredResults !== results && ` and found ${filteredResults} matching search`}
       </h5>
       <div className="puppy-health-events">
         {puppyHealthEvents.map((puppyHealthEvent) => {
@@ -35,7 +33,6 @@ const PuppyHealthEventsContainer = () => {
           );
         })}
       </div>
-      {numPages > 1 && <PuppyHealthEventsPageBtnContainer />}
     </Wrapper>
   );
 };

@@ -21,6 +21,7 @@ export { default as PuppyEdit } from './PuppyEdit';
 export { default as PuppyHealthEventsLayout } from './PuppyHealthEventsLayout';
 export { default as PuppyHealthEvents } from './PuppyHealthEvents';
 export { default as PuppyHealthEventEdit } from './PuppyHealthEventEdit';
+export { default as PuppyHealthEventAdd } from './PuppyHealthEventAdd';
 export { default as Register } from './Register';
 export { default as Reserve } from './Reserve';
 export { default as Stats } from './Stats';
