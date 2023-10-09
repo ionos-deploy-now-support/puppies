@@ -49,11 +49,11 @@ import { action as editLitterAction } from './pages/LitterEdit';
 import { action as deleteLitterAction } from './pages/LitterDelete';
 import { loader as allPuppiesLoader } from './pages/PuppiesLayout';
 import { action as addPuppyAction } from './pages/PuppyAdd';
-import { action as addPuppyToLitterAction } from './pages/PuppyAddToLitter';
 import { loader as editPuppyLoader } from './pages/PuppyEdit';
 import { action as editPuppyAction } from './pages/PuppyEdit';
 import { action as deletePuppyAction } from './pages/PuppyDelete';
 import { action as addPuppyHealthEventAction } from './pages/PuppyHealthEventAdd';
+import { action as deletePuppyHealthEventAction } from './pages/PuppyHealthEventDelete';
 // import { loader as allPuppyHealthEventsLoader } from './pages/PuppyHealthEvents';
 import { action as profileAction } from './pages/Profile';
 import ErrorElement from './components/ErrorElement';
@@ -179,10 +179,14 @@ const router = createBrowserRouter([
                         element: <PuppyHealthEventEdit />,
                         action: editPuppyHealthEventAction(queryClient)
                       },
-                                            {
+                      {
                         path: 'puppy-health-event-add',
                         element: <PuppyHealthEventAdd />,
                         action: addPuppyHealthEventAction(queryClient)
+                      },
+                      {
+                        path: 'puppy-health-event-delete/:id',
+                        action: deletePuppyHealthEventAction(queryClient)
                       }
                     ]
                   }

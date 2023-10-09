@@ -8,11 +8,10 @@ router.get('/', protect, restrictTo('admin'), healthEventsController.getAllHealt
 
 router.get('/:id', protect, restrictTo('admin'), healthEventsController.getHealthEvent);
 
-// router.post('/', protect, restrictTo('admin'), healthEventsController.createHealthEvent);
 router.post('/', protect, restrictTo('admin'), healthEventsController.createOneHealthEvent);
 
 router.put('/:id', protect, restrictTo('admin'), healthEventsController.updateHealthEvent);
 
-router.delete('/:id', protect, restrictTo('admin'), healthEventsController.deleteHealthEvent);
+router.delete('/:id', protect, restrictTo('admin'), healthEventsController.deleteOneHealthEvent);
 
 module.exports = router;
