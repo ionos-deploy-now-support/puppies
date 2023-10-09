@@ -71,7 +71,7 @@ const puppySchema = new mongoose.Schema(
     puppyHealthEvents: [
       {
         type: mongoose.Schema.ObjectId,
-        ref: HealthEvent
+        ref: 'HealthEvent'
       }
     ],
     litter: {

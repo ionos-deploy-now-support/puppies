@@ -42,7 +42,8 @@ exports.setLitterId = (req, res, next) => {
 
 exports.getAllPuppies = factory.getAll(Puppy);
 //see below - { path: 'puppyHealthEvents' } to pass in populate Options
-exports.getPuppy = factory.getOne(Puppy, { path: 'puppyHealthEvents' });
+// exports.getPuppy = factory.getOne(Puppy, { path: 'puppyHealthEvents' });
+exports.getPuppy = factory.getOne(Puppy);
 exports.createPuppy = factory.createOne(Puppy);
 exports.updatePuppy = factory.updateOne(Puppy);
 exports.deletePuppy = factory.deleteOne(Puppy);

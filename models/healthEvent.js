@@ -31,7 +31,11 @@ const healthEventsSchema = new mongoose.Schema(
     toObject: { virtuals: true }
   }
 );
-healthEventsSchema.index({ eventDate: 1 }, { collation: { locale: 'en' } });
-const HealthEvent = mongoose.model('HealthEvent', healthEventsSchema);
 
+healthEventsSchema.index({ eventDate: 1 }, { collation: { locale: 'en' } });
+healthEventsSchema.post('save', (next) => {
+  console.log('Doc saved');
+});
+
+const HealthEvent = mongoose.model('HealthEvent', healthEventsSchema);
 module.exports = HealthEvent;

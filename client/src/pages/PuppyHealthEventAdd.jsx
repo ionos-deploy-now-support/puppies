@@ -13,8 +13,9 @@ export const action =
     const data = Object.fromEntries(formData); //well-formed data Object from form inputs
     console.log(JSON.stringify(data));
     try {
-      await customFetch.post(`/${puppyId}/healthEvents`, data);
-      queryClient.invalidateQueries(['healthEvents']);
+      const result = await customFetch.post(`/puppies/${puppyId}/healthEvents`, data);
+      console.log(result);
+      queryClient.invalidateQueries(['puppy']);
       toast.success('health event added successfully ');
       return redirect(`/dashboard/litters/puppies/${puppyId}/puppy-health-events`);
     } catch (error) {
@@ -31,8 +32,13 @@ const PuppyHealthEventAdd = () => {
   return (
     <Wrapper>
       <Form method="post" className="form">
-        <h4 className="form-title">add health event</h4>
+        <h4 className="form-title">add health event for {puppyObj.puppyTempName}</h4>
         <div className="form-center">
+          <FormRow type="text" name="eventDate" labelText="date" defaultValue={today} />
+          <FormRow type="text" name="grams" />
+          <FormRow type="text" name="description" />
+
+          <SubmitBtn formBtn btnText="add new health record" />
           <div className="form-row">
             <label htmlFor="puppy" className="form-label"></label>
             <input
@@ -44,11 +50,6 @@ const PuppyHealthEventAdd = () => {
               required
             />
           </div>
-          <FormRow type="text" name="eventDate" labelText="date" defaultValue={today} />
-          <FormRow type="text" name="grams" />
-          <FormRow type="text" name="description" />
-
-          <SubmitBtn formBtn btnText="add new health record" />
         </div>
       </Form>
     </Wrapper>
