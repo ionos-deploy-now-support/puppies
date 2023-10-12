@@ -3,7 +3,9 @@ class APIFeatures {
   constructor(query, queryStr) {
     this.query = query;
     this.queryStr = queryStr;
+    console.log(query.model);
   }
+
   filter() {
     const queryObj = { ...this.queryStr };
     const excludedFields = ['page', 'sort', 'limit', 'fields'];
@@ -14,11 +16,10 @@ class APIFeatures {
 
     if (search) {
       queryFilterObj.$or = [
-        { puppyTempName: { $regex: search, $options: 'i' } },
         { clientFirstName: { $regex: search, $options: 'i' } },
-        { clientLastName: { $regex: search, $options: 'i' } },
-        { litterName: { $regex: search, $options: 'i' } },
-        { litter: { $regex: search, $options: 'i' } }
+        { clientLastName: { $regex: search, $options: 'i' } }
+        // { litterName: { $regex: search, $options: 'i' } },
+        // { litter: { $regex: search, $options: 'i' } }
       ];
     }
     if (puppySex && puppySex !== 'Both') {
@@ -44,8 +45,6 @@ class APIFeatures {
       oldest: 'createdAt',
       'a-z': 'clientFirstName',
       'z-a': '-clientFirstName',
-      'a-z': 'puppyTempName',
-      'z-a': '-puppyTempName',
       'a-z': 'litterName',
       'z-a': '-litterName'
     };

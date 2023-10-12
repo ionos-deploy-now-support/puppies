@@ -47,13 +47,13 @@ const Puppy = ({
           <PuppyInfo icon={<FaStickyNote />} text={puppyNote} />
         </div>
         <footer className="actions">
-          <Link to={`../puppy-edit/${_id}`} className="btn edit-btn">
+          <Link to={`../puppies/puppy-edit/${_id}`} className="btn edit-btn">
             Edit
           </Link>
           <Link to={`../puppies/${_id}/puppy-health-events`} className="btn edit-btn">
             health record
           </Link>
-          <Form method="post" action={`../puppy-delete/${_id}`}>
+          <Form method="post" action={`../puppies/puppy-delete/${_id}`}>
             <SubmitBtn formBtn btnText="delete" />
           </Form>
         </footer>

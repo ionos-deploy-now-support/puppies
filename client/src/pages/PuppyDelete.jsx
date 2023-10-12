@@ -13,5 +13,5 @@ export const action =
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }
-    return redirect('/dashboard/puppies');
+    return redirect('/dashboard/litter/puppies');
   };

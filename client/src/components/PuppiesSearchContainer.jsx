@@ -79,7 +79,6 @@ const PuppiesSearchContainer = () => {
               name="litter"
               id="litter"
               className="form-select"
-              defaultValue={litter}
               onChange={(e) => {
                 submit(e.currentTarget.form);
               }}>
