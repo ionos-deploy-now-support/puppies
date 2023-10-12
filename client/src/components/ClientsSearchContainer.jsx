@@ -2,7 +2,7 @@ import { FormRow, FormRowSelect } from '../components';
 import Wrapper from '../assets/wrappers/DashboardFormPage';
 import { Form, useSubmit, Link } from 'react-router-dom';
 import { SORT_BY } from '../../../utils/constants';
-import { useClientsContext } from '../pages/Clients';
+import { useClientsContext } from '../pages/ClientsLayout';
 import { BsPlusCircle } from 'react-icons/bs';
 
 const ClientsSearchContainer = () => {
@@ -25,7 +25,7 @@ const ClientsSearchContainer = () => {
     <Wrapper>
       <Form className="form">
         <Link
-          to="/dashboard/client-add"
+          to="/dashboard/clients/client-add"
           className="btn form-btn"
           style={{ marginTop: '-2rem', marginBottom: '2rem' }}>
           <span>

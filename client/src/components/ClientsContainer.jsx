@@ -1,6 +1,6 @@
 import Client from './Client';
 import Wrapper from '../assets/wrappers/ClientsContainer';
-import { useClientsContext } from '../pages/Clients';
+import { useClientsContext } from '../pages/ClientsLayout';
 import ClientsPageBtnContainer from './ClientsPageBtnContainer';
 const ClientsContainer = () => {
   const { data } = useClientsContext();

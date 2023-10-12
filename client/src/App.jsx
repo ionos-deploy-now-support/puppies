@@ -4,6 +4,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import {
   About,
+  ClientsLayout,
   Clients,
   ClientAdd,
   ClientEdit,
@@ -34,7 +35,7 @@ import {
 import { action as registerAction } from './pages/Register';
 import { action as loginAction } from './pages/Login';
 import { loader as dashboardLoader } from './pages/DashboardLayout';
-import { loader as allClientsLoader } from './pages/Clients';
+import { loader as allClientsLoader } from './pages/ClientsLayout';
 import { action as addClientAction } from './pages/ClientAdd';
 import { loader as editClientLoader } from './pages/ClientEdit';
 import { action as editClientAction } from './pages/ClientEdit';
@@ -196,24 +197,29 @@ const router = createBrowserRouter([
           },
           {
             path: 'clients',
-            element: <Clients />,
             loader: allClientsLoader(queryClient),
-            errorElement: <ErrorElement />
-          },
-          {
-            path: 'client-add',
-            element: <ClientAdd />,
-            action: addClientAction(queryClient)
-          },
-          {
-            path: 'client-edit/:id',
-            element: <ClientEdit />,
-            loader: editClientLoader(queryClient),
-            action: editClientAction(queryClient)
-          },
-          {
-            path: 'client-delete/:id',
-            action: deleteClientAction(queryClient)
+            element: <ClientsLayout />,
+            children: [
+              {
+                index: true,
+                element: <Clients />
+              },
+              {
+                path: 'client-add',
+                element: <ClientAdd />,
+                action: addClientAction(queryClient)
+              },
+              {
+                path: 'client-edit/:id',
+                element: <ClientEdit />,
+                loader: editClientLoader(queryClient),
+                action: editClientAction(queryClient)
+              },
+              {
+                path: 'client-delete/:id',
+                action: deleteClientAction(queryClient)
+              }
+            ]
           }
         ]
       }

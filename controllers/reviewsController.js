@@ -8,7 +8,7 @@ const mongoose = require('../db/connect');
 const Review = require('./../models/reviewModel');
 const factory = require('../controllers/handlerFactory');
 
-exports.getAllReviews = factory.getAll(Review);
+// exports.getAllReviews = factory.getAll(Review);
 exports.getReview = factory.getOne(Review);
 
 exports.createReview = factory.createOne(Review);

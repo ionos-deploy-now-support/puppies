@@ -8,7 +8,8 @@ const HealthEvent = require('./../models/healthEvent');
 const Puppy = require('./../models/puppy');
 const factory = require('../controllers/handlerFactory');
 
-exports.getAllHealthEvents = factory.getAll(HealthEvent);
+// exports.getAllHealthEvents = factory.getAll(HealthEvent);
+
 exports.getHealthEvent = factory.getOne(HealthEvent);
 exports.updateHealthEvent = factory.updateOne(HealthEvent);
 // exports.deleteHealthEvent = factory.deleteOne(HealthEvent);

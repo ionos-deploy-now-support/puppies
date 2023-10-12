@@ -19,7 +19,8 @@ const factory = require('../controllers/handlerFactory');
 //   });
 // });
 
-exports.getAllContracts = factory.getAll(Contract);
+// exports.getAllContracts = factory.getAll(Contract);
+
 exports.getContract = factory.getOne(Contract);
 exports.createContract = factory.createOne(Contract);
 exports.updateContract = factory.updateOne(Contract);

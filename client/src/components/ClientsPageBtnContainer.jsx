@@ -1,7 +1,7 @@
 import { HiChevronDoubleLeft, HiChevronDoubleRight } from 'react-icons/hi';
 import Wrapper from '../assets/wrappers/PageBtnContainer';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useClientsContext } from '../pages/Clients';
+import { useClientsContext } from '../pages/ClientsLayout';
 
 const ClientsPageBtnContainer = () => {
   const {

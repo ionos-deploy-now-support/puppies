@@ -91,7 +91,8 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getAllUsers = factory.getAll(JWTUser);
+// exports.getAllUsers = factory.getAll(JWTUser);
+
 exports.getUser = factory.getOne(JWTUser);
 exports.createUser = (req, res) => {
   res.status(500).json({

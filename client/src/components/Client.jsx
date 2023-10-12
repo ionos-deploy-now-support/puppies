@@ -46,10 +46,10 @@ const Client = ({
           <ClientInfo icon={<FaStickyNote />} text={clientNote} />
         </div>
         <footer className="actions">
-          <Link to={`../client-edit/${_id}`} className="btn edit-btn">
+          <Link to={`../clients/client-edit/${_id}`} className="btn edit-btn">
             Edit
           </Link>
-          <Form method="post" action={`../client-delete/${_id}`}>
+          <Form method="post" action={`../clients/client-delete/${_id}`}>
             <SubmitBtn formBtn btnText="delete" />
           </Form>
         </footer>

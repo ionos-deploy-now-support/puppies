@@ -13,7 +13,7 @@ exports.setClientId = (req, res, next) => {
   next();
 };
 
-exports.getAllPayments = factory.getAll(Payment);
+// exports.getAllPayments = factory.getAll(Payment);
 exports.getPayment = factory.getOne(Payment);
 exports.createPayment = factory.createOne(Payment);
 exports.updatePayment = factory.updateOne(Payment);
