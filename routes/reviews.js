@@ -5,7 +5,7 @@ const reviewsController = require('../controllers/reviewsController');
 const { protect, restrictTo } = require('../controllers/authController');
 
 router.use(protect); // protect all routes
-// router.get('/', reviewsController.getAllReviews);
+router.get('/', reviewsController.getAllReviews);
 router.get('/:id', reviewsController.getReview);
 router.post('/', restrictTo('user'), reviewsController.createReview);
 router.put('/:id', restrictTo('user', 'admin'), reviewsController.updateReview);

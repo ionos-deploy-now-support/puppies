@@ -4,6 +4,46 @@ const APIFeatures = require('../utils/apiFeatures');
 const { query } = require('express');
 const ObjectId = require('mongodb').ObjectId;
 
+exports.getAll = (Model) =>
+  catchAsync(async (req, res, next) => {
+    /*
+  #swagger.description = 'READ all documents.'
+*/
+    // To allow for nested GETs. THis is a work around. see video162 q&a for possible alternative
+    let filter = {};
+    if (req.params.litterId) filter = { litter: req.params.litterId };
+    if (req.params.clientId) filter = { client: req.params.clientId };
+
+    const totalDocs = await Model.countDocuments(filter);
+    const filtered = new APIFeatures(Model.find(filter), req.query).filter();
+    const filteredDocs = await filtered.query;
+
+    console.log(`factory filteredDocs: ${filteredDocs}`);
+    const features = new APIFeatures(Model.find(filter), req.query)
+      .filter()
+      .sort()
+      .limitFields()
+      .paginate();
+
+    const docs = await features.query;
+    let currentPage,
+      limit = '';
+    req.query.page ? (currentPage = req.query.page * 1) : (currentPage = 1 * 1);
+    req.query.limit ? (limit = req.query.page * 1) : (limit = PAGINATION_LIMIT);
+    const displaying = docs.length;
+    const numPages = Math.ceil(filteredDocs.length / limit);
+
+    res.status(200).json({
+      status: 'success',
+      results: totalDocs,
+      filteredResults: filteredDocs.length,
+      displaying: displaying,
+      numPages: numPages,
+      currentPage: currentPage,
+      data: { docs }
+    });
+  });
+
 exports.getOne = (Model, populateOptions) =>
   catchAsync(async (req, res, next) => {
     if (!ObjectId.isValid(req.params.id)) {

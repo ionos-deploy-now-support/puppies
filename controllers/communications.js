@@ -13,7 +13,7 @@ exports.setClientId = (req, res, next) => {
   next();
 };
 
-// exports.getAllCommunications = factory.getAll(Communication);
+exports.getAllCommunications = factory.getAll(Communication);
 
 exports.getCommunication = factory.getOne(Communication);
 exports.createCommunication = factory.createOne(Communication);

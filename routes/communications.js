@@ -5,7 +5,7 @@ const communicationsController = require('../controllers/communications');
 
 const { protect, restrictTo } = require('../controllers/authController');
 
-// router.get('/', communicationsController.getAllCommunications);
+router.get('/', communicationsController.getAllCommunications);
 
 // router.get('/communications-stats', communicationsController.getCommunicationsStats);
 router.get('/:id', communicationsController.getCommunication);
