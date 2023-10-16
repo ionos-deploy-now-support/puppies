@@ -49,6 +49,9 @@ const Client = ({
           <Link to={`../clients/client-edit/${_id}`} className="btn edit-btn">
             Edit
           </Link>
+          <Link to={`../clients/${_id}/communications`} className={`btn edit-btn`}>
+            Communications
+          </Link>
           <Form method="post" action={`../clients/client-delete/${_id}`}>
             <SubmitBtn formBtn btnText="delete" />
           </Form>

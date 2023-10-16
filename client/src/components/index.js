@@ -1,6 +1,8 @@
 export { default as BigSidebar } from './BigSidebar';
 export { default as ClientsContainer } from './ClientsContainer';
 export { default as ClientsSearchContainer } from './ClientsSearchContainer';
+export { default as CommunicationsContainer } from './CommunicationsContainer';
+export { default as CommunicationsAddSortContainer } from './CommunicationsAddSortContainer';
 export { default as FormRow } from './FormRow';
 export { default as FormRowRadio } from './FormRowRadio';
 export { default as FormRowSelect } from './FormRowSelect';

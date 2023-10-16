@@ -8,6 +8,10 @@ import {
   Clients,
   ClientAdd,
   ClientEdit,
+  CommunicationsLayout,
+  Communications,
+  CommunicationAdd,
+  CommunicationEdit,
   DashboardLayout,
   Error,
   Gallery,
@@ -40,6 +44,11 @@ import { action as addClientAction } from './pages/ClientAdd';
 import { loader as editClientLoader } from './pages/ClientEdit';
 import { action as editClientAction } from './pages/ClientEdit';
 import { action as deleteClientAction } from './pages/ClientDelete';
+import { loader as singleClientCommunicationsLoader } from './pages/CommunicationsLayout';
+import { action as addCommunicationAction } from './pages/CommunicationAdd';
+import { loader as editCommunicationLoader } from './pages/CommunicationEdit';
+import { action as editCommunicationAction } from './pages/CommunicationEdit';
+import { action as deleteCommunicationAction } from './pages/CommunicationDelete';
 import { loader as singlePuppyHealthEventsLoader } from './pages/PuppyHealthEventsLayout';
 // import { loader as editPuppyHealthEventLoader } from './pages/PuppyHealthEventEdit';
 import { action as editPuppyHealthEventAction } from './pages/PuppyHealthEventEdit';
@@ -218,6 +227,31 @@ const router = createBrowserRouter([
               {
                 path: 'client-delete/:id',
                 action: deleteClientAction(queryClient)
+              },
+              {
+                path: ':id/communications',
+                element: <CommunicationsLayout queryClient={queryClient} />,
+                loader: singleClientCommunicationsLoader(queryClient),
+                children: [
+                  {
+                    index: true,
+                    element: <Communications />
+                  },
+                  {
+                    path: 'communication-edit/:communicationId',
+                    element: <CommunicationEdit />,
+                    action: editCommunicationAction(queryClient)
+                  },
+                  {
+                    path: 'communication-add',
+                    element: <CommunicationAdd />,
+                    action: addCommunicationAction(queryClient)
+                  },
+                  {
+                    path: 'communication-delete/:communicationId',
+                    action: deleteCommunicationAction(queryClient)
+                  }
+                ]
               }
             ]
           }
