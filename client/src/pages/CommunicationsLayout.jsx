@@ -10,7 +10,7 @@ const singleClientCommunicationsQuery = (clientId) => {
   // const clientId = 'clientId';
   return {
     // queryKey: ['communications', id, sort ?? 'newest'],
-    queryKey: ['clients, id'],
+    queryKey: ['clientCommunications', clientId],
     queryFn: async () => {
       const { data } = await customFetch.get(`/clients/${clientId}/communications`);
       return data;
@@ -23,7 +23,6 @@ export const loader =
   async ({ params }) => {
     try {
       await queryClient.ensureQueryData(singleClientCommunicationsQuery(params.id));
-      console.log(`clientId from loader params.id = ${params.id}`);
       return params.id;
     } catch (error) {
       toast.error(error?.response?.data?.message);
@@ -34,19 +33,19 @@ export const loader =
 const CommunicationsContext = createContext();
 const CommunicationsLayout = () => {
   const clientId = useLoaderData();
-  const { data } = useQuery(singleClientCommunicationsQuery(clientId)).data; //provides a well-formed communications object for the specific client
-  const communicationsObj = data.docs;
+  console.log(`clientId from useLoaderData = ${clientId}`);
+  const { data } = useQuery(singleClientCommunicationsQuery(clientId)).data; //well-formed communications obj for the specific client
+  const communications = data.docs;
   console.log(`data resulting from singleClientCommunicationsQuery ${JSON.stringify(data.docs)}`);
   const navigation = useNavigation();
   const isPageLoading = navigation.state === 'loading';
   return (
-    <CommunicationsContext.Provider value={{ communicationsObj }}>
+    <CommunicationsContext.Provider value={{ data, communications, clientId }}>
       <div className="communications-page">{isPageLoading ? <Loading /> : <Outlet />}</div>
     </CommunicationsContext.Provider>
   );
 };
 
-//custom context hook
 export const useCommunicationsContext = () => useContext(CommunicationsContext);
 
 export default CommunicationsLayout;

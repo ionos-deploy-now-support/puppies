@@ -4,18 +4,15 @@ import Wrapper from '../assets/wrappers/Communication';
 import CommunicationInfo from './CommunicationInfo';
 import day from 'dayjs';
 import advancedFormat from 'dayjs/plugin/advancedFormat';
+import { useCommunicationsContext } from '../pages/CommunicationsLayout';
 
 day.extend(advancedFormat);
 
-const Communication = ({
-  _id,
-  communicationDate,
-  communicationType,
-  communicationNote,
-  client
-}) => {
+const Communication = ({ _id, communicationDate, communicationType, communicationNote }) => {
   const date = day(communicationDate).format('MMM Do, YYYY');
-  console.log(client); //this is client id
+  const { communications } = useCommunicationsContext();
+  const clientId = communications[0].client;
+  console.log(clientId); //this is clientId inside of the communications array
   return (
     <Wrapper>
       <div className="content">
@@ -25,10 +22,10 @@ const Communication = ({
           <CommunicationInfo text={`Message: ${communicationNote}`} />
         </div>
         <footer className="actions">
-          <Link to={`../${client}/communication-edit/${_id}`} className="btn edit-btn">
+          <Link to={`../${clientId}/communication-edit/${_id}`} className="btn edit-btn">
             Edit
           </Link>
-          <Form method="post" action={`../${client}/communication-delete/${_id}`}>
+          <Form method="post" action={`../${clientId}/communication-delete/${_id}`}>
             <SubmitBtn formBtn btnText="delete" />
           </Form>
         </footer>

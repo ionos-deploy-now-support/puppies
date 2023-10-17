@@ -1,14 +1,11 @@
 import Wrapper from '../assets/wrappers/DashboardFormPage';
 import { Form, Link } from 'react-router-dom';
 import { BsPlusCircle } from 'react-icons/bs';
-// import { useClientsContext } from '../pages/ClientsLayout';
 import { useCommunicationsContext } from '../pages/CommunicationsLayout';
 
 const CommunicationsAddSortContainer = () => {
-  const { communicationsObj } = useCommunicationsContext();
-  // const { clientObj } = useClientsContext();
-  // console.log(clientObj);
-  const clientId = communicationsObj[0].client;
+  const { clientId } = useCommunicationsContext();
+  // const clientId = communications[0].client;
 
   return (
     <Wrapper>

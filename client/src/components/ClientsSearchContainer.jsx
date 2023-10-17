@@ -8,7 +8,7 @@ import { BsPlusCircle } from 'react-icons/bs';
 const ClientsSearchContainer = () => {
   const { searchValues } = useClientsContext();
   const { search, sort } = searchValues;
-  const submit = useSubmit(); //invokes the useSubmit hook
+  const submit = useSubmit();
 
   const debounce = (onChange) => {
     let timeout;

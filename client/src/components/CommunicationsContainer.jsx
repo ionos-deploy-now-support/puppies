@@ -4,15 +4,13 @@ import { useCommunicationsContext } from '../pages/CommunicationsLayout';
 import { useClientsContext } from '../pages/ClientsLayout';
 
 const CommunicationsContainer = () => {
-  const { communicationsObj } = useCommunicationsContext();
-  const clientId = communicationsObj[0].client;
+  const { data, communications, clientId } = useCommunicationsContext();
   const { clients } = useClientsContext();
-  const client = clients.filter((obj) => {
-    return obj._id === clientId;
+  const client = clients.filter((client) => {
+    return client._id === clientId;
   });
   const clientFirstName = client[0].clientFirstName;
-
-  if (communicationsObj.length === 0) {
+  if (communications.length === 0) {
     return (
       <Wrapper>
         <h5>No communications entered yet for {clientFirstName}</h5>
@@ -22,12 +20,12 @@ const CommunicationsContainer = () => {
   return (
     <Wrapper>
       <h5>
-        {communicationsObj.length}{' '}
-        {communicationsObj.length > 1 ? 'communications' : 'communication record'}
+        {communications.length}{' '}
+        {communications.length > 1 ? 'communications' : 'communication records'}
         {` for ${clientFirstName}`}
       </h5>
       <div className="communications">
-        {communicationsObj.map((communication) => {
+        {communications.map((communication) => {
           return (
             <div key={communication._id}>
               <Communication key={communication._id} {...communication} />
