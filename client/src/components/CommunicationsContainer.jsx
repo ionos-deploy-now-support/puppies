@@ -4,7 +4,7 @@ import { useCommunicationsContext } from '../pages/CommunicationsLayout';
 import { useClientsContext } from '../pages/ClientsLayout';
 
 const CommunicationsContainer = () => {
-  const { data, communications, clientId } = useCommunicationsContext();
+  const { communications, clientId } = useCommunicationsContext();
   const { clients } = useClientsContext();
   const client = clients.filter((client) => {
     return client._id === clientId;

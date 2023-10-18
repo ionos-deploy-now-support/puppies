@@ -21,4 +21,13 @@ export const SORT_BY = {
   DESCENDING: 'z-a'
 };
 
+export const COMMUNICATION_TYPE = {
+  PHONE: 'Phone',
+  TEXT: 'Text',
+  FACEBOOK: 'Facebook',
+  EMAIL: 'Email',
+  PERSONAL: 'Personal',
+  AKC: 'AKC',
+  WEBSITE: 'Website'
+};
 // export const PAGINATION_LIMIT = 10; //see constants2.js

@@ -1,9 +1,10 @@
-import { FormRow, SubmitBtn } from '../components';
+import { FormRow, FormRowSelect, SubmitBtn } from '../components';
 import Wrapper from '../assets/wrappers/DashboardFormPage';
 import { Form, redirect, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import customFetch from '../utils/customFetch';
 import { useClientsContext } from './ClientsLayout';
+import { COMMUNICATION_TYPE } from '../../../utils/constants';
 
 export const action =
   (queryClient) =>
@@ -43,7 +44,12 @@ const CommunicationAdd = () => {
             defaultValue={today}
             required
           />
-          <FormRow type="text" name="communicationType" labelText="type" />
+          <FormRowSelect
+            labelText="type"
+            name="communicationType"
+            defaultValue="Phone"
+            list={Object.values(COMMUNICATION_TYPE)}
+          />
           <FormRow type="text" name="communicationNote" labelText="message" />
 
           <SubmitBtn formBtn btnText="add new communication" />
