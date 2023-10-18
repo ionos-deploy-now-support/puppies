@@ -11,7 +11,7 @@ const CommunicationsAddSortContainer = () => {
     <Wrapper>
       <Form className="form">
         <Link
-          to={`/dashboard/clients/${clientId}/communication-add`}
+          to={`/dashboard/clients/${clientId}/communications/communication-add`}
           className="btn form-btn"
           style={{ marginTop: '-2rem', marginBottom: '2rem' }}>
           <span>

@@ -7,9 +7,10 @@ const ObjectId = require('mongodb').ObjectId;
 const Communication = require('./../models/communication');
 const factory = require('../controllers/handlerFactory');
 
+//get clientId from url params for nested routes
 exports.setClientId = (req, res, next) => {
+  console.log(`req.params is ${req.params.id}`);
   if (!req.body.client) req.body.client = req.params.clientId;
-  //For nested routes get clientId from params (url) if not in body
   next();
 };
 

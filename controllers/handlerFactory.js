@@ -65,6 +65,8 @@ exports.getOne = (Model, populateOptions) =>
 
 exports.createOne = (Model) =>
   catchAsync(async (req, res, next) => {
+    console.log(`req.params is ${JSON.stringify(req.params)}`);
+    console.log(`req.body is ${JSON.stringify(req.body)}`);
     if (!req.body) {
       res.status(400).send({ message: 'Content cannot be empty!' });
       return;

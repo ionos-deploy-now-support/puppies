@@ -12,10 +12,9 @@ const communicationSchema = new mongoose.Schema(
       default: Date.now()
     },
     client: {
-      type: String,
-      maxLength: [30, 'ClientId should be less than 31 characters'],
-      minLength: [24, 'ClientId should be more than 23 characters'],
-      lowercase: true
+      type: mongoose.Schema.ObjectId,
+      ref: 'Client',
+      required: [true, 'Communication is tied to a Client']
     },
     communicationType: {
       type: String,

@@ -21,7 +21,7 @@ const CommunicationsContainer = () => {
     <Wrapper>
       <h5>
         {communications.length}{' '}
-        {communications.length > 1 ? 'communications' : 'communication records'}
+        {communications.length > 1 ? 'Communications' : 'Communication record'}
         {` for ${clientFirstName}`}
       </h5>
       <div className="communications">
