@@ -29,8 +29,8 @@ import {
   PuppyEdit,
   PuppyHealthEventsLayout,
   PuppyHealthEvents,
-  PuppyHealthEventEdit,
   PuppyHealthEventAdd,
+  PuppyHealthEventEdit,
   Register,
   Reserve,
   Stats
@@ -154,7 +154,7 @@ const router = createBrowserRouter([
               {
                 path: 'puppies',
                 loader: allPuppiesLoader(queryClient),
-                element: <PuppiesLayout />,
+                element: <PuppiesLayout queryClient={queryClient} />,
                 children: [
                   {
                     index: true,
@@ -207,7 +207,7 @@ const router = createBrowserRouter([
           {
             path: 'clients',
             loader: allClientsLoader(queryClient),
-            element: <ClientsLayout />,
+            element: <ClientsLayout queryClient={queryClient} />,
             children: [
               {
                 index: true,
@@ -238,14 +238,15 @@ const router = createBrowserRouter([
                     element: <Communications />
                   },
                   {
-                    path: 'communication-edit/:communicationId',
-                    element: <CommunicationEdit />,
-                    action: editCommunicationAction(queryClient)
-                  },
-                  {
                     path: 'communication-add',
                     element: <CommunicationAdd />,
                     action: addCommunicationAction(queryClient)
+                  },
+                  {
+                    path: 'communication-edit/:communicationId',
+                    element: <CommunicationEdit />,
+                    loader: editCommunicationLoader(queryClient),
+                    action: editCommunicationAction(queryClient)
                   },
                   {
                     path: 'communication-delete/:communicationId',

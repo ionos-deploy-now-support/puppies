@@ -45,7 +45,7 @@ export const action =
 const ClientEdit = () => {
   //grab client id from loader
   const id = useLoaderData();
-  console.log(`user id is ${id}`);
+  console.log(`client id is ${id}`);
   // having to drill deep into object to get to data wanted
   const client = useQuery(singleClientQuery(id)).data.data.data;
   return (

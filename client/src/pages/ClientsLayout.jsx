@@ -3,8 +3,6 @@ import { Outlet, useLoaderData, useNavigation } from 'react-router-dom';
 import { useContext, createContext } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Loading } from '../components';
-import { useDashboardContext } from './DashboardLayout';
-import { set } from 'mongoose';
 
 const allClientsQuery = (params) => {
   const { search, sort, page } = params;
@@ -30,6 +28,7 @@ export const loader =
   (queryClient) =>
   async ({ request }) => {
     const params = Object.fromEntries([...new URL(request.url).searchParams.entries()]);
+    console.log(`params = ${JSON.stringify(params)}`);
     await queryClient.ensureQueryData(allClientsQuery(params));
     return { searchValues: { ...params } };
   };

@@ -49,8 +49,8 @@ const PuppiesPageBtnContainer = () => {
           if (nextPage > numPages) nextPage = 1;
           handlePageChange(nextPage);
         }}>
-        <HiChevronDoubleRight />
         next
+        <HiChevronDoubleRight />
       </button>
     </Wrapper>
   );

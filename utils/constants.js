@@ -21,6 +21,13 @@ export const SORT_BY = {
   DESCENDING: 'z-a'
 };
 
+export const SORT_COMMS_BY = {
+  NEWEST_CREATED: 'newest',
+  OLDEST_CREATED: 'oldest',
+  NEWEST_BY_DATE: 'newest-by-date',
+  OLDEST_BY_DATE: 'oldest-by-date'
+};
+
 export const COMMUNICATION_TYPE = {
   PHONE: 'Phone',
   TEXT: 'Text',

@@ -1,23 +1,31 @@
 import { HiChevronDoubleLeft, HiChevronDoubleRight } from 'react-icons/hi';
 import Wrapper from '../assets/wrappers/PageBtnContainer';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useClientsContext } from '../pages/ClientsLayout';
+import { useCommunicationsContext } from '../pages/CommunicationsLayout';
 
 const CommunicationsPageBtnContainer = () => {
-  const {
-    data: { numPages, currentPage }
-  } = useClientsContext();
+  const { numPages, currentPage } = useCommunicationsContext();
+  console.log(`displaying page ${currentPage} of ${numPages} page(s)`);
+
+  // build simple array of pages numbers
   const pages = Array.from({ length: numPages }, (_, index) => {
     return index + 1;
   });
+
+  // useLocation holds search params and pathname
   const { search, pathname } = useLocation();
+  console.log(`search is ${search}, pathname is ${pathname}`);
+
   const navigate = useNavigate();
-  console.log(search, pathname);
+
   const handlePageChange = (pageNumber) => {
+    console.log('hello from handlePageChange');
     const searchParams = new URLSearchParams(search);
     searchParams.set('page', pageNumber);
+    console.log(`searchParams = ${searchParams.toString()}`);
     navigate(`${pathname}?${searchParams.toString()}`);
   };
+
   return (
     <Wrapper>
       <button
@@ -49,8 +57,8 @@ const CommunicationsPageBtnContainer = () => {
           if (nextPage > numPages) nextPage = 1;
           handlePageChange(nextPage);
         }}>
-        <HiChevronDoubleRight />
         next
+        <HiChevronDoubleRight />
       </button>
     </Wrapper>
   );

@@ -12,7 +12,6 @@ const Communication = ({ _id, communicationDate, communicationType, communicatio
   const date = day(communicationDate).format('MMM Do, YYYY');
   const { communications } = useCommunicationsContext();
   const clientId = communications[0].client;
-  console.log(clientId); //this is clientId inside of the communications array
   return (
     <Wrapper>
       <div className="content">
@@ -22,10 +21,12 @@ const Communication = ({ _id, communicationDate, communicationType, communicatio
           <CommunicationInfo text={`Message: ${communicationNote}`} />
         </div>
         <footer className="actions">
-          <Link to={`../${clientId}/communication-edit/${_id}`} className="btn edit-btn">
+          <Link
+            to={`../${clientId}/communications/communication-edit/${_id}`}
+            className="btn edit-btn">
             Edit
           </Link>
-          <Form method="post" action={`../${clientId}/communication-delete/${_id}`}>
+          <Form method="post" action={`../${clientId}/communications/communication-delete/${_id}`}>
             <SubmitBtn formBtn btnText="delete" />
           </Form>
         </footer>

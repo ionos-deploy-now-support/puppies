@@ -1,9 +1,10 @@
-import { FormRow, SubmitBtn } from '../components';
+import { FormRow, FormRowSelect, SubmitBtn } from '../components';
 import Wrapper from '../assets/wrappers/DashboardFormPage';
 import { Form, redirect, useLoaderData } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import customFetch from '../utils/customFetch';
 import { useQuery } from '@tanstack/react-query';
+import { COMMUNICATION_TYPE } from '../../../utils/constants';
 
 const singleCommunicationQuery = (id) => {
   return {
@@ -18,24 +19,26 @@ const singleCommunicationQuery = (id) => {
 export const loader =
   (queryClient) =>
   async ({ params }) => {
+    const communicationId = params.communicationId;
     try {
-      await queryClient.ensureQueryData(singleCommunicationQuery(params.id));
-      return params.id;
+      await queryClient.ensureQueryData(singleCommunicationQuery(communicationId));
+      return communicationId;
     } catch (error) {
       toast.error(error?.response?.data?.message);
-      return redirect('/dashboard/clients');
+      return redirect('../');
     }
   };
 export const action =
   (queryClient) =>
   async ({ request, params }) => {
+    const communicationId = params.communicationId;
     const formData = await request.formData();
     const data = Object.fromEntries(formData);
     try {
-      await customFetch.put(`/communications/${params.id}`, data);
-      queryClient.invalidateQueries(['communications']);
+      await customFetch.put(`/communications/${communicationId}`, data);
+      queryClient.invalidateQueries(['clientCommunications']);
       toast.success('Communication edited successfully');
-      return redirect('/dashboard/clients');
+      return redirect('../');
     } catch (error) {
       toast.error(error?.response?.data?.message);
       return error;
@@ -43,10 +46,15 @@ export const action =
   };
 
 const CommunicationEdit = () => {
-  //grab client id from loader
-  const id = useLoaderData();
-  console.log(`user id is ${id}`);
-  const communication = useQuery(singleCommunicationQuery(id)).data.data.data;
+  //grab communication id from loader
+  const communicationId = useLoaderData();
+  console.log(`communicationId = ${communicationId}`);
+
+  const communication = useQuery(singleCommunicationQuery(communicationId)).data.data.data;
+  // const communication = useQuery(singleCommunicationQuery(communicationId));
+  console.log(`communication holds ${JSON.stringify(communication)}`);
+  const { communicationDate, communicationType, communicationNote } = communication;
+  console.log(`Date ${communicationDate} Type ${communicationType} Note ${communicationNote}`);
   return (
     <Wrapper>
       <Form method="post" className="form">
@@ -55,20 +63,20 @@ const CommunicationEdit = () => {
           <FormRow
             type="text"
             name="communicationDate"
-            labelText="datee"
-            defaultValue={communication.communicationDate}
+            labelText="date"
+            defaultValue={communicationDate}
           />
-          <FormRow
-            type="text"
-            name="communicationType"
+          <FormRowSelect
             labelText="type"
-            defaultValue={communication.communicationType}
+            name="communicationType"
+            defaultValue={communicationType}
+            list={Object.values(COMMUNICATION_TYPE)}
           />
           <FormRow
             type="text"
             name="communicationNote"
             labelText="message"
-            defaultValue={communication.communicationNote}
+            defaultValue={communicationNote}
           />
           <SubmitBtn formBtn btnText="save changes" />
         </div>

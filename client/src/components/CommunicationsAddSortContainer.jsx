@@ -1,12 +1,15 @@
+import { FormRowSelect } from '../components';
 import Wrapper from '../assets/wrappers/DashboardFormPage';
-import { Form, Link } from 'react-router-dom';
+import { Form, Link, useSubmit } from 'react-router-dom';
 import { BsPlusCircle } from 'react-icons/bs';
 import { useCommunicationsContext } from '../pages/CommunicationsLayout';
+import { SORT_COMMS_BY } from '../../../utils/constants';
 
 const CommunicationsAddSortContainer = () => {
-  const { clientId } = useCommunicationsContext();
-  // const clientId = communications[0].client;
-
+  const { clientId, searchValues } = useCommunicationsContext();
+  console.log(searchValues);
+  const { sort } = searchValues;
+  const submit = useSubmit();
   return (
     <Wrapper>
       <Form className="form">
@@ -20,6 +23,17 @@ const CommunicationsAddSortContainer = () => {
           </span>
         </Link>
         <hr style={{ marginTop: '-.4rem', marginBottom: '.8rem' }} />
+        <div className="form-center">
+          <FormRowSelect
+            name="sort"
+            labelText="sort by"
+            defaultValue={sort}
+            list={[...Object.values(SORT_COMMS_BY)]}
+            onChange={(e) => {
+              submit(e.currentTarget.form);
+            }}
+          />
+        </div>
       </Form>
     </Wrapper>
   );

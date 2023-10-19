@@ -4,12 +4,14 @@ import { useCommunicationsContext } from '../pages/CommunicationsLayout';
 import { useClientsContext } from '../pages/ClientsLayout';
 
 const CommunicationsContainer = () => {
-  const { communications, clientId } = useCommunicationsContext();
+  const { communications, results, clientId } = useCommunicationsContext();
   const { clients } = useClientsContext();
   const client = clients.filter((client) => {
     return client._id === clientId;
   });
-  const clientFirstName = client[0].clientFirstName;
+  let clientFirstName = '';
+  // if (client[0].clientFirstName) clientFirstName = client[0].clientFirstName;
+  // const clientFirstName = client[0].clientFirstName;
   if (communications.length === 0) {
     return (
       <Wrapper>
@@ -20,9 +22,8 @@ const CommunicationsContainer = () => {
   return (
     <Wrapper>
       <h5>
-        {communications.length}{' '}
-        {communications.length > 1 ? 'Communications' : 'Communication record'}
-        {` for ${clientFirstName}`}
+        {results} {results > 1 ? 'Communications' : 'Communication record'}
+        {` ${clientFirstName}`}
       </h5>
       <div className="communications">
         {communications.map((communication) => {
