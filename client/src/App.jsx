@@ -12,6 +12,10 @@ import {
   Communications,
   CommunicationAdd,
   CommunicationEdit,
+  ContractsLayout,
+  Contracts,
+  ContractAdd,
+  ContractEdit,
   DashboardLayout,
   Error,
   Gallery,
@@ -49,8 +53,12 @@ import { action as addCommunicationAction } from './pages/CommunicationAdd';
 import { loader as editCommunicationLoader } from './pages/CommunicationEdit';
 import { action as editCommunicationAction } from './pages/CommunicationEdit';
 import { action as deleteCommunicationAction } from './pages/CommunicationDelete';
+import { loader as singleClientContractsLoader } from './pages/ContractsLayout';
+import { action as addContractAction } from './pages/ContractAdd';
+import { loader as editContractLoader } from './pages/ContractEdit';
+import { action as editContractAction } from './pages/ContractEdit';
+import { action as deleteContractAction } from './pages/ContractDelete';
 import { loader as singlePuppyHealthEventsLoader } from './pages/PuppyHealthEventsLayout';
-// import { loader as editPuppyHealthEventLoader } from './pages/PuppyHealthEventEdit';
 import { action as editPuppyHealthEventAction } from './pages/PuppyHealthEventEdit';
 import { loader as allLittersLoader } from './pages/LittersLayout';
 import { action as addLitterAction } from './pages/LitterAdd';
@@ -251,6 +259,32 @@ const router = createBrowserRouter([
                   {
                     path: 'communication-delete/:communicationId',
                     action: deleteCommunicationAction(queryClient)
+                  }
+                ]
+              },
+              {
+                path: ':id/contracts',
+                element: <ContractsLayout queryClient={queryClient} />,
+                loader: singleClientContractsLoader(queryClient),
+                children: [
+                  {
+                    index: true,
+                    element: <Contracts />
+                  },
+                  {
+                    path: 'contract-add',
+                    element: <ContractAdd />,
+                    action: addContractAction(queryClient)
+                  },
+                  {
+                    path: 'contract-edit/:contractId',
+                    element: <ContractEdit />,
+                    loader: editContractLoader(queryClient),
+                    action: editContractAction(queryClient)
+                  },
+                  {
+                    path: 'contract-delete/:contractId',
+                    action: deleteContractAction(queryClient)
                   }
                 ]
               }
