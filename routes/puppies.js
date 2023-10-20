@@ -8,6 +8,7 @@ const { protect, restrictTo } = require('../controllers/authController');
 //mount router - healthEventsRouter for nested route /puppies/:puppyId/healthEvents
 router.use('/:puppyId/healthEvents', healthEventsRouter);
 router.get('/', puppiesController.getAllPuppies);
+router.get('/puppies-available', puppiesController.getPuppiesAvailable);
 router.get('/puppies-stats', puppiesController.getPuppiesStats);
 router.get('/:id', puppiesController.getPuppy);
 router.post(

@@ -16,6 +16,16 @@ const singleContractQuery = (id) => {
   };
 };
 
+const puppiesAvailableQuery = () => {
+  return {
+    queryKey: ['puppies-available'],
+    queryFn: async () => {
+      const { data } = await customFetch.get(`/puppies/puppies-available`);
+      return data;
+    }
+  };
+};
+
 export const loader =
   (queryClient) =>
   async ({ params }) => {
@@ -49,7 +59,8 @@ const ContractEdit = () => {
   //grab contract id from loader
   const contractId = useLoaderData();
   console.log(`contractId = ${contractId}`);
-
+  const data = useQuery(puppiesAvailableQuery());
+  console.log(`results of puppiesAvailableQuery = ${JSON.stringify(data)}`);
   const contract = useQuery(singleContractQuery(contractId)).data.data.data;
   // const contract = useQuery(singleContractQuery(contractId));
   console.log(`contract holds ${JSON.stringify(contract)}`);

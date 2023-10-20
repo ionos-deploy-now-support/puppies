@@ -25,7 +25,6 @@ export { default as Profile } from './Profile';
 export { default as PuppiesLayout } from './PuppiesLayout';
 export { default as Puppies } from './Puppies';
 export { default as PuppyAdd } from './PuppyAdd';
-export { default as PuppyAddToLitter } from './PuppyAddToLitter';
 export { default as PuppyEdit } from './PuppyEdit';
 export { default as PuppyHealthEventsLayout } from './PuppyHealthEventsLayout';
 export { default as PuppyHealthEvents } from './PuppyHealthEvents';

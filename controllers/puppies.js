@@ -151,3 +151,18 @@ exports.getPuppy = factory.getOne(Puppy);
 exports.createPuppy = factory.createOne(Puppy);
 exports.updatePuppy = factory.updateOne(Puppy);
 exports.deletePuppy = factory.deleteOne(Puppy);
+
+exports.getPuppiesAvailable = catchAsync(async (req, res, next) => {
+  const puppies = await Puppy.find({ puppyAvailable: true });
+  const results = puppies.length;
+  if (!puppies) {
+    return next(new AppError('No available puppies found', 404));
+  }
+  res.status(200).json({
+    status: 'success',
+    results: results,
+    data: {
+      data: puppies
+    }
+  });
+});
