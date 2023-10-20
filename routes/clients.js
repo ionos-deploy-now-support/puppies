@@ -4,11 +4,12 @@ const router = express.Router({ mergeParams: true });
 const clientsController = require('../controllers/clients');
 const communicationsRouter = require('../routes/communications');
 const paymentsRouter = require('../routes/payments');
+const contractsRouter = require('../routes/contracts');
 
 const { protect, restrictTo } = require('../controllers/authController');
 
-//mount router - paymentsRouter for nested route /clients/:clientId/payments
 router.use('/:clientId/communications', communicationsRouter);
+router.use('/:clientId/contracts', contractsRouter);
 router.use('/:clientId/payments', paymentsRouter);
 router.get('/', protect, restrictTo('admin'), clientsController.getAllClients);
 // router.get('/clients-stats', clientsController.getClientsStats);

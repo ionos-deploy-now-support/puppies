@@ -37,4 +37,14 @@ export const COMMUNICATION_TYPE = {
   AKC: 'AKC',
   WEBSITE: 'Website'
 };
+
+export const CONTRACT_TYPE = {
+  BLACK_FEMALE: 'black-female',
+  BLACK_MALE: 'black-male',
+  CHOCOLATE_FEMALE: 'chocolate-female',
+  CHOCOLATE_MALE: 'chocolate-male',
+  YELLOW_FEMALE: 'yellow-female',
+  YELLOW_MALE: 'yellow-male'
+};
+
 // export const PAGINATION_LIMIT = 10; //see constants2.js

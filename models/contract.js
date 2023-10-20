@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const slugify = require('slugify');
-const HealthEvent = require('./healthEvent');
-const Litter = require('./litter');
+const Client = require('./client');
+const Puppy = require('./puppy');
 
 mongoose.Schema.Types.String.set('trim', true);
 
@@ -25,15 +25,15 @@ const contractSchema = new mongoose.Schema(
       lowercase: true,
       enum: {
         values: [
-          'black/female',
-          'black/male',
-          'chocolate/female',
-          'chocolate/male',
-          'yellow/female',
-          'yellow/male'
+          'black-female',
+          'black-male',
+          'chocolate-female',
+          'chocolate-male',
+          'yellow-female',
+          'yellow-male'
         ],
         message:
-          '{VALUE} is not supported. Enter black/female black/male     chocolate/female chocolate/male yellow/female or yellow/male'
+          '{VALUE} is not supported. Enter black-female black-male     chocolate-female chocolate-male yellow-female or yellow-male'
       }
     },
     contractPrice: {

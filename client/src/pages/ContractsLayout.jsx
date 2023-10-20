@@ -6,9 +6,9 @@ import { Loading } from '../components';
 import { toast } from 'react-toastify';
 
 const singleClientContractsQuery = (clientId, searchItems) => {
-  const { sort, page } = searchItems;
+  const { sort } = searchItems;
   return {
-    queryKey: ['clientContracts', clientId, sort ?? 'newest-created', page ?? 1],
+    queryKey: ['clientContracts', clientId, sort ?? 'newest-created'],
     queryFn: async () => {
       const { data } = await customFetch.get(`/clients/${clientId}/contracts`, {
         searchItems
@@ -42,7 +42,6 @@ const ContractsLayout = () => {
   const { data, results, numPages, currentPage } = useQuery(
     singleClientContractsQuery(clientId, searchValues)
   ).data; //well-formed contracts obj for the specific client
-  console.log(`data resulting from singleClientContractsQuery-current page ${currentPage}`);
   const contracts = data.docs;
   console.log(`data.docs resulting from singleClientContractsQuery ${JSON.stringify(data.docs)}`);
   const navigation = useNavigation();

@@ -1,15 +1,10 @@
-import {
-  ContractsContainer,
-  ContractsAddSortContainer
-  // ContractsPageBtnContainer
-} from '../components';
+import { ContractsContainer, ContractsAddSortContainer } from '../components';
 
 const Contracts = () => {
   return (
     <>
       <ContractsAddSortContainer />
       <ContractsContainer />
-      {/* <ContractsPageBtnContainer /> */}
     </>
   );
 };

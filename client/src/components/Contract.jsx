@@ -8,17 +8,33 @@ import { useContractsContext } from '../pages/ContractsLayout';
 
 day.extend(advancedFormat);
 
-const Contract = ({ _id, contractDate, contractType, contractNote }) => {
-  const date = day(contractDate).format('MMM Do, YYYY');
+const Contract = ({
+  _id,
+  contractOpen,
+  contractClose,
+  contractType,
+  contractPrice,
+  contractNote,
+  puppyPickOrder,
+  puppy,
+  puppyPickUp
+}) => {
+  const dateOpen = day(contractOpen).format('MMM Do, YYYY');
+  const dateClose = day(contractClose).format('MMM Do, YYYY');
   const { contracts } = useContractsContext();
   const clientId = contracts[0].client;
   return (
     <Wrapper>
       <div className="content">
         <div className="content-center">
-          <ContractInfo text={`Date: ${date}`} />
+          <ContractInfo text={`Opened: ${dateOpen}`} />
+          {contractClose && <ContractInfo text={`Closed: ${dateClose}`} />}
           <ContractInfo text={`Type: ${contractType}`} />
-          <ContractInfo text={`Message: ${contractNote}`} />
+          <ContractInfo text={`Price: $${contractPrice}`} />
+          {puppyPickOrder && <ContractInfo text={`Pick Order: ${puppyPickOrder}`} />}
+          {puppy && <ContractInfo text={`Puppy ID for now: ${puppy}`} />}
+          {puppyPickUp && <ContractInfo text={`Puppy Pickup: ${puppyPickUp}`} />}
+          {contractNote && <ContractInfo text={`Note: ${contractNote}`} />}
         </div>
         <footer className="actions">
           <Link to={`../${clientId}/contracts/contract-edit/${_id}`} className="btn edit-btn">

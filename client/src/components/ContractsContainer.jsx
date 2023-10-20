@@ -9,9 +9,7 @@ const ContractsContainer = () => {
   const client = clients.filter((client) => {
     return client._id === clientId;
   });
-  let clientFirstName = '';
-  // if (client[0].clientFirstName) clientFirstName = client[0].clientFirstName;
-  // const clientFirstName = client[0].clientFirstName;
+  const clientFirstName = client[0].clientFirstName;
   if (contracts.length === 0) {
     return (
       <Wrapper>
@@ -22,8 +20,8 @@ const ContractsContainer = () => {
   return (
     <Wrapper>
       <h5>
-        {results} {results > 1 ? 'Contracts' : 'Contract record'}
-        {` ${clientFirstName}`}
+        {results} {results > 1 ? 'Contracts' : 'Contract'}
+        {` for ${clientFirstName}`}
       </h5>
       <div className="contracts">
         {contracts.map((contract) => {

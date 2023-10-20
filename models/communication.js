@@ -21,9 +21,9 @@ const communicationSchema = new mongoose.Schema(
       lowercase: true,
       maxLength: [15, 'Communication Type must not exceed 15 characters'],
       enum: {
-        values: ['phone', 'text', 'facebook', 'email', 'personal', 'akc', 'website'],
+        values: ['Phone', 'Text', 'Facebook', 'Email', 'Personal', 'AKC', 'Website'],
         message:
-          '{VALUE} is not supported. Enter phone, text, messenger, email, personal, akc, or website'
+          '{VALUE} is not supported. Enter Phone, Text, Facebook, Email, Personal, AKC, or Website'
       }
     },
     communicationNote: {
