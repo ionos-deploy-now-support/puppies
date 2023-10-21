@@ -1,21 +1,11 @@
 import { FormRow, FormRowSelect, SubmitBtn } from '../components';
 import Wrapper from '../assets/wrappers/DashboardFormPage';
 import { Form, redirect, useParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import customFetch from '../utils/customFetch';
 import { useClientsContext } from './ClientsLayout';
+import { useHomeContext } from './HomeLayout';
 import { CONTRACT_TYPE } from '../../../utils/constants';
-
-const puppiesAvailableQuery = () => {
-  return {
-    queryKey: ['puppies-available'],
-    queryFn: async () => {
-      const { data } = await customFetch.get(`/puppies/puppies-available`);
-      return data;
-    }
-  };
-};
 
 export const action =
   (queryClient) =>
@@ -35,16 +25,9 @@ export const action =
   };
 
 const ContractAdd = () => {
+  const { puppiesAvailable } = useHomeContext();
+  console.log(puppiesAvailable);
   let today = Date();
-  const data = useQuery(puppiesAvailableQuery());
-  console.log(`results of puppiesAvailableQuery = ${JSON.stringify(data)}`);
-  // const puppies = data.data;
-  // console.log(`puppies = ${JSON.stringify(puppies)}`);
-  // console.log(puppies.status);
-  // const { puppyTempName } = puppies;
-  // console.log(JSON.stringify(puppyTempName));
-
-  // console.log(JSON.stringify(puppies.data[0]));
   const params = useParams();
   const clientId = params.id;
   const { clients } = useClientsContext();

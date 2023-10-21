@@ -5,6 +5,17 @@ import { toast } from 'react-toastify';
 import { checkDefaultTheme } from '../App';
 import { Loading } from '../components';
 import Wrapper from '../assets/wrappers/Logo';
+import { useQuery } from '@tanstack/react-query';
+
+const puppiesAvailableQuery = () => {
+  return {
+    queryKey: ['puppies-available'],
+    queryFn: async () => {
+      const { data } = await customFetch.get(`/puppies/puppies-available`);
+      return data;
+    }
+  };
+};
 
 const HomeContext = createContext();
 
@@ -17,6 +28,10 @@ const HomeLayout = ({ queryClient }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [showMenuDropDown, setShowMenuDropDown] = useState(false);
+
+  const { data } = useQuery(puppiesAvailableQuery());
+  let puppiesAvailable = [];
+  data ? (puppiesAvailable = data.puppies.puppies) : console.log('puppiesAvailable not here yet');
 
   const toggleDarkTheme = () => {
     console.log('toggle dark theme');
@@ -65,7 +80,8 @@ const HomeLayout = ({ queryClient }) => {
         toggleDarkTheme,
         logoutUser,
         setShowMenuDropDown,
-        showMenuDropDown
+        showMenuDropDown,
+        puppiesAvailable
       }}>
       <Wrapper>
         <div className="landing-page">{isPageLoading ? <Loading /> : <Outlet />}</div>

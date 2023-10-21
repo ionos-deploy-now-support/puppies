@@ -161,8 +161,8 @@ exports.getPuppiesAvailable = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: 'success',
     results: results,
-    data: {
-      data: puppies
+    puppies: {
+      puppies
     }
   });
 });
