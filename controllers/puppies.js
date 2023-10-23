@@ -153,7 +153,7 @@ exports.updatePuppy = factory.updateOne(Puppy);
 exports.deletePuppy = factory.deleteOne(Puppy);
 
 exports.getPuppiesAvailable = catchAsync(async (req, res, next) => {
-  const puppies = await Puppy.find({ puppyAvailable: true });
+  const puppies = await Puppy.find({ puppyAvailable: true }).sort('puppyTempName');
   const results = puppies.length;
   if (!puppies) {
     return next(new AppError('No available puppies found', 404));
@@ -163,6 +163,21 @@ exports.getPuppiesAvailable = catchAsync(async (req, res, next) => {
     results: results,
     puppies: {
       puppies
+    }
+  });
+});
+
+exports.getPuppiesNoFilter = catchAsync(async (req, res, next) => {
+  const puppiesNoFilter = await Puppy.find().sort('puppyTempName');
+  const results = puppiesNoFilter.length;
+  if (!puppiesNoFilter) {
+    return next(new AppError('No puppies found', 404));
+  }
+  res.status(200).json({
+    status: 'success',
+    results: results,
+    puppiesNoFilter: {
+      puppiesNoFilter
     }
   });
 });

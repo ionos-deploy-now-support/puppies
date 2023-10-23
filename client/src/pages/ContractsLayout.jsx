@@ -43,7 +43,7 @@ const ContractsLayout = () => {
     singleClientContractsQuery(clientId, searchValues)
   ).data; //well-formed contracts obj for the specific client
   const contracts = data.docs;
-  console.log(`data.docs resulting from singleClientContractsQuery ${JSON.stringify(data.docs)}`);
+  console.log(data.docs);
   const navigation = useNavigation();
   const isPageLoading = navigation.state === 'loading';
   return (

@@ -9,6 +9,7 @@ const { protect, restrictTo } = require('../controllers/authController');
 router.use('/:puppyId/healthEvents', healthEventsRouter);
 router.get('/', puppiesController.getAllPuppies);
 router.get('/puppies-available', puppiesController.getPuppiesAvailable);
+router.get('/puppies-no-filter', puppiesController.getPuppiesNoFilter);
 router.get('/puppies-stats', puppiesController.getPuppiesStats);
 router.get('/:id', puppiesController.getPuppy);
 router.post(

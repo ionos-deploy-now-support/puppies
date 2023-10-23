@@ -11,12 +11,24 @@ const puppiesAvailableQuery = () => {
   return {
     queryKey: ['puppies-available'],
     queryFn: async () => {
-      const { data } = await customFetch.get(`/puppies/puppies-available`);
+      let { data } = await customFetch.get(`/puppies/puppies-available`);
+      data = data.puppies.puppies;
       return data;
     }
   };
 };
 
+const puppiesNoFilterQuery = () => {
+  return {
+    queryKey: ['puppies-no-filter'],
+    queryFn: async () => {
+      let { data } = await customFetch.get(`/puppies/puppies-no-filter`);
+      data = data.puppiesNoFilter.puppiesNoFilter;
+      console.log(data);
+      return data;
+    }
+  };
+};
 const HomeContext = createContext();
 
 const HomeLayout = ({ queryClient }) => {
@@ -29,10 +41,11 @@ const HomeLayout = ({ queryClient }) => {
   const [currentUser, setCurrentUser] = useState({});
   const [showMenuDropDown, setShowMenuDropDown] = useState(false);
 
-  const { data } = useQuery(puppiesAvailableQuery());
-  let puppiesAvailable = [];
-  data ? (puppiesAvailable = data.puppies.puppies) : console.log('puppiesAvailable not here yet');
-
+  const { data } = useQuery(puppiesNoFilterQuery());
+  console.log(data);
+  const puppiesNoFilter = data;
+  const { data1 } = useQuery(puppiesAvailableQuery());
+  const puppiesAvailable = data1;
   const toggleDarkTheme = () => {
     console.log('toggle dark theme');
     const newDarkTheme = !isDarkTheme;
@@ -81,7 +94,8 @@ const HomeLayout = ({ queryClient }) => {
         logoutUser,
         setShowMenuDropDown,
         showMenuDropDown,
-        puppiesAvailable
+        puppiesAvailable,
+        puppiesNoFilter
       }}>
       <Wrapper>
         <div className="landing-page">{isPageLoading ? <Loading /> : <Outlet />}</div>

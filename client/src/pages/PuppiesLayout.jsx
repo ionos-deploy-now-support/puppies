@@ -39,12 +39,12 @@ const PuppiesContext = createContext();
 const PuppiesLayout = () => {
   const { searchValues } = useLoaderData();
   const { data } = useQuery(allPuppiesQuery(searchValues));
-  const litters = data.data.docs; //well-formed array of objects for litters
+  const puppies = data.data.docs; //well-formed array of objects for puppies
   const navigation = useNavigation();
   const isPageLoading = navigation.state === 'loading';
 
   return (
-    <PuppiesContext.Provider value={{ data, searchValues, litters }}>
+    <PuppiesContext.Provider value={{ data, searchValues, puppies }}>
       <div className="puppies-page">{isPageLoading ? <Loading /> : <Outlet />}</div>
     </PuppiesContext.Provider>
   );

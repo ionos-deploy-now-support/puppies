@@ -1,6 +1,6 @@
 import { FormRow, FormRowSelect, SubmitBtn } from '../components';
 import Wrapper from '../assets/wrappers/DashboardFormPage';
-import { Form, redirect, useParams } from 'react-router-dom';
+import { Form, redirect, useParams, useSubmit } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import customFetch from '../utils/customFetch';
 import { useClientsContext } from './ClientsLayout';
@@ -26,8 +26,12 @@ export const action =
 
 const ContractAdd = () => {
   const { puppiesAvailable } = useHomeContext();
-  console.log(puppiesAvailable);
+  const puppiesAvailableNames = puppiesAvailable.map((puppy) => ({
+    key: puppy._id,
+    value: puppy.puppyTempName
+  }));
   let today = Date();
+  const submit = useSubmit();
   const params = useParams();
   const clientId = params.id;
   const { clients } = useClientsContext();
@@ -35,6 +39,7 @@ const ContractAdd = () => {
     return client._id === clientId;
   });
   const clientFirstName = client[0].clientFirstName;
+
   return (
     <Wrapper>
       <Form method="post" className="form">
@@ -56,12 +61,27 @@ const ContractAdd = () => {
           />
           <FormRow type="text" name="contractNote" labelText="price" defaultValue="800" />
           <FormRow type="text" name="puppyPickOrder" labelText="pick order" />
-          <FormRow
-            type="text"
-            name="puppy"
-            labelText="puppy"
-            defaultValue="6532ba5a7fc4c7b63168697d" //this is a placeholder puppyId until a real puppy is picked
-          />
+          <div className="form-row">
+            <label htmlFor="puppy" className="form-label">
+              puppy
+            </label>
+            <select
+              name="puppy"
+              id="puppy"
+              className="form-select"
+              defaultValue={puppiesAvailable[0]}
+              onChange={(e) => {
+                submit(e.currentTarget.form);
+              }}>
+              {puppiesAvailableNames.map((item) => {
+                return (
+                  <option key={item.key} value={item.key}>
+                    {item.value}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
           <FormRow type="text" name="puppyPickUp" labelText="puppy pick up" />
 
           <FormRow type="text" name="contractNote" labelText="note" />

@@ -5,6 +5,7 @@ import ContractInfo from './ContractInfo';
 import day from 'dayjs';
 import advancedFormat from 'dayjs/plugin/advancedFormat';
 import { useContractsContext } from '../pages/ContractsLayout';
+import { useHomeContext } from '../pages/HomeLayout';
 
 day.extend(advancedFormat);
 
@@ -23,6 +24,15 @@ const Contract = ({
   const dateClose = day(contractClose).format('MMM Do, YYYY');
   const { contracts } = useContractsContext();
   const clientId = contracts[0].client;
+  const { puppiesNoFilter } = useHomeContext();
+  console.log(puppiesNoFilter); //good array here
+  const contractPuppy = puppiesNoFilter.filter((item) => {
+    console.log(puppy);
+    console.log(item._id);
+    return item._id === puppy;
+  });
+  console.log(contractPuppy);
+  const puppyTempName = contractPuppy[0].puppyTempName;
   return (
     <Wrapper>
       <div className="content">
@@ -32,7 +42,8 @@ const Contract = ({
           <ContractInfo text={`Type: ${contractType}`} />
           <ContractInfo text={`Price: $${contractPrice}`} />
           {puppyPickOrder && <ContractInfo text={`Pick Order: ${puppyPickOrder}`} />}
-          {puppy && <ContractInfo text={`Puppy ID for now: ${puppy}`} />}
+          {puppy && <ContractInfo text={`Puppy ID: ${puppy}`} />}
+          <ContractInfo text={`Puppy Temp Name: ${puppyTempName}`} />
           {puppyPickUp && <ContractInfo text={`Puppy Pickup: ${puppyPickUp}`} />}
           {contractNote && <ContractInfo text={`Note: ${contractNote}`} />}
         </div>
