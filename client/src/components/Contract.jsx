@@ -25,13 +25,9 @@ const Contract = ({
   const { contracts } = useContractsContext();
   const clientId = contracts[0].client;
   const { puppiesNoFilter } = useHomeContext();
-  console.log(puppiesNoFilter); //good array here
   const contractPuppy = puppiesNoFilter.filter((item) => {
-    console.log(puppy);
-    console.log(item._id);
     return item._id === puppy;
   });
-  console.log(contractPuppy);
   const puppyTempName = contractPuppy[0].puppyTempName;
   return (
     <Wrapper>
@@ -42,8 +38,7 @@ const Contract = ({
           <ContractInfo text={`Type: ${contractType}`} />
           <ContractInfo text={`Price: $${contractPrice}`} />
           {puppyPickOrder && <ContractInfo text={`Pick Order: ${puppyPickOrder}`} />}
-          {puppy && <ContractInfo text={`Puppy ID: ${puppy}`} />}
-          <ContractInfo text={`Puppy Temp Name: ${puppyTempName}`} />
+          <ContractInfo text={`Puppy: ${puppyTempName}`} />
           {puppyPickUp && <ContractInfo text={`Puppy Pickup: ${puppyPickUp}`} />}
           {contractNote && <ContractInfo text={`Note: ${contractNote}`} />}
         </div>

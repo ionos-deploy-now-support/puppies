@@ -41,11 +41,12 @@ const HomeLayout = ({ queryClient }) => {
   const [currentUser, setCurrentUser] = useState({});
   const [showMenuDropDown, setShowMenuDropDown] = useState(false);
 
-  const { data } = useQuery(puppiesNoFilterQuery());
-  console.log(data);
-  const puppiesNoFilter = data;
-  const { data1 } = useQuery(puppiesAvailableQuery());
-  const puppiesAvailable = data1;
+  const puppiesNoFilterQueryResults = useQuery(puppiesNoFilterQuery());
+  const puppiesNoFilter = puppiesNoFilterQueryResults.data;
+  console.log(puppiesNoFilter);
+  const puppiesAvailableQueryResults = useQuery(puppiesAvailableQuery());
+  const puppiesAvailable = puppiesAvailableQueryResults.data;
+  console.log(puppiesAvailable);
   const toggleDarkTheme = () => {
     console.log('toggle dark theme');
     const newDarkTheme = !isDarkTheme;

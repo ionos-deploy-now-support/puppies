@@ -26,6 +26,7 @@ export const action =
 
 const ContractAdd = () => {
   const { puppiesAvailable } = useHomeContext();
+  console.log(puppiesAvailable);
   const puppiesAvailableNames = puppiesAvailable.map((puppy) => ({
     key: puppy._id,
     value: puppy.puppyTempName
