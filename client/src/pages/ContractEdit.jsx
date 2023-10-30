@@ -160,6 +160,7 @@ const ContractEdit = () => {
                 name="puppyTempName"
                 className="form-input"
                 defaultValue={contractPuppyName}
+                readOnly
               />
             </div>
           )}
