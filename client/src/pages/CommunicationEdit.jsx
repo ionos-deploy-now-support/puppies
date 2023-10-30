@@ -1,10 +1,11 @@
 import { FormRow, FormRowSelect, SubmitBtn } from '../components';
 import Wrapper from '../assets/wrappers/DashboardFormPage';
-import { Form, redirect, useLoaderData } from 'react-router-dom';
+import { Form, redirect, useLoaderData, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import customFetch from '../utils/customFetch';
 import { useQuery } from '@tanstack/react-query';
 import { COMMUNICATION_TYPE } from '../../../utils/constants';
+import { useClientsContext } from './ClientsLayout';
 
 const singleCommunicationQuery = (id) => {
   return {
@@ -55,10 +56,17 @@ const CommunicationEdit = () => {
   console.log(`communication holds ${JSON.stringify(communication)}`);
   const { communicationDate, communicationType, communicationNote } = communication;
   console.log(`Date ${communicationDate} Type ${communicationType} Note ${communicationNote}`);
+  const params = useParams();
+  const clientId = params.id;
+  const { clients } = useClientsContext();
+  const client = clients.filter((client) => {
+    return client._id === clientId;
+  });
+  const clientFirstName = client[0].clientFirstName;
   return (
     <Wrapper>
       <Form method="post" className="form">
-        <h4 className="form-title">edit communication</h4>
+        <h4 className="form-title">edit communication for {clientFirstName}</h4>
         <div className="form-center">
           <FormRow
             type="text"

@@ -60,7 +60,7 @@ const ContractAdd = () => {
             defaultValue="black-male"
             list={Object.values(CONTRACT_TYPE)}
           />
-          <FormRow type="text" name="contractNote" labelText="price" defaultValue="800" />
+          <FormRow type="text" name="contractPrice" labelText="price" defaultValue="800" />
           <FormRow type="text" name="puppyPickOrder" labelText="pick order" />
           <div className="form-row">
             <label htmlFor="puppy" className="form-label">

@@ -1,10 +1,12 @@
 import { FormRow, FormRowSelect, SubmitBtn } from '../components';
 import Wrapper from '../assets/wrappers/DashboardFormPage';
-import { Form, redirect, useLoaderData } from 'react-router-dom';
+import { Form, redirect, useLoaderData, useSubmit } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import customFetch from '../utils/customFetch';
 import { useQuery } from '@tanstack/react-query';
-import { COMMUNICATION_TYPE } from '../../../utils/constants';
+import { CONTRACT_TYPE } from '../../../utils/constants';
+import { useClientsContext } from './ClientsLayout';
+import { useHomeContext } from './HomeLayout';
 
 const singleContractQuery = (id) => {
   return {
@@ -56,34 +58,101 @@ export const action =
   };
 
 const ContractEdit = () => {
+  const submit = useSubmit();
+  const { clients } = useClientsContext();
+  const { puppiesNoFilter, puppiesAvailable } = useHomeContext();
+  const puppiesAvailableNames = puppiesAvailable.map((puppy) => ({
+    key: puppy._id,
+    value: puppy.puppyTempName
+  }));
   //grab contract id from loader
   const contractId = useLoaderData();
   console.log(`contractId = ${contractId}`);
   const data = useQuery(puppiesAvailableQuery());
-  console.log(`results of puppiesAvailableQuery = ${JSON.stringify(data)}`);
+  console.log(`results of puppiesAvailableQuery = ${data}`);
   const contract = useQuery(singleContractQuery(contractId)).data.data.data;
   // const contract = useQuery(singleContractQuery(contractId));
   console.log(`contract holds ${JSON.stringify(contract)}`);
-  const { contractDate, contractType, contractNote } = contract;
-  console.log(`Date ${contractDate} Type ${contractType} Note ${contractNote}`);
+  const {
+    contractOpen,
+    contractClose,
+    contractType,
+    contractPrice,
+    puppyPickOrder,
+    puppy,
+    puppyPickUp,
+    contractNote,
+    client
+  } = contract;
+  const clientId = client;
+  const currentClient = clients.filter((item) => {
+    return item._id === clientId;
+  });
+  const clientFirstName = currentClient[0].clientFirstName;
+
+  const puppyToEdit = puppiesNoFilter.filter((item) => {
+    return item._id === puppy;
+  });
+  const puppyTempName = puppyToEdit[0].puppyTempName;
   return (
     <Wrapper>
       <Form method="post" className="form">
-        <h4 className="form-title">edit contract</h4>
+        <h4 className="form-title">edit contract for {clientFirstName}</h4>
         <div className="form-center">
-          <FormRow type="text" name="contractDate" labelText="date" defaultValue={contractDate} />
+          <FormRow type="text" name="contractOpen" labelText="opened" defaultValue={contractOpen} />
+          <FormRow
+            type="text"
+            name="contractClose"
+            labelText="closed"
+            defaultValue={contractClose}
+          />
           <FormRowSelect
             labelText="type"
             name="contractType"
             defaultValue={contractType}
-            list={Object.values(COMMUNICATION_TYPE)}
+            list={Object.values(CONTRACT_TYPE)}
           />
           <FormRow
             type="text"
-            name="contractNote"
-            labelText="message"
-            defaultValue={contractNote}
+            name="contractPrice"
+            labelText="price"
+            defaultValue={contractPrice}
           />
+          <FormRow
+            type="text"
+            name="puppyPickOrder"
+            labelText="pick order"
+            defaultValue={puppyPickOrder}
+          />
+          <div className="form-row">
+            <label htmlFor="puppy" className="form-label">
+              puppy
+            </label>
+            <select
+              name="puppy"
+              id="puppy"
+              className="form-select"
+              defaultValue={puppyTempName}
+              onChange={(e) => {
+                submit(e.currentTarget.form);
+              }}>
+              {puppiesAvailableNames.map((item) => {
+                return (
+                  <option key={item.key} value={item.key}>
+                    {item.value}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+          <FormRow
+            type="text"
+            name="puppyPickUp"
+            labelText="puppy pick up"
+            defaultValue={puppyPickUp}
+          />
+
+          <FormRow type="text" name="contractNote" labelText="note" defaultValue={contractNote} />
           <SubmitBtn formBtn btnText="save changes" />
         </div>
       </Form>

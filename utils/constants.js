@@ -29,13 +29,13 @@ export const SORT_COMMS_BY = {
 };
 
 export const COMMUNICATION_TYPE = {
-  PHONE: 'Phone',
-  TEXT: 'Text',
-  FACEBOOK: 'Facebook',
-  EMAIL: 'Email',
-  PERSONAL: 'Personal',
-  AKC: 'AKC',
-  WEBSITE: 'Website'
+  PHONE: 'phone',
+  TEXT: 'text',
+  FACEBOOK: 'facebook',
+  EMAIL: 'email',
+  PERSONAL: 'personal',
+  AKC: 'akc',
+  WEBSITE: 'website'
 };
 
 export const CONTRACT_TYPE = {
