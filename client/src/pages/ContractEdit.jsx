@@ -90,10 +90,14 @@ const ContractEdit = () => {
   });
   const clientFirstName = currentClient[0].clientFirstName;
 
-  const puppyToEdit = puppiesNoFilter.filter((item) => {
+  const contractPuppy = puppiesNoFilter.filter((item) => {
     return item._id === puppy;
   });
-  const puppyTempName = puppyToEdit[0].puppyTempName;
+  console.log(contractPuppy);
+  const contractPuppyName = contractPuppy[0].puppyTempName;
+  console.log(contractPuppyName);
+  const mytest = false;
+
   return (
     <Wrapper>
       <Form method="post" className="form">
@@ -124,34 +128,54 @@ const ContractEdit = () => {
             labelText="pick order"
             defaultValue={puppyPickOrder}
           />
-          <div className="form-row">
-            <label htmlFor="puppy" className="form-label">
-              puppy
-            </label>
-            <select
-              name="puppy"
-              id="puppy"
-              className="form-select"
-              defaultValue={puppyTempName}
-              onChange={(e) => {
-                submit(e.currentTarget.form);
-              }}>
-              {puppiesAvailableNames.map((item) => {
-                return (
-                  <option key={item.key} value={item.key}>
-                    {item.value}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
+          {contractPuppyName === 'A puppy not yet selected' ? (
+            <div id="contractPuppyNameDropDown" className="form-row">
+              <label htmlFor="puppy" className="form-label">
+                puppy
+              </label>
+              <select
+                name="puppy"
+                id="puppy"
+                className="form-select"
+                onChange={(e) => {
+                  submit(e.currentTarget.form);
+                }}>
+                {puppiesAvailableNames.map((item) => {
+                  return (
+                    <option key={item.key} value={item.key}>
+                      {item.value}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+          ) : (
+            <div id="contractPuppyPreviouslySelected" className="form-row">
+              <label htmlFor="puppyTempName" className="form-label">
+                puppy
+              </label>
+              <input
+                type="text"
+                id="puppyTempName"
+                name="puppyTempName"
+                className="form-input"
+                defaultValue={contractPuppyName}
+              />
+            </div>
+          )}
+
+          {mytest ? (
+            <FormRow type="text" name="test" labelText="test" defaultValue="true" />
+          ) : (
+            <FormRow type="text" name="test" labelText="test" defaultValue="false" />
+          )}
+
           <FormRow
             type="text"
             name="puppyPickUp"
             labelText="puppy pick up"
             defaultValue={puppyPickUp}
           />
-
           <FormRow type="text" name="contractNote" labelText="note" defaultValue={contractNote} />
           <SubmitBtn formBtn btnText="save changes" />
         </div>
