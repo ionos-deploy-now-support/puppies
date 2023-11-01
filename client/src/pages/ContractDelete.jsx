@@ -8,7 +8,6 @@ export const action =
     try {
       await customFetch.delete(`/contracts/${params.contractId}`);
       queryClient.invalidateQueries(['clientContracts']);
-
       toast.success('Contract deleted successfully');
     } catch (error) {
       toast.error(error?.response?.data?.message);

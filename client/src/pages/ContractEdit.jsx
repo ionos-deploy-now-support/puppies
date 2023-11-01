@@ -37,9 +37,6 @@ export const action =
     const formData = await request.formData();
     const data = Object.fromEntries(formData);
     const puppyId = data.puppy;
-    console.log(puppyId);
-    // const selectedPuppy = await customFetch.get(`/puppies/${puppyId}`);
-    // console.log(selectedPuppy);
     try {
       await customFetch.put(`/contracts/${contractId}`, data);
       //set puppyAvailable to FALSE when puppy is added to contract
