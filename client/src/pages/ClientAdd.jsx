@@ -11,7 +11,7 @@ export const action =
     const data = Object.fromEntries(formData);
     try {
       await customFetch.post('/clients', data);
-      queryClient.invalidateQueries(['clients']);
+      queryClient.invalidateQueries({ queryKey: ['clients'] });
       toast.success('Client added successfully ');
       return redirect('/dashboard/clients');
     } catch (error) {

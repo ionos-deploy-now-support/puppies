@@ -18,16 +18,6 @@ const singleContractQuery = (id) => {
   };
 };
 
-const puppiesAvailableQuery = () => {
-  return {
-    queryKey: ['puppies-available'],
-    queryFn: async () => {
-      const { data } = await customFetch.get(`/puppies/puppies-available`);
-      return data;
-    }
-  };
-};
-
 export const loader =
   (queryClient) =>
   async ({ params }) => {
@@ -46,9 +36,23 @@ export const action =
     const contractId = params.contractId;
     const formData = await request.formData();
     const data = Object.fromEntries(formData);
+    const puppyId = data.puppy;
+    console.log(puppyId);
+    // const selectedPuppy = await customFetch.get(`/puppies/${puppyId}`);
+    // console.log(selectedPuppy);
     try {
       await customFetch.put(`/contracts/${contractId}`, data);
-      queryClient.invalidateQueries(['clientContracts']);
+      //set puppyAvailable to FALSE when puppy is added to contract
+      //do not want to change the placeholder puppy to false
+      if (puppyId != '6532ba5a7fc4c7b63168697d') {
+        await customFetch.put(`/puppies/${puppyId}`, { puppyAvailable: false });
+      }
+      queryClient.invalidateQueries({
+        queryKey: ['clientContracts']
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['puppies-available']
+      });
       toast.success('Contract edited successfully');
       return redirect('../');
     } catch (error) {
@@ -65,14 +69,8 @@ const ContractEdit = () => {
     key: puppy._id,
     value: puppy.puppyTempName
   }));
-  //grab contract id from loader
   const contractId = useLoaderData();
-  console.log(`contractId = ${contractId}`);
-  const data = useQuery(puppiesAvailableQuery());
-  console.log(`results of puppiesAvailableQuery = ${data}`);
   const contract = useQuery(singleContractQuery(contractId)).data.data.data;
-  // const contract = useQuery(singleContractQuery(contractId));
-  console.log(`contract holds ${JSON.stringify(contract)}`);
   const {
     contractOpen,
     contractClose,
@@ -96,7 +94,6 @@ const ContractEdit = () => {
   console.log(contractPuppy);
   const contractPuppyName = contractPuppy[0].puppyTempName;
   console.log(contractPuppyName);
-  const mytest = false;
 
   return (
     <Wrapper>
@@ -141,6 +138,7 @@ const ContractEdit = () => {
                   submit(e.currentTarget.form);
                 }}>
                 {puppiesAvailableNames.map((item) => {
+                  //displays puppyTempName submits puppyId
                   return (
                     <option key={item.key} value={item.key}>
                       {item.value}
@@ -162,15 +160,16 @@ const ContractEdit = () => {
                 defaultValue={contractPuppyName}
                 readOnly
               />
+              <input
+                type="hidden"
+                id="puppy"
+                name="puppy"
+                className="form-input"
+                defaultValue={puppy}
+                readOnly
+              />
             </div>
           )}
-
-          {mytest ? (
-            <FormRow type="text" name="test" labelText="test" defaultValue="true" />
-          ) : (
-            <FormRow type="text" name="test" labelText="test" defaultValue="false" />
-          )}
-
           <FormRow
             type="text"
             name="puppyPickUp"
@@ -178,6 +177,7 @@ const ContractEdit = () => {
             defaultValue={puppyPickUp}
           />
           <FormRow type="text" name="contractNote" labelText="note" defaultValue={contractNote} />
+
           <SubmitBtn formBtn btnText="save changes" />
         </div>
       </Form>
