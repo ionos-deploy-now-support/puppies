@@ -46,6 +46,9 @@ const Contract = ({
           <Link to={`../${clientId}/contracts/contract-edit/${_id}`} className="btn edit-btn">
             Edit
           </Link>
+          <Link to={`../${clientId}/contracts/payments`} className="btn edit-btn">
+            Payments
+          </Link>
           <Form method="post" action={`../${clientId}/contracts/contract-delete/${_id}`}>
             <SubmitBtn formBtn btnText="delete" />
           </Form>

@@ -7,8 +7,8 @@ const Wrapper = styled.main`
   align-items: center;
   justify-content: center;
   img {
-    width: 90vw;
-    max-width: 600px;
+    width: 50vw;
+    max-width: 250px;
     display: block;
     margin-bottom: 2rem;
     margin-top: -3rem;
@@ -25,6 +25,13 @@ const Wrapper = styled.main`
   a {
     color: var(--primary-500);
     text-transform: capitalize;
+  }
+  .container {
+    background-color: grey;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2em;
   }
 `;
 
