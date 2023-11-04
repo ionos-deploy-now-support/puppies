@@ -47,4 +47,17 @@ export const CONTRACT_TYPE = {
   YELLOW_MALE: 'yellow-male'
 };
 
+export const PAYMENT_TYPE = {
+  CASH: 'cash',
+  CHECK: 'check',
+  VENMO: 'venmo',
+  PAYPAL: 'paypal',
+  ZELLE: 'zelle'
+};
+
+export const SORT_PAYMENTS_BY = {
+  NEWEST_FIRST: 'newest',
+  OLDEST_FIRST: 'oldest'
+};
+
 // export const PAGINATION_LIMIT = 10; //see constants2.js

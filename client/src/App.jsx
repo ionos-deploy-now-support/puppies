@@ -26,6 +26,10 @@ import {
   LitterAdd,
   LitterEdit,
   Login,
+  PaymentsLayout,
+  Payments,
+  PaymentAdd,
+  PaymentEdit,
   Profile,
   PuppiesLayout,
   Puppies,
@@ -65,6 +69,11 @@ import { action as addLitterAction } from './pages/LitterAdd';
 import { loader as editLitterLoader } from './pages/LitterEdit';
 import { action as editLitterAction } from './pages/LitterEdit';
 import { action as deleteLitterAction } from './pages/LitterDelete';
+import { loader as singleContractPaymentsLoader } from './pages/PaymentsLayout';
+import { action as addPaymentAction } from './pages/PaymentAdd';
+import { loader as editPaymentLoader } from './pages/PaymentEdit';
+import { action as editPaymentAction } from './pages/PaymentEdit';
+import { action as deletePaymentAction } from './pages/PaymentDelete';
 import { loader as allPuppiesLoader } from './pages/PuppiesLayout';
 import { action as addPuppyAction } from './pages/PuppyAdd';
 import { loader as editPuppyLoader } from './pages/PuppyEdit';
@@ -285,6 +294,32 @@ const router = createBrowserRouter([
                   {
                     path: 'contract-delete/:contractId',
                     action: deleteContractAction(queryClient)
+                  },
+                  {
+                    path: ':id/payments',
+                    element: <PaymentsLayout queryClient={queryClient} />,
+                    loader: singleContractPaymentsLoader(queryClient),
+                    children: [
+                      {
+                        index: true,
+                        element: <Payments />
+                      },
+                      {
+                        path: 'payment-add',
+                        element: <PaymentAdd />,
+                        action: addPaymentAction(queryClient)
+                      },
+                      {
+                        path: 'payment-edit/:paymentId',
+                        element: <PaymentEdit />,
+                        loader: editPaymentLoader(queryClient),
+                        action: editPaymentAction(queryClient)
+                      },
+                      {
+                        path: 'payment-delete/:paymentId',
+                        action: deletePaymentAction(queryClient)
+                      }
+                    ]
                   }
                 ]
               }

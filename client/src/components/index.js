@@ -14,6 +14,8 @@ export { default as Loading } from './Loading';
 export { default as Logo } from './Logo';
 export { default as Navbar } from './Navbar';
 export { default as PageNav } from './PageNav';
+export { default as PaymentsContainer } from './PaymentsContainer';
+export { default as PaymentsAddSortContainer } from './PaymentsAddSortContainer';
 export { default as PuppiesContainer } from './PuppiesContainer';
 export { default as PuppiesSearchContainer } from './PuppiesSearchContainer';
 export { default as PuppyHealthEventsContainer } from './PuppyHealthEventsContainer';
