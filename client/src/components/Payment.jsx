@@ -8,7 +8,7 @@ import { usePaymentsContext } from '../pages/PaymentsLayout';
 
 day.extend(advancedFormat);
 
-const Payment = ({ _id, paymentDate, paymentType, paymentNote }) => {
+const Payment = ({ _id, paymentDate, paymentAmount, paymentType, paymentNote }) => {
   const date = day(paymentDate).format('MMM Do, YYYY');
   const { payments } = usePaymentsContext();
   const contractId = payments[0].contract;
@@ -17,8 +17,9 @@ const Payment = ({ _id, paymentDate, paymentType, paymentNote }) => {
       <div className="content">
         <div className="content-center">
           <PaymentInfo text={`Date: ${date}`} />
-          <PaymentInfo text={`Type: ${paymentType}`} />
-          <PaymentInfo text={`Message: ${paymentNote}`} />
+          <PaymentInfo text={`Amount: $${paymentAmount}`} />
+          {paymentType && <PaymentInfo text={`Type: ${paymentType}`} />}
+          {paymentNote && <PaymentInfo text={`Message: ${paymentNote}`} />}
         </div>
         <footer className="actions">
           <Link to={`../${contractId}/payments/payment-edit/${_id}`} className="btn edit-btn">
