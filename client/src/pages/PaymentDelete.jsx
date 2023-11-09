@@ -7,11 +7,11 @@ export const action =
   async ({ params }) => {
     try {
       await customFetch.delete(`/payments/${params.paymentId}`);
-      queryClient.invalidateQueries(['contractPayments']);
+      queryClient.invalidateQueries(['payments']);
 
       toast.success('Payment deleted successfully');
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }
-    return redirect('../');
+    return redirect('../../');
   };
