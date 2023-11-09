@@ -26,12 +26,20 @@ const PaymentsContainer = () => {
   const contractPayments = payments.filter((payment) => {
     return payment.contract === contractId;
   });
+  let totalPayments = 0;
+  if (contractPayments.length !== 0) {
+    totalPayments = contractPayments
+      .map((payment) => payment.paymentAmount)
+      .reduce((a, b) => a + b);
+  }
+  const contractBalance = contract[0].contractPrice - totalPayments;
   if (contractPayments.length === 0) {
     return (
       <Wrapper>
         <h5>
-          No payments entered yet for {contractType} for {clientFirstName}
+          No payments entered yet for {contractType} puppy for {clientFirstName}
         </h5>
+        <p> Balance: ${contractBalance}</p>
       </Wrapper>
     );
   }
@@ -39,8 +47,9 @@ const PaymentsContainer = () => {
     <Wrapper>
       <h5>
         {contractPayments.length} {contractPayments.length > 1 ? 'Payments' : 'Payment record'}
-        {` for ${clientFirstName}'s  ${contractType}`}
+        {` for ${clientFirstName}'s  ${contractType} puppy total $${totalPayments}`}
       </h5>
+      <p> Balance: ${contractBalance}</p>
       <div className="payments">
         {payments.map((payment) => {
           return (

@@ -9,6 +9,9 @@ const Wrapper = styled.section`
     font-weight: 700;
     margin-bottom: 1.5rem;
   }
+  p {
+    margin-bottom: 1em;
+  }
   .payments {
     display: grid;
     grid-template-columns: 1fr;

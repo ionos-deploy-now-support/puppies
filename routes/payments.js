@@ -11,7 +11,7 @@ router.post(
   '/',
   protect,
   restrictTo('admin'),
-  paymentsController.setClientId,
+  paymentsController.setContractId,
   paymentsController.createPayment
 );
 router.put('/:id', protect, restrictTo('admin'), paymentsController.updatePayment);

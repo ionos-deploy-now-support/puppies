@@ -47,33 +47,38 @@ export const action =
   };
 
 const PaymentEdit = () => {
-  //grab payment id from loader
   const paymentId = useLoaderData();
   console.log(`paymentId = ${paymentId}`);
 
   const payment = useQuery(singlePaymentQuery(paymentId)).data.data.data;
-  // const payment = useQuery(singlePaymentQuery(paymentId));
-  console.log(`payment holds ${JSON.stringify(payment)}`);
-  const { paymentDate, paymentType, paymentNote } = payment;
-  console.log(`Date ${paymentDate} Type ${paymentType} Note ${paymentNote}`);
+  console.log(`payment details ${JSON.stringify(payment)}`);
+  const { paymentDate, paymentMethod, paymentAmount, paymentNote } = payment;
+
   const params = useParams();
-  const clientId = params.id;
+  const contractId = params.id;
+  console.log(`contractId = ${contractId}`);
   const { clients } = useClientsContext();
   const client = clients.filter((client) => {
-    return client._id === clientId;
+    return client._id === client;
   });
-  const clientFirstName = client[0].clientFirstName;
+  //const clientFirstName = client[0].clientFirstName;
   return (
     <Wrapper>
       <Form method="post" className="form">
-        <h4 className="form-title">edit payment for {clientFirstName}</h4>
+        <h4 className="form-title">edit payment for contractType for clientFirstName</h4>
         <div className="form-center">
           <FormRow type="text" name="paymentDate" labelText="date" defaultValue={paymentDate} />
           <FormRowSelect
             labelText="type"
             name="paymentType"
-            defaultValue={paymentType}
+            defaultValue={paymentMethod}
             list={Object.values(PAYMENT_TYPE)}
+          />
+          <FormRow
+            type="text"
+            name="paymentAmount"
+            labelText="amount"
+            defaultValue={paymentAmount}
           />
           <FormRow type="text" name="paymentNote" labelText="message" defaultValue={paymentNote} />
           <SubmitBtn formBtn btnText="save changes" />

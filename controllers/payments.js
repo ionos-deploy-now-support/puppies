@@ -7,9 +7,9 @@ const ObjectId = require('mongodb').ObjectId;
 const Payment = require('./../models/payment');
 const factory = require('../controllers/handlerFactory');
 
-exports.setClientId = (req, res, next) => {
-  if (!req.body.client) req.body.client = req.params.clientId;
-  //For nested routes get clientId from params (url) if not in body
+exports.setContractId = (req, res, next) => {
+  if (!req.body.contract) req.body.contract = req.params.contractId;
+  //For nested routes get contractId from params (url) if not in body
   next();
 };
 
