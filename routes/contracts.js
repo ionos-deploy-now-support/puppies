@@ -4,10 +4,8 @@ const contractsController = require('../controllers/contracts');
 const paymentsRouter = require('../routes/payments');
 const { protect, restrictTo } = require('../controllers/authController');
 
-router.use('/:contractId/payments', paymentsRouter);
+router.use('/:id/payments', paymentsRouter);
 router.get('/', contractsController.getAllContracts);
-
-// router.get('/contracts-stats', contractsController.getContractsStats);
 router.get('/:id', contractsController.getContract);
 router.post(
   '/',

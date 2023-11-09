@@ -8,7 +8,7 @@ const Payment = require('./../models/payment');
 const factory = require('../controllers/handlerFactory');
 
 exports.setContractId = (req, res, next) => {
-  if (!req.body.contract) req.body.contract = req.params.contractId;
+  if (!req.body.contract) req.body.contract = req.params.id;
   //For nested routes get contractId from params (url) if not in body
   next();
 };

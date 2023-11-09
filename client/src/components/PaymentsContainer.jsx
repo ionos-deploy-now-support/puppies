@@ -51,7 +51,7 @@ const PaymentsContainer = () => {
       </h5>
       <p> Balance: ${contractBalance}</p>
       <div className="payments">
-        {payments.map((payment) => {
+        {contractPayments.map((payment) => {
           return (
             <div key={payment._id}>
               <Payment key={payment._id} {...payment} />
