@@ -21,6 +21,11 @@ const paymentSchema = new mongoose.Schema(
       ref: 'Contract',
       required: [true, 'Payment must belong to a contract']
     },
+    client: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Client',
+      required: [true, 'Payment must belong to a client']
+    },
     paymentNote: {
       type: String,
       maxLength: [255, 'Payment note must not exceed 255 characters']

@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import customFetch from '../utils/customFetch';
 import { useClientsContext } from './ClientsLayout';
 import { PAYMENT_TYPE } from '../../../utils/constants';
+import { useContractsContext } from './ContractsLayout';
 
 export const action =
   (queryClient) =>
@@ -14,20 +15,25 @@ export const action =
     const data = Object.fromEntries(formData);
     try {
       await customFetch.post(`/contracts/${contractId}/payments`, data);
-      queryClient.invalidateQueries(['contractPayments']);
+      queryClient.invalidateQueries(['payments']);
       toast.success('Payment added successfully ');
-      return redirect('../');
+      return redirect('../../');
     } catch (error) {
       toast.error(error?.response?.data?.message);
       return error;
     }
   };
 
-//THIS NEEDS LOTS OF WORK - COPIED IN - NEED REFACTOR
 const PaymentAdd = () => {
   let today = Date();
   const params = useParams();
-  const clientId = params.id;
+  const contractId = params.id;
+  const { contracts } = useContractsContext();
+  const contract = contracts.filter((contract) => {
+    return (contract._id = contractId);
+  });
+  const contractType = contract[0].contractType;
+  const clientId = contract[0].client;
   const { clients } = useClientsContext();
   const client = clients.filter((client) => {
     return client._id === clientId;
@@ -36,7 +42,9 @@ const PaymentAdd = () => {
   return (
     <Wrapper>
       <Form method="post" className="form">
-        <h4 className="form-title">add payment for {clientFirstName} </h4>
+        <h5 className="form-title">
+          add payment for {contractType} puppy for {clientFirstName}{' '}
+        </h5>
         <div className="form-center">
           <FormRow type="text" name="paymentDate" labelText="date" defaultValue={today} required />
           <FormRowSelect
@@ -45,8 +53,9 @@ const PaymentAdd = () => {
             defaultValue="Phone"
             list={Object.values(PAYMENT_TYPE)}
           />
+          <FormRow type="text" name="paymentAmount" labelText="amount" />
           <FormRow type="text" name="paymentNote" labelText="message" />
-
+          <input type="hidden" id="client" name="client" className="form-input" value={clientId} />
           <SubmitBtn formBtn btnText="add new payment" />
         </div>
       </Form>
