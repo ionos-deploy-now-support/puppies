@@ -19,6 +19,7 @@ import {
   DashboardLayout,
   Error,
   Gallery,
+  GalleryAdmin,
   HomeLayout,
   Landing,
   LittersLayout,
@@ -130,6 +131,10 @@ const router = createBrowserRouter([
         element: <Reserve />
       },
       {
+        path: 'gallery',
+        element: <Gallery />
+      },
+      {
         path: 'dashboard',
         element: <DashboardLayout queryClient={queryClient} />,
         loader: dashboardLoader(queryClient),
@@ -142,6 +147,10 @@ const router = createBrowserRouter([
           {
             path: 'stats',
             element: <Stats />
+          },
+          {
+            path: 'gallery-admin',
+            element: <GalleryAdmin />
           },
           {
             path: 'litters',

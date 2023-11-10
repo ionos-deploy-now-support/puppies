@@ -8,6 +8,8 @@ export { default as ContractsAddSortContainer } from './ContractsAddSortContaine
 export { default as FormRow } from './FormRow';
 export { default as FormRowRadio } from './FormRowRadio';
 export { default as FormRowSelect } from './FormRowSelect';
+export { default as GalleryAdminContainer } from './GalleryAdminContainer';
+export { default as GalleryAdminSearchContainer } from './GalleryAdminSearchContainer';
 export { default as LittersContainer } from './LittersContainer';
 export { default as LittersSearchContainer } from './LittersSearchContainer';
 export { default as Loading } from './Loading';

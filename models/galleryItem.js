@@ -6,6 +6,7 @@ const galleryItemSchema = new mongoose.Schema(
   {
     galleryItemURL: {
       type: String,
+      default: '/img/galleryItems/clouds.jpg',
       maxLength: [255, 'GalleryItem caption must not exceed 255 characters'],
       required: [true, 'GalleryItem must have a URL']
     },
