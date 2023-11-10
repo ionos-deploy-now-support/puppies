@@ -1,10 +1,8 @@
 import React from 'react';
-
 import { IoBarChartSharp } from 'react-icons/io5';
 import { GiDogHouse } from 'react-icons/gi';
 import { FaDog } from 'react-icons/fa';
 import { ImProfile } from 'react-icons/im';
-import { MdAdminPanelSettings } from 'react-icons/md';
 import { BsPeople } from 'react-icons/bs';
 
 const links = [
@@ -32,12 +30,6 @@ const links = [
     icon: <BsPeople />,
     adminOnly: true
   },
-  // {
-  //   text: 'add client',
-  //   path: 'client-add',
-  //   icon: <BsPeople />,
-  //   adminOnly: true
-  // },
   {
     text: 'stats',
     path: 'stats',

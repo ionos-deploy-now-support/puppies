@@ -81,7 +81,6 @@ import { action as editPuppyAction } from './pages/PuppyEdit';
 import { action as deletePuppyAction } from './pages/PuppyDelete';
 import { action as addPuppyHealthEventAction } from './pages/PuppyHealthEventAdd';
 import { action as deletePuppyHealthEventAction } from './pages/PuppyHealthEventDelete';
-// import { loader as allPuppyHealthEventsLoader } from './pages/PuppyHealthEvents';
 import { action as profileAction } from './pages/Profile';
 import ErrorElement from './components/ErrorElement';
 
