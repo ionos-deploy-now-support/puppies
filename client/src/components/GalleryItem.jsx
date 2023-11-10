@@ -10,52 +10,41 @@ day.extend(advancedFormat);
 
 const GalleryItem = ({
   _id,
-  galleryItemFirstName,
-  galleryItemLastName,
-  galleryItemEmail,
-  galleryItemPhone,
-  galleryItemAddress1,
-  galleryItemAddress2,
-  galleryItemCity,
-  galleryItemState,
-  galleryItemZip,
-  galleryItemNote,
+  galleryItemURL,
+  galleryItemDate,
+  galleryItemType,
+  galleryItemCaption,
+  displayInGallery,
+  displayOnLanding,
+  litter,
+  puppy,
   createdAt
 }) => {
-  const date = day(createdAt).format('MMM Do, YYYY');
+  const date1 = day(galleryItemDate).format('MMM Do, YYYY');
+  const date2 = day(createdAt).format('MMM Do, YYYY');
   return (
     <Wrapper>
       <header>
-        <div className="main-icon">{galleryItemFirstName.charAt(0)}</div>
-        <div className="info">
-          <h5>{`${galleryItemFirstName} ${galleryItemLastName}`}</h5>
-          <p>{galleryItemCity}</p>
+        <div className="gallery-item-image">
+          <img src={galleryItemURL} alt={`Image of${galleryItemCaption}`} />
         </div>
       </header>
       <div className="content">
         <div className="content-center">
-          <GalleryItemInfo icon={<FaPhone />} text={galleryItemPhone} />
-          <GalleryItemInfo icon={<MdEmail />} text={galleryItemEmail} />
-          <GalleryItemInfo icon={<FaCalendarAlt />} text={`Since: ${date}`} />
-          <GalleryItemInfo
-            icon={<FaLocationArrow />}
-            text={`${galleryItemAddress1}
-            ${galleryItemAddress2}
-            ${galleryItemCity}   ${galleryItemState} ${galleryItemZip}`}
-          />
-          <GalleryItemInfo icon={<FaStickyNote />} text={galleryItemNote} />
+          <GalleryItemInfo icon={<FaCalendarAlt />} text={date1} />
+          <GalleryItemInfo text={`Type: ${galleryItemType}`} />
+          <GalleryItemInfo text={`In Gallery: ${displayInGallery}`} />
+          <GalleryItemInfo text={`On Landing: ${displayOnLanding}`} />
+          {litter && <GalleryItemInfo text={`LitterId: ${litter}`} />}
+          {puppy && <GalleryItemInfo text={`PuppyId: ${puppy}`} />}
+          <GalleryItemInfo icon={<FaCalendarAlt />} text={`Added: ${date2}`} />
+          <GalleryItemInfo icon={<FaStickyNote />} text={galleryItemCaption} />
         </div>
         <footer className="actions">
-          <Link to={`../galleryItems/galleryItem-edit/${_id}`} className="btn edit-btn">
+          <Link to={`../gallery-admin/gallery-item-edit/${_id}`} className="btn edit-btn">
             Edit
           </Link>
-          <Link to={`../galleryItems/${_id}/communications`} className={`btn edit-btn`}>
-            Communications
-          </Link>
-          <Link to={`../galleryItems/${_id}/contracts`} className={`btn edit-btn`}>
-            Contracts
-          </Link>
-          <Form method="post" action={`../galleryItems/galleryItem-delete/${_id}`}>
+          <Form method="post" action={`../gallery-admin/gallery-item-delete/${_id}`}>
             <SubmitBtn formBtn btnText="delete" />
           </Form>
         </footer>

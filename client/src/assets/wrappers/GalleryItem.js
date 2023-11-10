@@ -76,6 +76,12 @@ const Wrapper = styled.article`
   .edit-btn {
     margin-right: 0.5rem;
   }
+  .gallery-item-image {
+    width: 100%;
+
+    object-fit: contain;
+    overflow: hidden;
+  }
 `;
 
 export default Wrapper;

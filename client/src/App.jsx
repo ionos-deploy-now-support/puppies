@@ -19,6 +19,7 @@ import {
   DashboardLayout,
   Error,
   Gallery,
+  GalleryAdminLayout,
   GalleryAdmin,
   HomeLayout,
   Landing,
@@ -63,6 +64,7 @@ import { action as addContractAction } from './pages/ContractAdd';
 import { loader as editContractLoader } from './pages/ContractEdit';
 import { action as editContractAction } from './pages/ContractEdit';
 import { action as deleteContractAction } from './pages/ContractDelete';
+import { loader as allGalleryItemsLoader } from './pages/GalleryAdminLayout';
 import { loader as singlePuppyHealthEventsLoader } from './pages/PuppyHealthEventsLayout';
 import { action as editPuppyHealthEventAction } from './pages/PuppyHealthEventEdit';
 import { loader as allLittersLoader } from './pages/LittersLayout';
@@ -150,7 +152,14 @@ const router = createBrowserRouter([
           },
           {
             path: 'gallery-admin',
-            element: <GalleryAdmin />
+            loader: allGalleryItemsLoader(queryClient),
+            element: <GalleryAdminLayout queryClient={queryClient} />,
+            children: [
+              {
+                index: true,
+                element: <GalleryAdmin />
+              }
+            ]
           },
           {
             path: 'litters',

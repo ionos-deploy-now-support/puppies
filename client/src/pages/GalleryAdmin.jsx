@@ -2,9 +2,10 @@ import { GalleryAdminContainer, GalleryAdminSearchContainer } from '../component
 
 const GalleryAdmin = () => {
   return (
-    <div className="litters-page">
+    <div className="gallery-admin-page">
       <GalleryAdminSearchContainer />
       <GalleryAdminContainer />
+      {/* <GalleryAdminPageBtnContainer /> */}
     </div>
   );
 };

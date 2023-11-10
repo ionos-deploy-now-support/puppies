@@ -23,7 +23,7 @@ const GalleryAdminContainer = () => {
       </h5>
       <div className="galleryItems">
         {galleryItems.map((item) => {
-          return <GalleryAdmin key={item._id} {...item} />;
+          return <GalleryItem key={item._id} {...item} />;
         })}
       </div>
       {numPages > 1 && <GalleryAdminsPageBtnContainer />}

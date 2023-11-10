@@ -14,6 +14,7 @@ export { default as ContractEdit } from './ContractEdit';
 export { default as DashboardLayout } from './DashboardLayout';
 export { default as Error } from './Error';
 export { default as Gallery } from './Gallery';
+export { default as GalleryAdminLayout } from './GalleryAdminLayout';
 export { default as GalleryAdmin } from './GalleryAdmin';
 export { default as HomeLayout } from './HomeLayout';
 export { default as Landing } from './Landing';
