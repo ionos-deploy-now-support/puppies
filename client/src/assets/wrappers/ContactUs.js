@@ -5,7 +5,8 @@ const Wrapper = styled.div`
 
   p {
     font-weight: bold;
-    line-height: 0.5;
+    line-height: 1;
+    font-size: clamp(0.75rem, 1.5vw, 1.5rem);
     margin-bottom: 1.5rem;
     max-width: 35em;
   }

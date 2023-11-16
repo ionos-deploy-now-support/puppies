@@ -38,12 +38,12 @@ const Puppy = ({
       <div className="content">
         <div className="content-center">
           <PuppyInfo text={`Born: ${date}`} />
-          <PuppyInfo text={`Survived?: ${puppySurvived}`} />
+          <PuppyInfo text={`Survived? ${puppySurvived}`} />
           <PuppyInfo text={`Collar: ${puppyCollar}`} />
-          <PuppyInfo text={`AKC #: ${puppyAKC}`} />
+          <PuppyInfo text={`AKC # ${puppyAKC}`} />
           <PuppyInfo text={`New Name: ${puppyNewName}`} />
-          <PuppyInfo text={`Asking Price: $${puppyAskingPrice}`} />
-          <PuppyInfo text={`Available?: ${puppyAvailable}`} />
+          <PuppyInfo text={`Price: $${puppyAskingPrice}`} />
+          <PuppyInfo text={`Available? ${puppyAvailable}`} />
           <PuppyInfo icon={<FaStickyNote />} text={puppyNote} />
         </div>
         <footer className="actions">

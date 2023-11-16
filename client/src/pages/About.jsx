@@ -19,7 +19,7 @@ function About() {
         </p>
         <p>
           Jacki enjoys working on the family farm growing organic vegetables and eggs for the local
-          farmer's market. Jacki is a licensed massage therapist and an amazing artist.
+          farmer's market.
         </p>
 
         <ContactUs />

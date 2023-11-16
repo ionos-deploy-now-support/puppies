@@ -62,7 +62,7 @@
   --dark-mode-bg-secondary-color: #3f3f3f;
   --dark-mode-text-secondary-color: var(--grey-300);
 
-  --background-color: var(--grey-100);
+  --background-color: var(--green-light);
   --text-color: var(--grey-900);
   --background-secondary-color: var(--white);
   --text-secondary-color: var(--grey-500);
@@ -112,6 +112,7 @@ body {
 
 p {
   margin: 0;
+  font-size: clamp(0.75rem, 1.5vw, 1.5rem);
 }
 
 h1,

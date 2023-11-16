@@ -1,10 +1,11 @@
-import { FormRow, SubmitBtn } from '../components';
+import { FormRow, FormRowSelect, SubmitBtn } from '../components';
 import Wrapper from '../assets/wrappers/DashboardFormPage';
 import { Form, redirect, useLoaderData, useSubmit } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import customFetch from '../utils/customFetch';
 import { useQuery } from '@tanstack/react-query';
 import { useLittersContext } from '../pages/LittersLayout';
+import { TRUE_FALSE } from '../../../utils/constants';
 
 const singlePuppyQuery = (id) => {
   return {
@@ -44,11 +45,10 @@ export const action =
   };
 
 const PuppyEdit = () => {
-  //grab puppy id from loader
   const id = useLoaderData();
   console.log(`From PuppyEdit puppy id is ${id}`);
-  // having to drill deep into object to get to data wanted
   const puppy = useQuery(singlePuppyQuery(id)).data.data.data;
+  console.log(puppy);
   const { litters } = useLittersContext();
   const litterNames = litters.map((litter) => ({ key: litter._id, value: litter.litterName }));
   const submit = useSubmit();
@@ -118,12 +118,14 @@ const PuppyEdit = () => {
             labelText="Asking Price"
             defaultValue={puppy.puppyAskingPrice}
           />
-          <FormRow
+          <FormRowSelect
             type="text"
             name="puppyAvailable"
             labelText="available"
             defaultValue={puppy.puppyAvailable}
+            list={Object.values(TRUE_FALSE)}
           />
+
           <FormRow type="text" name="puppyNote" labelText="note" defaultValue={puppy.puppyNote} />
 
           <SubmitBtn formBtn btnText="save changes" />

@@ -55,8 +55,8 @@ const Wrapper = styled.section`
   .intro p {
     margin-bottom: 0.5em;
     text-align: center;
-    font-size: 1rem;
-    line-height: 1;
+    font-size: clamp(0.75rem, 1.5vw, 1.5rem);
+    line-height: 1.5;
   }
   .reserve-container {
     width: 100%;

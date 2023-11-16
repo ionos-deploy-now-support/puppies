@@ -26,6 +26,7 @@ const litterSchema = new mongoose.Schema({
   },
   litterConceived: {
     type: Date,
+    default: Date.now(),
     required: false
   },
   litterDelivered: {

@@ -54,10 +54,10 @@ const Litter = ({
           <LitterInfo icon={<FaStickyNote />} text={litterNote} />
         </div>
         <footer className="actions">
-          <Link to={`../litter-edit/${_id}`} className="btn edit-btn">
+          <Link to={`../litters/litter-edit/${_id}`} className="btn edit-btn">
             Edit
           </Link>
-          <Form method="post" action={`../litter-delete/${_id}`}>
+          <Form method="post" action={`../litters/litter-delete/${_id}`}>
             <SubmitBtn formBtn btnText="delete" />
           </Form>
         </footer>

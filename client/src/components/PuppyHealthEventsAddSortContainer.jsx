@@ -5,6 +5,7 @@ import { BsPlusCircle } from 'react-icons/bs';
 
 const PuppyHealthEventsAddSortContainer = () => {
   const { puppyObj } = usePuppyHealthEventsContext();
+  console.log(puppyObj);
   const puppyId = puppyObj._id;
   const submit = useSubmit();
 
@@ -21,6 +22,12 @@ const PuppyHealthEventsAddSortContainer = () => {
           </span>
         </Link>
         <hr style={{ marginTop: '-.4rem', marginBottom: '.8rem' }} />
+        <Link
+          to={`/dashboard/litters/puppies?search=${puppyObj.puppyTempName}`}
+          className="btn form-btn"
+          style={{ marginTop: '-2rem', marginBottom: '.5rem' }}>
+          Back to Summary
+        </Link>
       </Form>
     </Wrapper>
   );
