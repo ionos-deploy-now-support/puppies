@@ -8,8 +8,9 @@ const Wrapper = styled.button`
   display: grid;
   place-items: center;
   cursor: pointer;
+  font-size: 22pt;
   .toggle-icon {
-    font-size: 1.15rem;
+    font-size: 22pt;
     color: var(--text-color);
   }
 `;

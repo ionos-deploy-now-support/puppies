@@ -17,7 +17,7 @@ const Wrapper = styled.section`
     align-items: center;
     margin-top: -3rem;
   }
-  h1 {
+  h3 {
     font-weight: 700;
     span {
       color: var(--primary-500);
@@ -28,54 +28,19 @@ const Wrapper = styled.section`
     line-height: 2;
     color: var(--text-secondary-color);
     margin-bottom: 1.5rem;
+    max-width: 35em;
   }
-  .main-img {
-    display: none;
-  }
+
   .btn {
     padding: 0.75rem 1rem;
   }
   .intro {
     margin-bottom: 2.5em;
+    text-align: center;
   }
-  .intro h2 {
-    margin-top: 1em;
+  .intro h3 {
     margin-bottom: 0.5em;
     text-align: center;
-  }
-  .intro h4 {
-    margin-bottom: 0.5em;
-    text-align: center;
-  }
-  .intro h5 {
-    margin-top: 1.5em;
-    margin-bottom: 0.5em;
-    text-align: center;
-  }
-  .intro p {
-    margin-bottom: 0.5em;
-    text-align: center;
-    font-size: 1rem;
-    line-height: 1;
-  }
-  .reserve-container {
-    width: 100%;
-    height: 5em;
-    margin: auto;
-    margin-top: 0.5em;
-    position: relative;
-    padding: 1em;
-    text-align: center;
-    background-color: var(--red-dark);
-  }
-  .reserve-link {
-    max-height: 90%;
-    margin: 0em;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
   }
 
   @media (min-width: 992px) {

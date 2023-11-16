@@ -12,6 +12,7 @@ import {
   Communications,
   CommunicationAdd,
   CommunicationEdit,
+  ContactUs,
   ContractsLayout,
   Contracts,
   ContractAdd,
@@ -21,6 +22,7 @@ import {
   Gallery,
   GalleryAdminLayout,
   GalleryAdmin,
+  Guarantee,
   HomeLayout,
   Landing,
   LittersLayout,
@@ -117,6 +119,14 @@ const router = createBrowserRouter([
       {
         path: 'about',
         element: <About />
+      },
+      {
+        path: 'contact',
+        element: <ContactUs />
+      },
+      {
+        path: 'guarantee',
+        element: <Guarantee />
       },
       {
         path: 'login',
