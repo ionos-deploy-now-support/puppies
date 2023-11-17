@@ -62,7 +62,7 @@
   --dark-mode-bg-secondary-color: #3f3f3f;
   --dark-mode-text-secondary-color: var(--grey-300);
 
-  --background-color: var(--green-light);
+  --background-color: #f3f5eb;
   --text-color: var(--grey-900);
   --background-secondary-color: var(--white);
   --text-secondary-color: var(--grey-500);
@@ -86,6 +86,7 @@
   --text-secondary-color: var(--dark-mode-text-secondary-color);
   --background-secondary-color: var(--dark-mode-bg-secondary-color);
 }
+
 
 *,
 ::after,

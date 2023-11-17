@@ -8,11 +8,13 @@ const Landing = () => {
     <Wrapper>
       <PageNav />
       <div className="intro">
+        <hr />
         <h2>JW Farm AKC Labrador Puppies</h2>
         <h4>Raised in our home with love,</h4>
         <h4>fresh air and sunshine on the farm</h4>
         <h5>Puppies available for $800</h5>
         <p>We do not limit your puppy's breeding rights (Full Registration).</p>
+        <hr />
       </div>
       <Carousel />
       <div className="reserve-container">

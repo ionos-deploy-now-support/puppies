@@ -36,7 +36,7 @@ const Wrapper = styled.section`
     padding: 0.75rem 1rem;
   }
   .intro {
-    margin-bottom: 2.5em;
+    margin-bottom: 0.5em;
   }
   .intro h2 {
     margin-top: 1em;
@@ -62,7 +62,7 @@ const Wrapper = styled.section`
     width: 100%;
     height: 5em;
     margin: auto;
-    margin-top: 0.5em;
+    margin-top: 0.2em;
     position: relative;
     padding: 1em;
     text-align: center;
