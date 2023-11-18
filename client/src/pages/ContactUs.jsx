@@ -1,5 +1,5 @@
 import PageNav from '../components/PageNav';
-import Wrapper from '../assets/wrappers/Reserve';
+import Wrapper from '../assets/wrappers/ContactUs';
 import ContactUs from '../components/ContactUs';
 function About() {
   return (
@@ -7,6 +7,9 @@ function About() {
       <PageNav />
       <div className="container">
         <h3>We look forward to hearing from you</h3>
+        <div className="img-frame">
+          <img src="/img/site/jackihappy.jpg" alt="Jacki of JW Farm" />
+        </div>
         <ContactUs />
       </div>
     </Wrapper>
