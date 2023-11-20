@@ -8,6 +8,9 @@ function Reserve() {
         <PageNav />
         <div className="container">
           <h3>Reserve Your Puppy Today</h3>
+          <div className="img-frame">
+            <img src="/img/site/4pups.jpg" alt="different colored puppies" />
+          </div>
           <p>
             We collect a non-refundable $200 deposit to reserve a puppy. When you place a deposit
             you will be asked to select a puppy sex and a puppy color (black, chocolate, yellow).

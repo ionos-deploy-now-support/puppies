@@ -31,7 +31,7 @@ const Wrapper = styled.section`
   .img-frame {
     background-color: #030b33;
     margin-left: 1em;
-    width: 80%;
+    width: 40%;
     margin-bottom: 1em;
   }
   @media (min-width: 992px) {

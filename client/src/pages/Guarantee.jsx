@@ -7,6 +7,9 @@ function Guarantee() {
       <PageNav />
       <div className="container">
         <h3>Our puppy guarantee</h3>
+        <div className="img-frame">
+          <img src="/img/site/undraw_certificate.svg" alt="man holding certificate" />
+        </div>
         <p>
           Our puppies are the offspring of parents that are registered with the American Kennel Club
           (AKC). Our litters are AKC registered and your puppy can be registered with the AKC if you

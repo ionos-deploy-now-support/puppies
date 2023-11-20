@@ -30,6 +30,19 @@ const Wrapper = styled.section`
     margin-bottom: 1.5rem;
     max-width: 35em;
   }
+  img {
+    display: block;
+    margin: auto;
+
+    padding: 1em;
+    width: 95%;
+  }
+  .img-frame {
+    background-color: var(--primary-500);
+    margin-left: 1em;
+    width: 40%;
+    margin-bottom: 1em;
+  }
 
   .btn {
     padding: 0.75rem 1rem;
