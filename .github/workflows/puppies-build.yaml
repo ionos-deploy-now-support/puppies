@@ -1,0 +1,70 @@
+# To better understand this file read this:
+# https://docs.ionos.space/docs/github-actions-customization/
+
+name: "Deploy Now: Execute Build"
+
+on:
+  workflow_call:
+    inputs:
+      site-url:
+        required: true
+        type: string
+      branch-id:
+        required: true
+        type: string
+
+env:
+  DEPLOYMENT_FOLDER: ./
+
+jobs:
+# Please do not rename this job
+  build-project:
+    name: build puppies
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: 'recursive'
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: v16.x
+
+      - name: Build Node assets
+        env:
+          CI: true
+          DATABASE_PASSWORD: mzFtRrTGjX63nUEt
+          EMAIL_HOST: sandbox.smtp.mailtrap.io
+          EMAIL_PASSWORD: 2e07ff996957b3
+          EMAIL_PORT: 25
+          EMAIL_USERNAME: 1f203ff93eef63
+          JWT_COOKIE_EXPIRES_IN: 90
+          JWT_EXPIRES_IN: 90d
+          JWT_SECRET: can-you-keep-a-secret-try-this-1
+          MONGODB_URI: mongodb+srv://exagent957:<PASSWORD>@cse341.9aujsue.mongodb.net/puppiesAPI?retryWrites=true&w=majority
+          NODE_ENV: development
+          NODE_VERSION: 20.5.1
+          SITE_URL: ${{ inputs.site-url }}
+        run: npm run setup-production-app
+
+      - name: Run script
+# uncomment the following lines if you want to add environment variables for this step
+#        env:
+#          MY_ENV_VAR: value-for-my-env-var
+#          MY_SECRET_ENV_VAR: ${{ secrets.MY_SECRET }} # here you can find information how to create secrets: https://docs.github.com/en/actions/security-guides/encrypted-secrets
+        run: node app.js
+
+# Please do not touch the following action
+      - name: Store deployment content
+        uses: ionos-deploy-now/artifact-action@v1
+        with:
+          api-key: ${{ secrets.IONOS_API_KEY }}
+          service-host: api-us.ionos.space
+          project-id: 01f612ee-0a6b-416c-a991-e42a306994d5
+          branch-id: ${{ inputs.branch-id }}
+          version: ${{ github.sha }}
+          folder: ${{ env.DEPLOYMENT_FOLDER }}
+          config-file: .deploy-now/puppies/config.yaml
+          action: upload
