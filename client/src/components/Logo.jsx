@@ -9,11 +9,11 @@ const Logo = () => {
     <Wrapper>
       {isDarkTheme ? (
         <Link to="/">
-          <img src="../jwfarmlogo-simple-yellow.svg" alt="JW Farm Logo" className="logo" />
+          <img src="/jwfarmlogo-simple-yellow.svg" alt="JW Farm Logo" className="logo" />
         </Link>
       ) : (
         <Link to="/">
-          <img src="../jwfarmlogo-simple.svg" alt="JW Farm Logo" className="logo" />
+          <img src="/jwfarmlogo-simple.svg" alt="JW Farm Logo" className="logo" />
         </Link>
       )}
     </Wrapper>
