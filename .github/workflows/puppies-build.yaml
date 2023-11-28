@@ -27,37 +27,13 @@ jobs:
         with:
           submodules: 'recursive'
 
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: v16.x
-
-      - name: Build Node assets
-        env:
-          CI: true
-          SITE_URL: ${{ inputs.site-url }}
-          #NODE_ENV: development
-          NODE_VERSION: 20.5.1
-        run: npm run setup-production-app
-       # run: node app.js
-
-      - name: Run script
-# uncomment the following lines if you want to add environment variables for this step
-        env:
-          MONGODB_URI: mongodb+srv://exagent957:mzFtRrTGjX63nUEt@cse341.9aujsue.mongodb.net/puppiesAPI?retryWrites=true&w=majority
-          JWT_SECRET: can-you-keep-a-secret-try-this-1
-          JWT_EXPIRES_IN: 90d
-          JWT_COOKIE_EXPIRES_IN: 90
-         #MY_SECRET_ENV_VAR: ${{ secrets.MY_SECRET }} # here you can find information how to create secrets: https://docs.github.com/en/actions/security-guides/encrypted-secrets
-        run: node app.js
-
 # Please do not touch the following action
       - name: Store deployment content
         uses: ionos-deploy-now/artifact-action@v1
         with:
           api-key: ${{ secrets.IONOS_API_KEY }}
           service-host: api-us.ionos.space
-          project-id: 24bbf5a8-9583-4532-afcc-0f6b16e82b02
+          project-id: 396c9069-7beb-4f10-85d7-b58c9f47a29a
           branch-id: ${{ inputs.branch-id }}
           version: ${{ github.sha }}
           folder: ${{ env.DEPLOYMENT_FOLDER }}
